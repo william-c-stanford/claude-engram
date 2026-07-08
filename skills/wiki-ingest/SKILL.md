@@ -42,7 +42,7 @@ If `.vault-meta/mode.json` is absent, the router returns mode=generic paths (ide
 
 Mode-specific follow-up:
 - **LYT**: after filing the atomic note, update the relevant MOC (`wiki/mocs/<topic>-moc.md`) to link the new note. If no MOC exists for the topic, create one using `skills/wiki-mode/templates/lyt/moc-template.md`.
-- **Zettelkasten**: **do not file with the router's flat `wiki/<timestamp>-<slug>.md` path.** When the [[comprehensive-zettel]] / [[local-wiki-index]] skills are present, zettelkasten notes are folder-nested plain-slug atomic notes, so run the placement procedure instead (see the dedicated section below). If those skills are absent, fall back to the router's flat path and populate `id:` to match the filename.
+- **Zettelkasten**: notes are folder-nested plain-slug atomic notes under `wiki/zettel/`, identified by a DragonScale `address`. Run the placement procedure (see the dedicated section below) via the [[comprehensive-zettel]] / [[local-wiki-index]] skills. If those skills are absent, fall back to filing a single note at the router's `wiki/zettel/<slug>.md` path with an allocated `address:`.
 - **PARA**: new ingests land in `wiki/resources/incoming/` by default. Do NOT auto-guess the topic; leave in incoming/ for user review.
 
 ### Zettelkasten placement (v1.9+, folder-nested)
@@ -53,7 +53,7 @@ In zettelkasten mode, each significant claim from the source becomes an atomic n
 
 1. Decompose the source into atomic claims per [[comprehensive-zettel]]'s Decomposition Algorithm (draft comprehensively, then split until every leaf is a single 1-3 sentence claim).
 2. For each atomic claim, follow the **placement decision procedure** in [[local-wiki-index]]: `find` whether a note already exists (update/cross-reference instead of duplicating); locate the parent concept; decide **attach** (parent has a folder) vs **promote** (parent is a leaf → give it a folder + synthesis rewrite) vs **new root**; `collisions`-check the slug before writing; then write per comprehensive-zettel and `upsert` every new/changed note into the index.
-3. The source-summary note itself is still created, but as a zettel (with `id`/`parent_id`/`child_ids`) linking to the atomic notes it spawned, not as a `wiki/sources/` page.
+3. The source-summary note itself is still created, but as a zettel (with `address`/`parent`/`children`) linking to the atomic notes it spawned, not as a `wiki/sources/` page.
 
 The index (`scripts/zettel-index.py`) is what keeps this affordable: the ingesting agent reads only the notes on the candidate parent chain, not the whole vault. Acquire `wiki-lock` on each target path before writing, exactly as in the filesystem transport path.
 
