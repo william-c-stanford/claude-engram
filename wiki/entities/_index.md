@@ -38,8 +38,8 @@ All entity pages — people, organizations, products, and tools.
 
 <!-- Add tool and product pages here -->
 
-> [!note] Book entity moved to Zettelkasten
-> [[Hitchhikers Guide to Agentic AI (book)|The Hitchhiker's Guide to Agentic AI: From Foundations to Systems]] was re-filed as a flat, timestamp-ID Zettelkasten note directly under `wiki/` on 2026-07-08. No longer under `wiki/entities/`; the wikilink above still resolves via its `aliases:` frontmatter.
+> [!note] Book entity lives in the nested Zettelkasten
+> The Hitchhiker's Guide to Agentic AI source/book content is maintained in the folder-nested Zettelkasten tree under `wiki/zettel/`, not under `wiki/entities/`. See the `comprehensive-zettel` / `local-wiki-index` skills.
 
 ---
 
