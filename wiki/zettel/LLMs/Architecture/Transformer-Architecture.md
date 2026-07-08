@@ -3,7 +3,7 @@ type: zettel
 id: "20260708221914968943"
 title: "Transformer Architecture"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985220"
 child_ids:
   - "20260708221914968944"
   - "20260708221914968945"
@@ -48,5 +48,6 @@ The transformer is the substrate of every modern LLM: a stack of $L$ identical b
 
 ## Cross-references
 
+- Parent: [[Architecture]]
 - Upstream stage: [[Tokenization]] produces the IDs this architecture embeds.
 - [[LLM-Pipeline-Overview]] — where this sits in the end-to-end pipeline.

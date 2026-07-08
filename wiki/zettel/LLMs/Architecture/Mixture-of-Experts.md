@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223105938818"
 title: "Mixture of Experts (MoE)"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985220"
 child_ids:
   - "20260708223105938819"
   - "20260708223105938820"
@@ -34,5 +34,6 @@ MoE scales model *capacity* without scaling per-token *compute*: it replaces the
 
 ## Cross-references
 
+- Parent: [[Architecture]]
 - Replaces the dense [[Feed-Forward-Network]]
 - "Active param" models in [[Model-Size-Reference]]

@@ -3,7 +3,7 @@ type: zettel
 id: "20260708221914968942"
 title: "LLM Pipeline Overview"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985219"
 child_ids: []
 tags:
   - llm-fundamentals
@@ -33,6 +33,7 @@ Generation is autoregressive: the chosen token is appended to the input and the 
 
 ## Cross-references
 
+- Parent: [[LLMs]]
 - Stage 1: [[Tokenization]]
 - Stages 2–3: [[Transformer-Architecture]] (embeddings, attention, layers)
 - Stage 4: [[Prediction-Heads]] and [[Decoding-Methods]]

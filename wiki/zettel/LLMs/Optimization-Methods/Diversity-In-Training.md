@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223105938823"
 title: "Diversity in LLM Training"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708223105938824"
   - "20260708223105938825"
@@ -32,5 +32,6 @@ Diversity — in outputs, in training data, and in optimization — is what prev
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Sampling knobs are detailed under [[Decoding-Methods]]
 - Data diversity connects to [[Pretraining-Data-Pipeline]] and [[LIMA-Principle]]

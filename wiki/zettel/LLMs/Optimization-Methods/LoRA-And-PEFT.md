@@ -3,7 +3,7 @@ type: zettel
 id: "20260708222835675664"
 title: "LoRA and Parameter-Efficient Fine-Tuning"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708222835675665"
   - "20260708222835675666"
@@ -36,5 +36,6 @@ Full fine-tuning of a 70B model needs 560+ GB (weights + gradients + optimizer s
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Applied during [[Supervised-Fine-Tuning]]
 - Adapts the weight matrices of [[Transformer-Architecture]]

@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223500121078"
 title: "Speculative Decoding Methods"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708223500121079"
   - "20260708223500121080"
@@ -36,5 +36,6 @@ Speculative decoding accelerates autoregressive generation 2–3× by having a f
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Accelerates the [[Decoding-Methods]] loop
 - Weight-level complement: [[Model-Compression]]

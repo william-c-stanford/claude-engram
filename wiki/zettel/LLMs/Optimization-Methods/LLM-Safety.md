@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223500121087"
 title: "LLM Safety and Responsible AI"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708223500121088"
   - "20260708223500121089"
@@ -36,5 +36,6 @@ Safety is not an afterthought but an integral part of the training pipeline, app
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Refusal is a capability SFT alone can't teach: [[SFT-Is-Not-Enough]]
 - Refusal over-triggering as a prompt failure: [[Prompt-Engineering-Best-Practices]]

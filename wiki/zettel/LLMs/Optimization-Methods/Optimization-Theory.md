@@ -3,7 +3,7 @@ type: zettel
 id: "20260708222508084716"
 title: "Optimization Theory for LLM Training"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708222508084717"
   - "20260708222508084718"
@@ -44,5 +44,6 @@ Training an LLM is minimizing a loss $\mathcal{L}(\theta)$ over billions of para
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Kernel-level training efficiency: [[Flash-Attention]]
 - Applied in [[Pretraining]] and [[Supervised-Fine-Tuning]]

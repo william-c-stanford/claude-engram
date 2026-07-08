@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223105938838"
 title: "Prompt Engineering"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708223105938839"
   - "20260708223105938840"
@@ -41,5 +41,6 @@ Prompt engineering elicits desired behavior *without changing weights* — the f
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - When prompting stops improving quality, move to [[Supervised-Fine-Tuning]] or RLHF.
 - Guaranteed structure via [[Constrained-Decoding]]

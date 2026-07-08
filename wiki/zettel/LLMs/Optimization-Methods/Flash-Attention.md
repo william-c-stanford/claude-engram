@@ -3,7 +3,7 @@ type: zettel
 id: "20260708222508084726"
 title: "Flash Attention"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708222508084727"
   - "20260708222508084728"
@@ -34,5 +34,6 @@ Flash Attention computes *exactly* standard attention but restructures its memor
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - The bottleneck it solves: [[Attention-Quadratic-Cost]]
 - Composes with sparse masks under [[Self-Attention]]

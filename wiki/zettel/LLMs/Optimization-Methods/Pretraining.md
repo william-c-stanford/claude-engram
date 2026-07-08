@@ -3,7 +3,7 @@ type: zettel
 id: "20260708222835675652"
 title: "Pretraining"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708222835675653"
   - "20260708222835675654"
@@ -36,5 +36,6 @@ Pretraining is the most expensive phase of LLM development — millions of GPU-h
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Uses the [[Language-Modeling-Head]] and [[Optimization-Theory]]
 - Next phase: [[Supervised-Fine-Tuning]]

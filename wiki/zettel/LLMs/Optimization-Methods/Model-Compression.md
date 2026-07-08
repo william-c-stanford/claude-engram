@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223500121074"
 title: "Model Compression Methods"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708223500121075"
   - "20260708223500121076"
@@ -44,5 +44,6 @@ Model compression cuts size and inference cost while preserving quality through 
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Inference-time complement: [[Speculative-Decoding]]
 - QLoRA relies on 4-bit quantization: [[LoRA-Variants]]

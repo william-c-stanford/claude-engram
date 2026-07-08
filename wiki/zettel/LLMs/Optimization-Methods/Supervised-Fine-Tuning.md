@@ -3,7 +3,7 @@ type: zettel
 id: "20260708222835675658"
 title: "Supervised Fine-Tuning (SFT)"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708222835675659"
   - "20260708222835675660"
@@ -36,5 +36,6 @@ SFT is the bridge from a raw next-token predictor to an instruction-following as
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Previous phase: [[Pretraining]]
 - Head it trains: [[Conditional-Generation-Head]]

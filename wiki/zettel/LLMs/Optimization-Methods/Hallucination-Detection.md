@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223500121084"
 title: "Hallucination Detection"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708223500121085"
   - "20260708223500121086"
@@ -30,5 +30,6 @@ LLMs produce fluent text that may be factually wrong — hallucination. This not
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - RAG grounding as the reliable complement: [[Advanced-Prompting-Techniques]]
 - DoLA is a layer-contrast cousin of [[Contrastive-Decoding]]

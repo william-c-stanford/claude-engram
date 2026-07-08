@@ -3,7 +3,7 @@ type: zettel
 id: "20260708221914968971"
 title: "Prediction Heads"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985220"
 child_ids:
   - "20260708221914968972"
   - "20260708221914968973"
@@ -42,5 +42,6 @@ The transformer body produces a contextual hidden state $h_t \in \mathbb{R}^d$ p
 
 ## Cross-references
 
+- Parent: [[Architecture]]
 - Consumes hidden states from [[Transformer-Architecture]]
 - Final stage of the [[LLM-Pipeline-Overview]]

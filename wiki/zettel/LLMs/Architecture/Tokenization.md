@@ -3,7 +3,7 @@ type: zettel
 id: "20260708215912362253"
 title: "Tokenization"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985220"
 child_ids:
   - "20260708215912389407"
   - "20260708215912414151"
@@ -33,4 +33,5 @@ Tokenization is the first stage of the LLM pipeline: it converts raw text into t
 
 ## Cross-references
 
+- Parent: [[Architecture]]
 - Downstream stage: the token IDs index into the embedding table of the transformer.

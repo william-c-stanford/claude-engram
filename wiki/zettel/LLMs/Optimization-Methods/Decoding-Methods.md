@@ -3,7 +3,7 @@ type: zettel
 id: "20260708223105938827"
 title: "Text Generation: Decoding Methods"
 created: "2026-07-08"
-parent_id: ""
+parent_id: "20260708224425985221"
 child_ids:
   - "20260708223105938828"
   - "20260708223105938829"
@@ -51,5 +51,6 @@ At each step a trained model gives a distribution $P(x_t \mid x_{<t})$; the **de
 
 ## Cross-references
 
+- Parent: [[Optimization-Methods]]
 - Diversity lens: [[Sampling-Diversity]]
 - Accelerated by [[Speculative-Decoding]]
