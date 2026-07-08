@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968947"
+address: "c-000055"
 title: "Embedding Anisotropy"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids: []
+parent: "c-000072"
+children: []
 tags:
   - llm-fundamentals
   - embeddings

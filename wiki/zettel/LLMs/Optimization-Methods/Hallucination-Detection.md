@@ -1,12 +1,12 @@
 ---
 type: zettel
-id: "20260708223500121084"
+address: "c-000097"
 title: "Hallucination Detection"
 created: "2026-07-08"
-parent_id: "20260708224425985221"
-child_ids:
-  - "20260708223500121085"
-  - "20260708223500121086"
+parent: "c-000151"
+children:
+  - "c-000095"
+  - "c-000096"
 tags:
   - llm-fundamentals
   - hallucination

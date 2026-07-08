@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968961"
+address: "c-000063"
 title: "Long-Context Extension"
 created: "2026-07-08"
-parent_id: "20260708221914968949"
-child_ids: []
+parent: "c-000066"
+children: []
 tags:
   - llm-fundamentals
   - positional-encoding

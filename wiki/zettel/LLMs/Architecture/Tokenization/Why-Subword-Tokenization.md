@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708215912389407"
+address: "c-000043"
 title: "Why Subword Tokenization"
 created: "2026-07-08"
-parent_id: "20260708215912362253"
-child_ids: []
+parent: "c-000044"
+children: []
 tags:
   - llm-fundamentals
   - tokenization

@@ -1,14 +1,14 @@
 ---
 type: zettel
-id: "20260708221914968949"
+address: "c-000066"
 title: "Positional Encodings"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids:
-  - "20260708221914968958"
-  - "20260708221914968959"
-  - "20260708221914968960"
-  - "20260708221914968961"
+parent: "c-000072"
+children:
+  - "c-000065"
+  - "c-000064"
+  - "c-000062"
+  - "c-000063"
 tags:
   - llm-fundamentals
   - transformer

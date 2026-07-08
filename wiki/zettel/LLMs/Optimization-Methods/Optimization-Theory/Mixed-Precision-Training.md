@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222508084724"
+address: "c-000119"
 title: "Mixed Precision Training"
 created: "2026-07-08"
-parent_id: "20260708222508084716"
-child_ids: []
+parent: "c-000123"
+children: []
 tags:
   - llm-fundamentals
   - optimization

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968963"
+address: "c-000060"
 title: "Pre-LN vs Post-LN"
 created: "2026-07-08"
-parent_id: "20260708221914968951"
-child_ids: []
+parent: "c-000061"
+children: []
 tags:
   - llm-fundamentals
   - normalization

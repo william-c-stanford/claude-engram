@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223500121085"
+address: "c-000095"
 title: "Hallucination Types"
 created: "2026-07-08"
-parent_id: "20260708223500121084"
-child_ids: []
+parent: "c-000097"
+children: []
 tags:
   - llm-fundamentals
   - hallucination

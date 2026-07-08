@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938820"
+address: "c-000023"
 title: "MoE Load Balancing"
 created: "2026-07-08"
-parent_id: "20260708223105938818"
-child_ids: []
+parent: "c-000026"
+children: []
 tags:
   - llm-fundamentals
   - moe

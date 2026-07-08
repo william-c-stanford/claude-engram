@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938825"
+address: "c-000088"
 title: "Training Data Diversity"
 created: "2026-07-08"
-parent_id: "20260708223105938823"
-child_ids: []
+parent: "c-000089"
+children: []
 tags:
   - llm-fundamentals
   - diversity

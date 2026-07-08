@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222508084721"
+address: "c-000118"
 title: "Learning Rate Warmup"
 created: "2026-07-08"
-parent_id: "20260708222508084716"
-child_ids: []
+parent: "c-000123"
+children: []
 tags:
   - llm-fundamentals
   - optimization

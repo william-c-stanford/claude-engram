@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222835675668"
+address: "c-000107"
 title: "LoRA Variants"
 created: "2026-07-08"
-parent_id: "20260708222835675664"
-child_ids: []
+parent: "c-000109"
+children: []
 tags:
   - llm-fundamentals
   - lora

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938826"
+address: "c-000086"
 title: "Diversity-Promoting Methods"
 created: "2026-07-08"
-parent_id: "20260708223105938823"
-child_ids: []
+parent: "c-000089"
+children: []
 tags:
   - llm-fundamentals
   - diversity

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223500121080"
+address: "c-000142"
 title: "Speculative Decoding Methods Comparison"
 created: "2026-07-08"
-parent_id: "20260708223500121078"
-child_ids: []
+parent: "c-000144"
+children: []
 tags:
   - llm-fundamentals
   - speculative-decoding

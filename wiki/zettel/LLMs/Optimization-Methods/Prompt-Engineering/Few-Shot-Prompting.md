@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938841"
+address: "c-000132"
 title: "Few-Shot Prompting"
 created: "2026-07-08"
-parent_id: "20260708223105938838"
-child_ids: []
+parent: "c-000138"
+children: []
 tags:
   - llm-fundamentals
   - prompting

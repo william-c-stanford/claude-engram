@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938824"
+address: "c-000087"
 title: "Sampling Diversity"
 created: "2026-07-08"
-parent_id: "20260708223105938823"
-child_ids: []
+parent: "c-000089"
+children: []
 tags:
   - llm-fundamentals
   - diversity

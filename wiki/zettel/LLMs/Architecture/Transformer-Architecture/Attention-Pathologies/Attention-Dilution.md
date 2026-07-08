@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968965"
+address: "c-000050"
 title: "Attention Dilution"
 created: "2026-07-08"
-parent_id: "20260708221914968953"
-child_ids: []
+parent: "c-000053"
+children: []
 tags:
   - llm-fundamentals
   - attention

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223500121076"
+address: "c-000111"
 title: "Pruning"
 created: "2026-07-08"
-parent_id: "20260708223500121074"
-child_ids: []
+parent: "c-000113"
+children: []
 tags:
   - llm-fundamentals
   - compression

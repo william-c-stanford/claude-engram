@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968968"
+address: "c-000045"
 title: "Attention Is Not Explanation"
 created: "2026-07-08"
-parent_id: "20260708221914968954"
-child_ids: []
+parent: "c-000049"
+children: []
 tags:
   - llm-fundamentals
   - interpretability

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968958"
+address: "c-000065"
 title: "Sinusoidal and Learned Absolute Positional Encoding"
 created: "2026-07-08"
-parent_id: "20260708221914968949"
-child_ids: []
+parent: "c-000066"
+children: []
 tags:
   - llm-fundamentals
   - positional-encoding

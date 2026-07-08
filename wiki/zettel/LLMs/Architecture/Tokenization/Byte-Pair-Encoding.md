@@ -1,12 +1,12 @@
 ---
 type: zettel
-id: "20260708215912414151"
+address: "c-000034"
 title: "Byte-Pair Encoding"
 created: "2026-07-08"
-parent_id: "20260708215912362253"
-child_ids:
-  - "20260708215912437724"
-  - "20260708215912460084"
+parent: "c-000044"
+children:
+  - "c-000032"
+  - "c-000033"
 tags:
   - llm-fundamentals
   - tokenization

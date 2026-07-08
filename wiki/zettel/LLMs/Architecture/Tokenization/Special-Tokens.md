@@ -1,13 +1,13 @@
 ---
 type: zettel
-id: "20260708215912482649"
+address: "c-000038"
 title: "Special Tokens"
 created: "2026-07-08"
-parent_id: "20260708215912362253"
-child_ids:
-  - "20260708215912504485"
-  - "20260708215912526282"
-  - "20260708215912548087"
+parent: "c-000044"
+children:
+  - "c-000037"
+  - "c-000036"
+  - "c-000035"
 tags:
   - llm-fundamentals
   - tokenization

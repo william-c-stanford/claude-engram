@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222835675662"
+address: "c-000146"
 title: "SFT Best Practices"
 created: "2026-07-08"
-parent_id: "20260708222835675658"
-child_ids: []
+parent: "c-000150"
+children: []
 tags:
   - llm-fundamentals
   - sft

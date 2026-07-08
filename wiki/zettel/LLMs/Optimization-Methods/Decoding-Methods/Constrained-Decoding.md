@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938837"
+address: "c-000076"
 title: "Constrained Decoding"
 created: "2026-07-08"
-parent_id: "20260708223105938827"
-child_ids: []
+parent: "c-000085"
+children: []
 tags:
   - llm-fundamentals
   - decoding

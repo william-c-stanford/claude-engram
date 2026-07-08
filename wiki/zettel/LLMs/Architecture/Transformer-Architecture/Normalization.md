@@ -1,12 +1,12 @@
 ---
 type: zettel
-id: "20260708221914968951"
+address: "c-000061"
 title: "Normalization"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids:
-  - "20260708221914968962"
-  - "20260708221914968963"
+parent: "c-000072"
+children:
+  - "c-000059"
+  - "c-000060"
 tags:
   - llm-fundamentals
   - transformer

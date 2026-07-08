@@ -1,13 +1,13 @@
 ---
 type: zettel
-id: "20260708215912570475"
+address: "c-000042"
 title: "Tokenization Best Practices"
 created: "2026-07-08"
-parent_id: "20260708215912362253"
-child_ids:
-  - "20260708215912593475"
-  - "20260708215912616264"
-  - "20260708215912639772"
+parent: "c-000044"
+children:
+  - "c-000041"
+  - "c-000039"
+  - "c-000040"
 tags:
   - llm-fundamentals
   - tokenization

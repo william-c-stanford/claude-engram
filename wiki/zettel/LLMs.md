@@ -1,13 +1,13 @@
 ---
 type: zettel
-id: "20260708224425985219"
+address: "c-000152"
 title: "LLMs"
 created: "2026-07-08"
-parent_id: ""
-child_ids:
-  - "20260708224425985220"
-  - "20260708224425985221"
-  - "20260708221914968942"
+parent: ""
+children:
+  - "c-000073"
+  - "c-000151"
+  - "c-000074"
 tags:
   - llm-fundamentals
   - moc

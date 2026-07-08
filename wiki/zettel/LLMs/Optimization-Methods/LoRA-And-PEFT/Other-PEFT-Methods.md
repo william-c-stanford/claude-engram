@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222835675669"
+address: "c-000108"
 title: "Other PEFT Methods"
 created: "2026-07-08"
-parent_id: "20260708222835675664"
-child_ids: []
+parent: "c-000109"
+children: []
 tags:
   - llm-fundamentals
   - peft

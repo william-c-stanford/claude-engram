@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222508084728"
+address: "c-000093"
 title: "Tiling and Online Softmax"
 created: "2026-07-08"
-parent_id: "20260708222508084726"
-child_ids: []
+parent: "c-000094"
+children: []
 tags:
   - llm-fundamentals
   - attention

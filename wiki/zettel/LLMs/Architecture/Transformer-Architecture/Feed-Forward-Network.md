@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968950"
+address: "c-000057"
 title: "Feed-Forward Network"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids: []
+parent: "c-000072"
+children: []
 tags:
   - llm-fundamentals
   - transformer

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938845"
+address: "c-000130"
 title: "Advanced Prompting Techniques"
 created: "2026-07-08"
-parent_id: "20260708223105938838"
-child_ids: []
+parent: "c-000138"
+children: []
 tags:
   - llm-fundamentals
   - prompting

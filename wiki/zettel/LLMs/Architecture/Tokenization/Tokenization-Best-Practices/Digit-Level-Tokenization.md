@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708215912616264"
+address: "c-000039"
 title: "Digit-Level Tokenization"
 created: "2026-07-08"
-parent_id: "20260708215912570475"
-child_ids: []
+parent: "c-000042"
+children: []
 tags:
   - llm-fundamentals
   - tokenization

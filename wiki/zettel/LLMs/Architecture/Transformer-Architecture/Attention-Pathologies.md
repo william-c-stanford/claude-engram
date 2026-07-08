@@ -1,13 +1,13 @@
 ---
 type: zettel
-id: "20260708221914968953"
+address: "c-000053"
 title: "Attention Pathologies"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids:
-  - "20260708221914968964"
-  - "20260708221914968965"
-  - "20260708221914968966"
+parent: "c-000072"
+children:
+  - "c-000052"
+  - "c-000050"
+  - "c-000051"
 tags:
   - llm-fundamentals
   - transformer

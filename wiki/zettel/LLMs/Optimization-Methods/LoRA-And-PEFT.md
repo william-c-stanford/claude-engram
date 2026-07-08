@@ -1,15 +1,15 @@
 ---
 type: zettel
-id: "20260708222835675664"
+address: "c-000109"
 title: "LoRA and Parameter-Efficient Fine-Tuning"
 created: "2026-07-08"
-parent_id: "20260708224425985221"
-child_ids:
-  - "20260708222835675665"
-  - "20260708222835675666"
-  - "20260708222835675667"
-  - "20260708222835675668"
-  - "20260708222835675669"
+parent: "c-000151"
+children:
+  - "c-000106"
+  - "c-000104"
+  - "c-000105"
+  - "c-000107"
+  - "c-000108"
 tags:
   - llm-fundamentals
   - peft

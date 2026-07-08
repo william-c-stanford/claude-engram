@@ -1,14 +1,14 @@
 ---
 type: zettel
-id: "20260708221914968954"
+address: "c-000049"
 title: "Attention Interpretability"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids:
-  - "20260708221914968967"
-  - "20260708221914968968"
-  - "20260708221914968969"
-  - "20260708221914968970"
+parent: "c-000072"
+children:
+  - "c-000046"
+  - "c-000045"
+  - "c-000048"
+  - "c-000047"
 tags:
   - llm-fundamentals
   - transformer

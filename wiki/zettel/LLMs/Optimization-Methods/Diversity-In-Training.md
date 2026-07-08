@@ -1,13 +1,13 @@
 ---
 type: zettel
-id: "20260708223105938823"
+address: "c-000089"
 title: "Diversity in LLM Training"
 created: "2026-07-08"
-parent_id: "20260708224425985221"
-child_ids:
-  - "20260708223105938824"
-  - "20260708223105938825"
-  - "20260708223105938826"
+parent: "c-000151"
+children:
+  - "c-000087"
+  - "c-000088"
+  - "c-000086"
 tags:
   - llm-fundamentals
   - diversity

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968972"
+address: "c-000028"
 title: "Language Modeling Head"
 created: "2026-07-08"
-parent_id: "20260708221914968971"
-child_ids: []
+parent: "c-000031"
+children: []
 tags:
   - llm-fundamentals
   - pretraining

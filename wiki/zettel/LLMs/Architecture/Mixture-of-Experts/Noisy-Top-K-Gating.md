@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938821"
+address: "c-000024"
 title: "Noisy Top-K Gating"
 created: "2026-07-08"
-parent_id: "20260708223105938818"
-child_ids: []
+parent: "c-000026"
+children: []
 tags:
   - llm-fundamentals
   - moe

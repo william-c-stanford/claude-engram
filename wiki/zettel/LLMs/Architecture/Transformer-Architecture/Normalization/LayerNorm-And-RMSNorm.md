@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968962"
+address: "c-000059"
 title: "LayerNorm and RMSNorm"
 created: "2026-07-08"
-parent_id: "20260708221914968951"
-child_ids: []
+parent: "c-000061"
+children: []
 tags:
   - llm-fundamentals
   - normalization

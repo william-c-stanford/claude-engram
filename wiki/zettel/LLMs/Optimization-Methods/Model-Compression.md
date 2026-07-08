@@ -1,13 +1,13 @@
 ---
 type: zettel
-id: "20260708223500121074"
+address: "c-000113"
 title: "Model Compression Methods"
 created: "2026-07-08"
-parent_id: "20260708224425985221"
-child_ids:
-  - "20260708223500121075"
-  - "20260708223500121076"
-  - "20260708223500121077"
+parent: "c-000151"
+children:
+  - "c-000112"
+  - "c-000111"
+  - "c-000110"
 tags:
   - llm-fundamentals
   - compression

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938834"
+address: "c-000082"
 title: "Temperature Scaling"
 created: "2026-07-08"
-parent_id: "20260708223105938827"
-child_ids: []
+parent: "c-000085"
+children: []
 tags:
   - llm-fundamentals
   - decoding

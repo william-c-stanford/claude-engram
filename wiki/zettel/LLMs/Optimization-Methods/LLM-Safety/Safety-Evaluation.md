@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223500121092"
+address: "c-000099"
 title: "Safety Evaluation"
 created: "2026-07-08"
-parent_id: "20260708223500121087"
-child_ids: []
+parent: "c-000103"
+children: []
 tags:
   - llm-fundamentals
   - safety

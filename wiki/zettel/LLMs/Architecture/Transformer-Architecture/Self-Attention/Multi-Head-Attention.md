@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968957"
+address: "c-000068"
 title: "Multi-Head Attention"
 created: "2026-07-08"
-parent_id: "20260708221914968948"
-child_ids: []
+parent: "c-000070"
+children: []
 tags:
   - llm-fundamentals
   - attention

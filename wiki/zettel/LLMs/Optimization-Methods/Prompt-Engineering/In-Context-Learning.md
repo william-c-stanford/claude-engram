@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938839"
+address: "c-000133"
 title: "In-Context Learning"
 created: "2026-07-08"
-parent_id: "20260708223105938838"
-child_ids: []
+parent: "c-000138"
+children: []
 tags:
   - llm-fundamentals
   - prompting

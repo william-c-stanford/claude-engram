@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222835675660"
+address: "c-000145"
 title: "LIMA Principle"
 created: "2026-07-08"
-parent_id: "20260708222835675658"
-child_ids: []
+parent: "c-000150"
+children: []
 tags:
   - llm-fundamentals
   - sft

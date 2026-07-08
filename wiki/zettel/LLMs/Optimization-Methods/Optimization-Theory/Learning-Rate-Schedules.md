@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222508084722"
+address: "c-000117"
 title: "Learning Rate Schedules"
 created: "2026-07-08"
-parent_id: "20260708222508084716"
-child_ids: []
+parent: "c-000123"
+children: []
 tags:
   - llm-fundamentals
   - optimization

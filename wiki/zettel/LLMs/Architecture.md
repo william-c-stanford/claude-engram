@@ -1,14 +1,14 @@
 ---
 type: zettel
-id: "20260708224425985220"
+address: "c-000073"
 title: "Architecture"
 created: "2026-07-08"
-parent_id: "20260708224425985219"
-child_ids:
-  - "20260708215912362253"
-  - "20260708221914968943"
-  - "20260708221914968971"
-  - "20260708223105938818"
+parent: "c-000152"
+children:
+  - "c-000044"
+  - "c-000072"
+  - "c-000031"
+  - "c-000026"
 tags:
   - llm-fundamentals
   - architecture

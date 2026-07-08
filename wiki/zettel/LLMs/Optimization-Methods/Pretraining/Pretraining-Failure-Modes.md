@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222835675657"
+address: "c-000125"
 title: "Pretraining Failure Modes"
 created: "2026-07-08"
-parent_id: "20260708222835675652"
-child_ids: []
+parent: "c-000129"
+children: []
 tags:
   - llm-fundamentals
   - pretraining

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708215912548087"
+address: "c-000035"
 title: "Mask Loss on Special Tokens"
 created: "2026-07-08"
-parent_id: "20260708215912482649"
-child_ids: []
+parent: "c-000038"
+children: []
 tags:
   - llm-fundamentals
   - tokenization

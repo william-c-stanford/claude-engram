@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222835675661"
+address: "c-000147"
 title: "SFT Efficient Training"
 created: "2026-07-08"
-parent_id: "20260708222835675658"
-child_ids: []
+parent: "c-000150"
+children: []
 tags:
   - llm-fundamentals
   - sft

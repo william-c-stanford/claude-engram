@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222835675654"
+address: "c-000124"
 title: "Pretraining Data Pipeline"
 created: "2026-07-08"
-parent_id: "20260708222835675652"
-child_ids: []
+parent: "c-000129"
+children: []
 tags:
   - llm-fundamentals
   - pretraining

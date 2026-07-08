@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938822"
+address: "c-000025"
 title: "Notable MoE Models"
 created: "2026-07-08"
-parent_id: "20260708223105938818"
-child_ids: []
+parent: "c-000026"
+children: []
 tags:
   - llm-fundamentals
   - moe

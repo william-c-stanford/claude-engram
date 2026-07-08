@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708222508084719"
+address: "c-000114"
 title: "Adam Optimizer"
 created: "2026-07-08"
-parent_id: "20260708222508084716"
-child_ids: []
+parent: "c-000123"
+children: []
 tags:
   - llm-fundamentals
   - optimization

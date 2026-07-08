@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708215912437724"
+address: "c-000032"
 title: "BPE Merge Algorithm"
 created: "2026-07-08"
-parent_id: "20260708215912414151"
-child_ids: []
+parent: "c-000034"
+children: []
 tags:
   - llm-fundamentals
   - tokenization

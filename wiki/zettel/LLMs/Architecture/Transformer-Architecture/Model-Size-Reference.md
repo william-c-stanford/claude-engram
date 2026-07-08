@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968952"
+address: "c-000058"
 title: "Model Size Reference"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids: []
+parent: "c-000072"
+children: []
 tags:
   - llm-fundamentals
   - transformer

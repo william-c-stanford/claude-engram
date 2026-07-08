@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968942"
+address: "c-000074"
 title: "LLM Pipeline Overview"
 created: "2026-07-08"
-parent_id: "20260708224425985219"
-child_ids: []
+parent: "c-000152"
+children: []
 tags:
   - llm-fundamentals
   - architecture

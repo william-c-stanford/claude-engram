@@ -1,14 +1,14 @@
 ---
 type: zettel
-id: "20260708215912362253"
+address: "c-000044"
 title: "Tokenization"
 created: "2026-07-08"
-parent_id: "20260708224425985220"
-child_ids:
-  - "20260708215912389407"
-  - "20260708215912414151"
-  - "20260708215912482649"
-  - "20260708215912570475"
+parent: "c-000073"
+children:
+  - "c-000043"
+  - "c-000034"
+  - "c-000038"
+  - "c-000042"
 tags:
   - llm-fundamentals
   - tokenization

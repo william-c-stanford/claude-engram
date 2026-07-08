@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708215912504485"
+address: "c-000037"
 title: "Special Token Inventory"
 created: "2026-07-08"
-parent_id: "20260708215912482649"
-child_ids: []
+parent: "c-000038"
+children: []
 tags:
   - llm-fundamentals
   - tokenization

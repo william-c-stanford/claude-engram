@@ -1,13 +1,13 @@
 ---
 type: zettel
-id: "20260708221914968948"
+address: "c-000070"
 title: "Self-Attention"
 created: "2026-07-08"
-parent_id: "20260708221914968943"
-child_ids:
-  - "20260708221914968955"
-  - "20260708221914968956"
-  - "20260708221914968957"
+parent: "c-000072"
+children:
+  - "c-000069"
+  - "c-000067"
+  - "c-000068"
 tags:
   - llm-fundamentals
   - transformer

@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708221914968956"
+address: "c-000067"
 title: "Attention Quadratic Cost"
 created: "2026-07-08"
-parent_id: "20260708221914968948"
-child_ids: []
+parent: "c-000070"
+children: []
 tags:
   - llm-fundamentals
   - attention

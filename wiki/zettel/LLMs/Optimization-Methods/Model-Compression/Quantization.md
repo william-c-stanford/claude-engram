@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223500121075"
+address: "c-000112"
 title: "Quantization"
 created: "2026-07-08"
-parent_id: "20260708223500121074"
-child_ids: []
+parent: "c-000113"
+children: []
 tags:
   - llm-fundamentals
   - compression

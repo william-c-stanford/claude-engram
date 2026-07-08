@@ -1,10 +1,10 @@
 ---
 type: zettel
-id: "20260708223105938840"
+address: "c-000137"
 title: "Zero-Shot Prompting"
 created: "2026-07-08"
-parent_id: "20260708223105938838"
-child_ids: []
+parent: "c-000138"
+children: []
 tags:
   - llm-fundamentals
   - prompting
