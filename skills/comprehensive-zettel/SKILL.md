@@ -1,6 +1,6 @@
 ---
 name: comprehensive-zettel
-description: "Write Zettelkasten notes that are simultaneously atomic (one claim per note) and comprehensive (the full topic is covered somewhere in the tree). Notes nest by folder: a parent note's children live in a same-named folder beside it, recursively. Filenames are plain slugs (no date/ID prefix); a stable id/parent_id/child_ids triad in frontmatter carries the hierarchy so paths can be reorganized without breaking references. All math is real LaTeX. Triggers on: comprehensive zettel, atomic note, decompose into zettels, zettelkasten note, split into atomic notes, nested zettel folders."
+description: "Write Zettelkasten notes that are simultaneously atomic (one claim per note) and comprehensive (the full topic is covered somewhere in the tree). Notes nest by folder under wiki/zettel/: a parent note's children live in a same-named folder beside it, recursively. Filenames are plain slugs (no date/ID prefix); the DragonScale address/parent/children frontmatter triad carries the hierarchy so paths can be reorganized without breaking references. All math is real LaTeX. Triggers on: comprehensive zettel, atomic note, decompose into zettels, zettelkasten note, split into atomic notes, nested zettel folders."
 allowed-tools: Read Write Edit Bash
 ---
 
@@ -12,16 +12,16 @@ Luhmann's rule ("one claim per note") and the requirement that a topic be *fully
 
 ## Naming and Folder Structure
 
-Filenames are the plain slug — **no date or ID prefix**.
+The corpus is rooted at `wiki/zettel/` (the vault's Zettelkasten mode root — see `scripts/wiki-mode.py`). Filenames are the plain slug — **no date or ID prefix**.
 
-- A root-level note with no children: `wiki/<slug>.md`
+- A root-level note with no children: `wiki/zettel/<slug>.md`
 - A note WITH children becomes both things at once:
-  - the note itself: `wiki/<slug>.md`
-  - a same-named folder holding its children: `wiki/<slug>/<child-slug>.md`
-- Recursion is just repeating the pattern: if a child itself has children, it in turn becomes `wiki/<parent-slug>/<child-slug>.md` *and* `wiki/<parent-slug>/<child-slug>/<grandchild-slug>.md`.
+  - the note itself: `wiki/zettel/<slug>.md`
+  - a same-named folder holding its children: `wiki/zettel/<slug>/<child-slug>.md`
+- Recursion is just repeating the pattern: if a child itself has children, it in turn becomes `wiki/zettel/<parent-slug>/<child-slug>.md` *and* `wiki/zettel/<parent-slug>/<child-slug>/<grandchild-slug>.md`.
 
 ```
-wiki/
+wiki/zettel/
   Tokenization.md                                  <- parent/synthesis note
   Tokenization/
     Why-Subwords.md                                <- leaf (atomic)
@@ -32,23 +32,23 @@ wiki/
     Special-Tokens.md                               <- leaf (atomic)
 ```
 
-The folder path *is* the parent chain — you can see the tree by looking at the filesystem. IDs (below) are what stay stable if a note is ever renamed or moved to a different parent.
+The folder path *is* the parent chain — you can see the tree by looking at the filesystem. The `address` (below) is what stays stable if a note is ever renamed or moved to a different parent.
 
 ## Frontmatter
 
 ```yaml
 ---
 type: zettel
-id: "{{id}}"              # mint with: python3 scripts/wiki-mode.py id
+address: "{{address}}"       # allocate with: ./scripts/allocate-address.sh  (c-NNNNNN)
 title: "{{title}}"
 created: "{{date}}"
-parent_id: "{{parent-id}}"   # "" for a root note
-child_ids: []                # populated as children are written; stays [] for a leaf
+parent: "{{parent-address}}" # "" for a root note
+children: []                 # populated as children are written; stays [] for a leaf
 tags: []
 ---
 ```
 
-`id:`, `parent_id:`, and `child_ids:` are the **stable** cross-reference primitive — reuse `scripts/wiki-mode.py id` to mint each one (it is a pure timestamp minter, independent of the router/filename logic, so this works without touching `wiki-mode.py`'s filing behavior). Because the folder path already encodes the hierarchy, these IDs exist so that a `[[wikilink]]`-independent reference survives a future rename or re-parent without going stale.
+`address:` is the **single identity scheme** — the same DragonScale creation-order address (`c-NNNNNN`) used by every other addressed page in the vault, so zettels participate in `wiki-lint` address validation with no parallel `id:` scheme. Allocate it with `./scripts/allocate-address.sh` (atomic, flock-guarded), and record the path→address mapping in `.raw/.manifest.json`'s `address_map` exactly as `wiki-ingest` does for any new page. `parent:` and `children:` hold **addresses**, not filenames — because the folder path already encodes the hierarchy, these address references survive a rename or re-parent without going stale.
 
 > **See also: [[local-wiki-index]]** — the companion skill that indexes this frontmatter into a fast lookup cache and owns the attach/promote placement procedure (where a new atomic note goes). Consult it when you need to find an existing note, check what a branch already covers, or detect a slug collision without reading the whole vault.
 
@@ -85,11 +85,11 @@ Use proper LaTeX commands: `\mathbb{R}`, `\sqrt{}`, `\sum`, `\theta`, `\eta`, `\
 ```markdown
 ---
 type: zettel
-id: "{{id}}"
+address: "{{address}}"
 title: "{{title}}"
 created: "{{date}}"
-parent_id: "{{parent-id}}"
-child_ids: []
+parent: "{{parent-address}}"
+children: []
 tags: []
 ---
 
@@ -113,18 +113,18 @@ tags: []
 - [[{{related-slug}}]] — (nature of the relationship)
 ```
 
-### Parent Template (has children — lives at `wiki/<slug>.md` beside `wiki/<slug>/`)
+### Parent Template (has children — lives at `wiki/zettel/<slug>.md` beside `wiki/zettel/<slug>/`)
 
 ```markdown
 ---
 type: zettel
-id: "{{id}}"
+address: "{{address}}"
 title: "{{title}}"
 created: "{{date}}"
-parent_id: "{{parent-id}}"
-child_ids:
-  - "{{child-id-1}}"
-  - "{{child-id-2}}"
+parent: "{{parent-address}}"
+children:
+  - "{{child-address-1}}"
+  - "{{child-address-2}}"
 tags: []
 ---
 
@@ -153,13 +153,13 @@ tags: []
 
 ## Worked Example
 
-`wiki/Tokenization.md` (parent) synthesizes: "Tokenization converts text to discrete units the transformer can process; the choice of granularity and algorithm trades off vocabulary size, sequence length, and multilingual coverage." It points to:
+`wiki/zettel/Tokenization.md` (parent) synthesizes: "Tokenization converts text to discrete units the transformer can process; the choice of granularity and algorithm trades off vocabulary size, sequence length, and multilingual coverage." It points to:
 
-- `wiki/Tokenization/Why-Subwords.md` — atomic claim: subword tokenization is the trade-off sweet spot between character- and word-level granularity.
-- `wiki/Tokenization/Byte-Pair-Encoding.md` — not atomic on its own (algorithm + variants + practice), so it becomes its own parent with children:
-  - `wiki/Tokenization/Byte-Pair-Encoding/BPE-Merge-Algorithm.md` — atomic claim: BPE iteratively merges the most frequent adjacent symbol pair.
-  - `wiki/Tokenization/Byte-Pair-Encoding/BPE-Vocabulary-Size-Tradeoff.md` — atomic claim: larger vocabularies (128K vs 32K) improve multilingual/code coverage at the cost of a larger embedding table.
-- `wiki/Tokenization/Special-Tokens.md` — atomic claim: special tokens are structural, not semantic, and must never receive an SFT loss signal.
+- `wiki/zettel/Tokenization/Why-Subwords.md` — atomic claim: subword tokenization is the trade-off sweet spot between character- and word-level granularity.
+- `wiki/zettel/Tokenization/Byte-Pair-Encoding.md` — not atomic on its own (algorithm + variants + practice), so it becomes its own parent with children:
+  - `wiki/zettel/Tokenization/Byte-Pair-Encoding/BPE-Merge-Algorithm.md` — atomic claim: BPE iteratively merges the most frequent adjacent symbol pair.
+  - `wiki/zettel/Tokenization/Byte-Pair-Encoding/BPE-Vocabulary-Size-Tradeoff.md` — atomic claim: larger vocabularies (128K vs 32K) improve multilingual/code coverage at the cost of a larger embedding table.
+- `wiki/zettel/Tokenization/Special-Tokens.md` — atomic claim: special tokens are structural, not semantic, and must never receive an SFT loss signal.
 
 Nothing from the original comprehensive draft on tokenization is missing — it's just distributed one claim per leaf, with `Tokenization.md` and `Byte-Pair-Encoding.md` acting purely as synthesis/index nodes.
 

@@ -1,6 +1,6 @@
 ---
 name: local-wiki-index
-description: "Index and navigate the folder-nested Zettelkasten vault, and decide where a new atomic note goes. Maintains a rebuildable JSON cache (.vault-meta/zettel-index.json) mapping id -> path/title/aliases/parent_id/child_ids so existence checks and branch lookups are O(1) instead of a whole-vault read. Provides the attach/promote placement procedure wiki-ingest consults before filing. Triggers on: index the zettels, rebuild the zettel index, find a note, does this note exist, where does this note go, attach or promote, which parent, slug collision, navigate the zettel tree."
+description: "Index and navigate the folder-nested Zettelkasten vault, and decide where a new atomic note goes. Maintains a rebuildable JSON cache (.vault-meta/zettel-index.json) mapping DragonScale address -> path/title/aliases/parent/children so existence checks and branch lookups are O(1) instead of a whole-vault read. Provides the attach/promote placement procedure wiki-ingest consults before filing. Triggers on: index the zettels, rebuild the zettel index, find a note, does this note exist, where does this note go, attach or promote, which parent, slug collision, navigate the zettel tree."
 allowed-tools: Read Write Edit Bash
 ---
 
@@ -14,9 +14,9 @@ Backed by one script: `scripts/zettel-index.py`.
 
 ## Why this exists
 
-Once you know a note's path, the filesystem answers navigation directly: children are `ls wiki/<slug>/`, the parent is one directory up (`wiki/<slug>.md` beside `wiki/<slug>/`). Three things the filesystem **cannot** answer, and each blocks correct ingestion:
+Once you know a note's path, the filesystem answers navigation directly: children are `ls wiki/zettel/<slug>/`, the parent is one directory up. Three things the filesystem **cannot** answer, and each blocks correct ingestion:
 
-- **Existence** — a deep path like `wiki/Tokenization/Byte-Pair-Encoding/BPE-Merge-Algorithm.md` isn't guessable from a concept name. Checking "does a note for this claim already exist" by reading candidate files blows the ingest read budget.
+- **Existence** — a deep path like `wiki/zettel/Tokenization/Byte-Pair-Encoding/BPE-Merge-Algorithm.md` isn't guessable from a concept name. Checking "does a note for this claim already exist" by reading candidate files blows the ingest read budget.
 - **Placement** — which existing parent a new atomic note attaches under, or whether a leaf must be promoted into a parent to hold it.
 - **Slug collisions** — filenames are plain slugs, unique only among siblings. Two `Overview.md` in different branches break bare `[[Overview]]` wikilinks.
 
@@ -26,26 +26,27 @@ The index turns existence and branch-shape into O(1) lookups. The placement proc
 
 ## Index Schema
 
-`.vault-meta/zettel-index.json` is a **cache, not the source of truth** — each note's first frontmatter block (`id`/`parent_id`/`child_ids`) is authoritative. If the index and reality ever disagree, run `rebuild`.
+`.vault-meta/zettel-index.json` is a **cache, not the source of truth** — each note's first frontmatter block (`address`/`parent`/`children`) is authoritative. If the index and reality ever disagree, run `rebuild`.
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "root": "wiki/zettel",
   "notes": {
-    "<id>": {
-      "id": "<id>",
-      "path": "wiki/Tokenization/Byte-Pair-Encoding.md",
+    "c-000002": {
+      "address": "c-000002",
+      "path": "wiki/zettel/Tokenization/Byte-Pair-Encoding.md",
       "slug": "Byte-Pair-Encoding",
       "title": "Byte-Pair Encoding",
       "aliases": ["BPE"],
-      "parent_id": "<parent-id>",
-      "child_ids": ["<child-id>", "..."]
+      "parent": "c-000001",
+      "children": ["c-000003"]
     }
   }
 }
 ```
 
-Records are keyed by `id` (stable across renames/reparents); `path` is derived and refreshed on every `rebuild`/`upsert`. The file is gitignored like other `.vault-meta` runtime caches. The top-level `root` field records which subtree the index covers (see Scoping below).
+Records are keyed by `address` — the DragonScale creation-order address (`c-NNNNNN`), the **same single identity scheme** as every other addressed page in the vault (no parallel `id:`). It is stable across renames/reparents; `path` is derived and refreshed on every `rebuild`/`upsert`. `parent`/`children` hold addresses. The file is gitignored like other `.vault-meta` runtime caches. The top-level `root` field records which subtree the index covers (see Scoping below).
 
 ### Scoping the index to a subtree
 
@@ -66,12 +67,12 @@ All read commands auto-recover: a missing, empty, or corrupt index rebuilds tran
 
 | Command | Purpose |
 |---|---|
-| `python3 scripts/zettel-index.py rebuild` | Scan `wiki/**/*.md` and (re)write the index. Run after out-of-band file moves. |
+| `python3 scripts/zettel-index.py rebuild` | Scan the scoped subtree and (re)write the index. Run after out-of-band file moves. |
 | `python3 scripts/zettel-index.py find "<text>"` | Candidate records matching title / alias / slug (case-insensitive, ranked). The existence check. |
-| `python3 scripts/zettel-index.py get <id>` | One record as JSON. |
-| `python3 scripts/zettel-index.py children <id>` | Direct children only. |
-| `python3 scripts/zettel-index.py subtree <id>` | All descendants — "what does this branch already cover" without opening files. |
-| `python3 scripts/zettel-index.py ancestors <id>` | Parent chain, nearest-first, to the root. |
+| `python3 scripts/zettel-index.py get <address>` | One record as JSON. |
+| `python3 scripts/zettel-index.py children <address>` | Direct children only. |
+| `python3 scripts/zettel-index.py subtree <address>` | All descendants — "what does this branch already cover" without opening files. |
+| `python3 scripts/zettel-index.py ancestors <address>` | Parent chain, nearest-first, to the root. |
 | `python3 scripts/zettel-index.py collisions` | Every slug used by more than one note (the wikilink hazard). |
 | `python3 scripts/zettel-index.py upsert <path>` | Add/replace one note's record after writing it. |
 | `python3 scripts/zettel-index.py remove <path>` | Drop one note's record. |
@@ -85,11 +86,11 @@ This is the canonical copy. `wiki-ingest` and `comprehensive-zettel` link here r
 1. **Exists already?** `find "<C's concept>"`. If an exact title/alias match comes back, C already has a note — **update or cross-reference it, do not duplicate.** Stop.
 2. **Locate the parent.** From the source context, name the broadest concept C belongs under. `find` that parent.
 3. **Decide attach vs promote vs root:**
-   - **Parent exists and has children** (its record's `child_ids` is non-empty, i.e. it already owns a folder) → **ATTACH**: create C at `wiki/<parent-path-without-.md>/<C-slug>.md` as a child leaf; add C's `id` to the parent's `child_ids`.
-   - **Parent exists but is a leaf** (empty `child_ids`, no folder yet) → **PROMOTE**: create the parent's folder, keep the parent note as a *synthesis* node (rewrite per [[comprehensive-zettel]]'s Parent Template), re-file its former detailed content as a child leaf if it held any, then attach C as another child.
-   - **No parent exists** → create a new **root** note for the topic (which may itself need decomposition per [[comprehensive-zettel]]), then attach C under it.
+   - **Parent exists and has children** (its record's `children` is non-empty, i.e. it already owns a folder) → **ATTACH**: allocate C's address (`./scripts/allocate-address.sh`), create C at `wiki/zettel/<parent-path-without-.md>/<C-slug>.md` as a child leaf, and add C's address to the parent's `children`.
+   - **Parent exists but is a leaf** (empty `children`, no folder yet) → **PROMOTE**: create the parent's folder, keep the parent note as a *synthesis* node (rewrite per [[comprehensive-zettel]]'s Parent Template), re-file its former detailed content as a child leaf if it held any, then attach C as another child.
+   - **No parent exists** → create a new **root** note for the topic under `wiki/zettel/` (which may itself need decomposition per [[comprehensive-zettel]]), then attach C under it.
 4. **Collision check before writing.** `collisions` (or `find "<C-slug>"`). If C's slug is already used elsewhere in the tree, warn the caller and either disambiguate the slug or ensure every reference to C uses a path-qualified wikilink (`[[Tokenization/Byte-Pair-Encoding/BPE-Merge-Algorithm]]`).
-5. **Write the note(s)** per [[comprehensive-zettel]] (Leaf or Parent template, real LaTeX).
+5. **Write the note(s)** per [[comprehensive-zettel]] (Leaf or Parent template, real LaTeX), allocating an `address:` for each new note and recording it in `.raw/.manifest.json`'s `address_map`.
 6. **Update the index.** `upsert <path>` for every note created or changed (the new leaf, and any promoted parent + moved child).
 
 The payoff: the ingesting agent reads only the handful of notes on the candidate parent chain (found via `find`/`ancestors`) and asks `subtree` what a branch covers — never the whole vault.
