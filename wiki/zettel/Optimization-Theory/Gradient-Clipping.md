@@ -1,0 +1,32 @@
+---
+type: zettel
+id: "20260708222508084723"
+title: "Gradient Clipping"
+created: "2026-07-08"
+parent_id: "20260708222508084716"
+child_ids: []
+tags:
+  - llm-fundamentals
+  - optimization
+---
+
+# Gradient Clipping
+
+## Claim
+
+Gradient clipping rescales the gradient when its global norm exceeds a threshold $\tau$ (typically 1.0), bounding update size while *preserving the gradient's direction* — unlike lowering the learning rate, which shrinks every step uniformly.
+
+## Reasoning
+
+$$g_t \leftarrow g_t \cdot \min\!\left(1, \frac{\tau}{\lVert g_t \rVert_2}\right)$$
+
+Only steps whose global L2 norm exceeds `max_grad_norm` are scaled down; normal steps pass through untouched. This is the right tool for occasional large gradients (e.g. a bad batch) because it damps the spike without slowing ordinary training the way a smaller LR would. Practical notes: clipping applies to the *accumulated* gradient when using gradient accumulation; under FP16 you must unscale before clipping, or the threshold is applied to scaled gradients (see [[Mixed-Precision-Training]]).
+
+## Sources
+
+- [[hitchhikers-guide-to-agentic-ai-ch1-llm-architecture]] §1.5.8
+
+## Cross-references
+
+- Parent: [[Optimization-Theory]]
+- Interacts with: [[Mixed-Precision-Training]]
