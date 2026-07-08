@@ -8,13 +8,13 @@
         "type": "tabs",
         "children": [
           {
-            "id": "a31de1b302cdc5cf",
+            "id": "de1e88ac7332215f",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:llm-fundamentals",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 366.5
   },
   "right": {
     "id": "7092b65be1e76349",
@@ -183,9 +183,52 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-memos:Thino": false,
+      "obsidian-memos:Thino Super": false,
+      "obsidian-git:Open Git source control": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "a31de1b302cdc5cf",
-  "lastOpenFiles": []
+  "active": "5565f1231fe95c42",
+  "lastOpenFiles": [
+    "wiki/sources/hitchhikers-guide-to-agentic-ai-ch1-llm-architecture.md",
+    "wiki/zettel/LLM-Pipeline-Overview.md",
+    "wiki/zettel/LLMs/Optimization-Methods.md",
+    "wiki/zettel/LLMs/Architecture.md",
+    "wiki/zettel/LLMs.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Self-Attention/Scaled-Dot-Product-Attention.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Self-Attention/Multi-Head-Attention.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Self-Attention/Attention-Quadratic-Cost.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Positional-Encodings/Sinusoidal-And-Learned-Positional.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Positional-Encodings/RoPE.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Positional-Encodings/Long-Context-Extension.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Positional-Encodings/ALiBi.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Normalization/Pre-LN-vs-Post-LN.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Normalization/LayerNorm-And-RMSNorm.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Sink.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Head-Roles.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Dilution.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability/Sparse-Autoencoders.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability/Natural-Language-Autoencoders.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability/Attention-Visualization-Methods.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability/Attention-Is-Not-Explanation.md",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Tokenization-Best-Practices/Vocabulary-Size.md",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Tokenization-Best-Practices/Tokenizer-Fertility.md",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Tokenization-Best-Practices/Digit-Level-Tokenization.md",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Special-Tokens/Special-Token-Inventory.md",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Special-Tokens/Never-Split-Special-Tokens.md",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Self-Attention",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Positional-Encodings",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Normalization",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies",
+    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Tokenization-Best-Practices",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Special-Tokens",
+    "wiki/zettel/LLMs/Architecture/Tokenization/Byte-Pair-Encoding",
+    "wiki/zettel/LLMs/Optimization-Methods/Supervised-Fine-Tuning",
+    "wiki/zettel/LLMs/Optimization-Methods/Speculative-Decoding",
+    "wiki/Wiki Map.canvas"
+  ]
 }
