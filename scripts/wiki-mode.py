@@ -59,9 +59,12 @@ DEFAULT_CONFIG = {
             "archives_folder": "wiki/archives/",
         },
         "zettelkasten": {
-            "id_format": "YYYYMMDDHHMMSSffffff",
-            "no_folders": True,
-            "root_folder": "wiki/",
+            # v1.9+: folder-nested atomic notes with plain-slug filenames, rooted
+            # at wiki/zettel/. Identity is the DragonScale `address` (c-NNNNNN),
+            # not a timestamp id. See skills/comprehensive-zettel + local-wiki-index.
+            "nested": True,
+            "identity": "dragonscale-address",
+            "root_folder": "wiki/zettel/",
         },
         "generic": {
             "sources_folder": "wiki/sources/",
@@ -182,9 +185,13 @@ def route_path(mode, content_type, name, cfg):
         return mapping[content_type]
 
     if mode == "zettelkasten":
+        # Folder-nested plain-slug convention (v1.9+): the router returns the
+        # default root-level path under wiki/zettel/. Depth in the tree is decided
+        # dynamically by the local-wiki-index placement procedure (attach vs
+        # promote), which relocates the note under its parent folder. Identity is
+        # a DragonScale address allocated at write time, not a filename timestamp.
         z = cfg["config"]["zettelkasten"]
-        zid = mint_zettel_id()
-        return z["root_folder"] + f"{zid}-{slug}.md"
+        return z["root_folder"] + slug + ".md"
 
     raise SystemExit(3)
 
