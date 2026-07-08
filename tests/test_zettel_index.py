@@ -239,6 +239,33 @@ def test_two_node_cycle_terminates():
         assert_eq("cycle subtree visits the other node once", {"id-b"}, sub)
 
 
+# ─── root scoping: rebuild covers only the configured subtree ───────────────
+def test_root_scoping_excludes_outside_notes():
+    with patched_vault() as (tmp, wiki):
+        # A pre-existing flat note directly under wiki/ ...
+        write_note(wiki, "Existing-Flat.md", "id-flat", "Existing Flat")
+        # ... and a fresh corpus under wiki/zettel/
+        (wiki / "zettel").mkdir()
+        write_note(wiki / "zettel", "Topic.md", "id-topic", "Topic")
+        with mock.patch.object(zi, "WIKI_DIR", wiki / "zettel"):
+            idx = zi.rebuild()
+        assert_true("scoped rebuild indexes only the subtree note",
+                    set(idx) == {"id-topic"}, hint=f"keys={list(idx)}")
+        assert_true("flat note outside root excluded", "id-flat" not in idx)
+
+
+# ─── root scoping: the chosen root is persisted in the index ────────────────
+def test_stored_root_persisted():
+    with patched_vault() as (tmp, wiki):
+        (wiki / "zettel").mkdir()
+        write_note(wiki / "zettel", "Topic.md", "id-topic", "Topic")
+        with mock.patch.object(zi, "WIKI_DIR", wiki / "zettel"):
+            zi.rebuild()
+        data = index_is_valid_json(tmp)
+        assert_eq("stored root is the scoped subtree", "wiki/zettel", data.get("root"))
+        assert_eq("_read_stored_root reads it back", "wiki/zettel", zi._read_stored_root())
+
+
 def main():
     print("=== test_zettel_index.py ===")
     test_rebuild_captures_fields()
@@ -252,6 +279,8 @@ def main():
     test_mutations_leave_valid_json()
     test_malformed_tree_terminates()
     test_two_node_cycle_terminates()
+    test_root_scoping_excludes_outside_notes()
+    test_stored_root_persisted()
     print("\nAll zettel-index tests passed.")
 
 

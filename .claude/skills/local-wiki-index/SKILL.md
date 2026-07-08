@@ -45,7 +45,18 @@ The index turns existence and branch-shape into O(1) lookups. The placement proc
 }
 ```
 
-Records are keyed by `id` (stable across renames/reparents); `path` is derived and refreshed on every `rebuild`/`upsert`. The file is gitignored like other `.vault-meta` runtime caches.
+Records are keyed by `id` (stable across renames/reparents); `path` is derived and refreshed on every `rebuild`/`upsert`. The file is gitignored like other `.vault-meta` runtime caches. The top-level `root` field records which subtree the index covers (see Scoping below).
+
+### Scoping the index to a subtree
+
+By default the index scans all of `wiki/`. To cover only a subtree — e.g. a fresh nested-zettel corpus at `wiki/zettel/` that must **not** pull in pre-existing flat pages elsewhere in `wiki/` — pass a scan root:
+
+```bash
+python3 scripts/zettel-index.py --root wiki/zettel rebuild
+# or, for consumer skills:  ZETTEL_ROOT=wiki/zettel python3 scripts/zettel-index.py rebuild
+```
+
+Resolution precedence: `--root` > `$ZETTEL_ROOT` > the `root` stored in an existing index > default `wiki`. Because the chosen root is persisted in the index, later `upsert`/`remove`/read calls stay scoped to the same subtree with no flag needed. Paths in records remain vault-relative (`wiki/zettel/...`), so wikilinks and Obsidian resolution are unaffected.
 
 ---
 

@@ -35,17 +35,46 @@ Exit codes:
 
 import argparse
 import json
+import os
 import re
 import sys
 import tempfile
 from pathlib import Path
 
 VAULT_ROOT = Path(__file__).resolve().parent.parent
-WIKI_DIR = VAULT_ROOT / "wiki"
+DEFAULT_ROOT = "wiki"
+# WIKI_DIR is THE scan root — the subtree rebuild walks. It defaults to wiki/
+# but can be scoped to a subtree (e.g. wiki/zettel/) via `--root` / ZETTEL_ROOT
+# so an index can cover a fresh corpus without pulling in pre-existing pages.
+WIKI_DIR = VAULT_ROOT / DEFAULT_ROOT
 META_DIR = VAULT_ROOT / ".vault-meta"
 INDEX_PATH = META_DIR / "zettel-index.json"
 
 SCHEMA_VERSION = 1
+
+
+def _apply_root(root_rel):
+    """Point the scan root at a vault-relative subtree (e.g. 'wiki/zettel')."""
+    global WIKI_DIR
+    WIKI_DIR = VAULT_ROOT / root_rel
+
+
+def _current_root_rel():
+    """The scan root as a vault-relative string, for storage in the index."""
+    try:
+        return str(WIKI_DIR.resolve().relative_to(VAULT_ROOT))
+    except ValueError:
+        return DEFAULT_ROOT
+
+
+def _read_stored_root():
+    """The `root` recorded in an existing index file, or None."""
+    if not INDEX_PATH.is_file():
+        return None
+    try:
+        return json.loads(INDEX_PATH.read_text(encoding="utf-8")).get("root")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
 
 
 # ─── Frontmatter parsing ─────────────────────────────────────────────────────
@@ -157,7 +186,7 @@ def rebuild():
 def _write_index(records):
     META_DIR.mkdir(parents=True, exist_ok=True)
     payload = json.dumps(
-        {"schema_version": SCHEMA_VERSION, "notes": records},
+        {"schema_version": SCHEMA_VERSION, "root": _current_root_rel(), "notes": records},
         indent=2, ensure_ascii=False,
     ) + "\n"
     fd, tmp = tempfile.mkstemp(prefix="zettel-index.", suffix=".tmp", dir=str(META_DIR))
@@ -299,6 +328,10 @@ def remove(path):
 
 def main():
     parser = argparse.ArgumentParser(description="Index + query cache for nested Zettelkasten notes.")
+    parser.add_argument("--root", default=None,
+                        help="Vault-relative subtree to scan (e.g. wiki/zettel). "
+                             "Overrides $ZETTEL_ROOT and any root stored in the index. "
+                             "Scopes the index so it excludes pages outside the subtree.")
     sub = parser.add_subparsers(dest="cmd", required=True)
     sub.add_parser("rebuild", help="Scan the vault and rewrite the index")
     sp_get = sub.add_parser("get", help="Print one record by id")
@@ -318,6 +351,19 @@ def main():
     sp_rm.add_argument("path")
 
     args = parser.parse_args()
+
+    # Resolve the scan root once, for every command: explicit --root wins, then
+    # $ZETTEL_ROOT, then the root recorded in an existing index, else wiki/.
+    # Reads don't scan, but resolving here keeps upsert/remove scoped to the
+    # same subtree the index was built for.
+    if args.root:
+        _apply_root(args.root)
+    elif os.environ.get("ZETTEL_ROOT"):
+        _apply_root(os.environ["ZETTEL_ROOT"])
+    else:
+        stored = _read_stored_root()
+        if stored:
+            _apply_root(stored)
 
     if args.cmd == "rebuild":
         recs = rebuild()
