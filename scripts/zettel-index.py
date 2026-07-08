@@ -2,26 +2,33 @@
 """zettel-index.py — index + query cache for folder-nested Zettelkasten notes.
 
 Maintains a rebuildable index sidecar at .vault-meta/zettel-index.json mapping
-each note's stable id to its path, title, aliases, parent_id, and child_ids.
-The index is a CACHE, not the source of truth: the note files' first-frontmatter
-block is authoritative, and `rebuild` reconstructs the index by scanning
-wiki/**/*.md. This mirrors scripts/allocate-address.sh's counter-recovery model
-and scripts/wiki-mode.py's atomic JSON writes.
+each note's DragonScale address to its path, title, aliases, parent, and
+children. The index is a CACHE, not the source of truth: the note files' first
+frontmatter block is authoritative, and `rebuild` reconstructs the index by
+scanning wiki/**/*.md. This mirrors scripts/allocate-address.sh's counter
+recovery and scripts/wiki-mode.py's atomic JSON writes.
+
+Identity is the single DragonScale scheme: every zettel carries `address:`
+(c-NNNNNN or l-NNNNNN, allocated by scripts/allocate-address.sh), and the tree
+is expressed with `parent:` (a parent's address, "" for a root) and `children:`
+(a list of child addresses). There is no separate `id:`; the address IS the id,
+so the same page participates in DragonScale address validation (wiki-lint) with
+no parallel identity scheme.
 
 The index exists so consumers (comprehensive-zettel, wiki-ingest) can answer
 "does a note for X already exist / where" and "what does this branch cover"
 without reading every file in the vault.
 
 CLI:
-  zettel-index.py rebuild            # scan wiki/**/*.md, (re)write the index
-  zettel-index.py get <id>           # one record as JSON
-  zettel-index.py find <text>        # candidates matching title/alias/slug
-  zettel-index.py children <id>      # direct children records
-  zettel-index.py subtree <id>       # all descendants (self excluded)
-  zettel-index.py ancestors <id>     # parent chain, nearest-first, to root
-  zettel-index.py collisions         # slugs used by >1 note (wikilink hazard)
-  zettel-index.py upsert <path>      # add/replace one note's record
-  zettel-index.py remove <path>      # drop one note's record
+  zettel-index.py [--root wiki/zettel] rebuild   # scan subtree, (re)write index
+  zettel-index.py get <address>                  # one record as JSON
+  zettel-index.py find <text>                    # candidates by title/alias/slug
+  zettel-index.py children <address>             # direct children records
+  zettel-index.py subtree <address>              # all descendants (self excluded)
+  zettel-index.py ancestors <address>            # parent chain, nearest-first
+  zettel-index.py collisions                     # slugs used by >1 note
+  zettel-index.py upsert <path>                  # add/replace one note's record
+  zettel-index.py remove <path>                  # drop one note's record
 
 All read commands auto-recover: a missing/empty/corrupt index triggers a
 transparent rebuild (INFO to stderr) before answering. This helper NEVER writes
@@ -29,8 +36,8 @@ to note files.
 
 Exit codes:
   0 — success
-  2 — usage error
-  3 — not found (get/upsert on a path with no parseable id)
+  2 — usage error (including a path outside the vault root)
+  3 — not found (get, or upsert on a file with no address)
 """
 
 import argparse
@@ -43,14 +50,14 @@ from pathlib import Path
 
 VAULT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_ROOT = "wiki"
-# WIKI_DIR is THE scan root — the subtree rebuild walks. It defaults to wiki/
-# but can be scoped to a subtree (e.g. wiki/zettel/) via `--root` / ZETTEL_ROOT
-# so an index can cover a fresh corpus without pulling in pre-existing pages.
+# WIKI_DIR is THE scan root — the subtree rebuild walks. Defaults to wiki/ but
+# can be scoped to a subtree (e.g. wiki/zettel/) via `--root` / ZETTEL_ROOT so an
+# index can cover a fresh corpus without pulling in pre-existing pages.
 WIKI_DIR = VAULT_ROOT / DEFAULT_ROOT
 META_DIR = VAULT_ROOT / ".vault-meta"
 INDEX_PATH = META_DIR / "zettel-index.json"
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2  # v2: identity is `address` (was timestamp `id` in v1)
 
 
 def _apply_root(root_rel):
@@ -77,6 +84,32 @@ def _read_stored_root():
         return None
 
 
+def _vault_relative(path):
+    """Return `path` as a vault-relative string, or raise SystemExit(2) with
+    agent-actionable context when it resolves outside the vault.
+
+    Paths are resolved against the current working directory, so an agent that
+    invokes this from the wrong CWD gets a precise, self-correcting error rather
+    than a bare ValueError traceback.
+    """
+    resolved = Path(path).resolve()
+    try:
+        return str(resolved.relative_to(VAULT_ROOT))
+    except ValueError:
+        sys.stderr.write(
+            "ERR: path is outside the vault root.\n"
+            f"  given:       {path}\n"
+            f"  resolved to: {resolved}\n"
+            f"  vault root:  {VAULT_ROOT}\n"
+            "  Cause: relative paths resolve against the current working "
+            "directory (CWD), and this CWD is not the vault root.\n"
+            "  Fix: pass a path inside the vault, or re-run with the vault root "
+            f"as CWD (cd {VAULT_ROOT}) and pass a vault-relative path "
+            "(e.g. wiki/zettel/Foo.md).\n"
+        )
+        raise SystemExit(2)
+
+
 # ─── Frontmatter parsing ─────────────────────────────────────────────────────
 
 def parse_frontmatter(path):
@@ -101,7 +134,6 @@ def parse_frontmatter(path):
     for raw in lines[1:]:
         if raw.strip() == "---":
             break
-        # list item under the current key
         m_item = re.match(r"^\s+-\s+(.*)$", raw)
         if m_item and key is not None and list_acc is not None:
             list_acc.append(_unquote(m_item.group(1).strip()))
@@ -112,7 +144,6 @@ def parse_frontmatter(path):
             key = m_kv.group(1)
             val = m_kv.group(2).strip()
             if val == "":
-                # could be the start of a block list; prime an accumulator
                 list_acc = []
                 fm[key] = ""
             else:
@@ -134,45 +165,45 @@ def _slug_of(path):
 
 
 def _record_from_file(path):
-    """Build an index record from a note file, or None if it has no id."""
+    """Build an index record from a note file, or None if it has no address."""
     fm = parse_frontmatter(path)
     if not fm:
         return None
-    note_id = fm.get("id")
-    if not note_id or not isinstance(note_id, str):
+    address = fm.get("address")
+    if not address or not isinstance(address, str):
         return None
     rel = str(Path(path).resolve().relative_to(VAULT_ROOT))
     aliases = fm.get("aliases")
     if not isinstance(aliases, list):
         aliases = []
-    child_ids = fm.get("child_ids")
-    if not isinstance(child_ids, list):
-        child_ids = []
-    parent_id = fm.get("parent_id")
-    if not isinstance(parent_id, str):
-        parent_id = ""
+    children = fm.get("children")
+    if not isinstance(children, list):
+        children = []
+    parent = fm.get("parent")
+    if not isinstance(parent, str):
+        parent = ""
     return {
-        "id": note_id,
+        "address": address,
         "path": rel,
         "slug": _slug_of(path),
         "title": fm.get("title", "") if isinstance(fm.get("title"), str) else "",
         "aliases": aliases,
-        "parent_id": parent_id,
-        "child_ids": child_ids,
+        "parent": parent,
+        "children": children,
     }
 
 
 # ─── Index load / save ───────────────────────────────────────────────────────
 
 def _scan_records():
-    """Walk WIKI_DIR and return {id: record} for every note with an id."""
+    """Walk WIKI_DIR and return {address: record} for every note with an address."""
     records = {}
     if not WIKI_DIR.is_dir():
         return records
     for path in sorted(WIKI_DIR.rglob("*.md")):
         rec = _record_from_file(path)
         if rec:
-            records[rec["id"]] = rec
+            records[rec["address"]] = rec
     return records
 
 
@@ -203,15 +234,14 @@ def _write_index(records):
 
 
 def load_index(recover=True):
-    """Return {id: record}. On missing/empty/corrupt index, rebuild if allowed."""
+    """Return {address: record}. On missing/empty/corrupt index, rebuild if allowed."""
     if not INDEX_PATH.is_file():
         if recover:
             print("INFO: zettel index missing; rebuilding from vault scan", file=sys.stderr)
             return rebuild()
         return {}
     try:
-        raw = INDEX_PATH.read_text(encoding="utf-8")
-        data = json.loads(raw)
+        data = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
         notes = data.get("notes", {})
         if not isinstance(notes, dict):
             raise ValueError("notes is not an object")
@@ -247,38 +277,38 @@ def find(index, text):
     return [rec for _, rec in scored]
 
 
-def children(index, note_id):
-    """Direct children of note_id, ordered by path."""
-    kids = [r for r in index.values() if r.get("parent_id") == note_id]
+def children(index, address):
+    """Direct children of the note at `address`, ordered by path."""
+    kids = [r for r in index.values() if r.get("parent") == address]
     kids.sort(key=lambda r: r.get("path", ""))
     return kids
 
 
-def subtree(index, note_id):
-    """All descendants of note_id (self excluded), breadth-first, cycle-safe."""
+def subtree(index, address):
+    """All descendants of `address` (self excluded), breadth-first, cycle-safe."""
     out = []
-    seen = {note_id}
-    frontier = [note_id]
+    seen = {address}
+    frontier = [address]
     while frontier:
         nxt = []
         for pid in frontier:
             for kid in children(index, pid):
-                if kid["id"] in seen:
+                if kid["address"] in seen:
                     continue
-                seen.add(kid["id"])
+                seen.add(kid["address"])
                 out.append(kid)
-                nxt.append(kid["id"])
+                nxt.append(kid["address"])
         frontier = nxt
     return out
 
 
-def ancestors(index, note_id):
+def ancestors(index, address):
     """Parent chain from nearest parent up to the root, cycle-safe."""
     out = []
-    seen = {note_id}
-    rec = index.get(note_id)
+    seen = {address}
+    rec = index.get(address)
     while rec:
-        pid = rec.get("parent_id") or ""
+        pid = rec.get("parent") or ""
         if not pid or pid in seen:
             break
         seen.add(pid)
@@ -302,24 +332,23 @@ def collisions(index):
 
 def upsert(path):
     """Parse one note file, replace/add its record, write. Returns the record."""
+    rel = _vault_relative(path)
     rec = _record_from_file(Path(path))
     if not rec:
         return None
     index = load_index(recover=True)
-    # Drop any stale record that previously pointed at this path under a
-    # different id (e.g., the id was changed by hand), keyed by path.
-    index = {i: r for i, r in index.items() if r.get("path") != rec["path"]}
-    index[rec["id"]] = rec
+    index = {a: r for a, r in index.items() if r.get("path") != rel}
+    index[rec["address"]] = rec
     _write_index(index)
     return rec
 
 
 def remove(path):
     """Drop the record whose path matches. Returns True if something was removed."""
-    rel = str(Path(path).resolve().relative_to(VAULT_ROOT)) if Path(path).is_absolute() else str(path)
+    rel = _vault_relative(path)
     index = load_index(recover=True)
     before = len(index)
-    index = {i: r for i, r in index.items() if r.get("path") != rel}
+    index = {a: r for a, r in index.items() if r.get("path") != rel}
     _write_index(index)
     return len(index) < before
 
@@ -333,17 +362,17 @@ def main():
                              "Overrides $ZETTEL_ROOT and any root stored in the index. "
                              "Scopes the index so it excludes pages outside the subtree.")
     sub = parser.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("rebuild", help="Scan the vault and rewrite the index")
-    sp_get = sub.add_parser("get", help="Print one record by id")
-    sp_get.add_argument("id")
+    sub.add_parser("rebuild", help="Scan the subtree and rewrite the index")
+    sp_get = sub.add_parser("get", help="Print one record by address")
+    sp_get.add_argument("address")
     sp_find = sub.add_parser("find", help="Candidates matching title/alias/slug")
     sp_find.add_argument("text")
-    sp_children = sub.add_parser("children", help="Direct children of an id")
-    sp_children.add_argument("id")
-    sp_subtree = sub.add_parser("subtree", help="All descendants of an id")
-    sp_subtree.add_argument("id")
-    sp_anc = sub.add_parser("ancestors", help="Parent chain of an id")
-    sp_anc.add_argument("id")
+    sp_children = sub.add_parser("children", help="Direct children of an address")
+    sp_children.add_argument("address")
+    sp_subtree = sub.add_parser("subtree", help="All descendants of an address")
+    sp_subtree.add_argument("address")
+    sp_anc = sub.add_parser("ancestors", help="Parent chain of an address")
+    sp_anc.add_argument("address")
     sub.add_parser("collisions", help="Slugs used by more than one note")
     sp_up = sub.add_parser("upsert", help="Add/replace one note's record")
     sp_up.add_argument("path")
@@ -354,8 +383,6 @@ def main():
 
     # Resolve the scan root once, for every command: explicit --root wins, then
     # $ZETTEL_ROOT, then the root recorded in an existing index, else wiki/.
-    # Reads don't scan, but resolving here keeps upsert/remove scoped to the
-    # same subtree the index was built for.
     if args.root:
         _apply_root(args.root)
     elif os.environ.get("ZETTEL_ROOT"):
@@ -369,26 +396,23 @@ def main():
         recs = rebuild()
         print(f"Indexed {len(recs)} notes -> {INDEX_PATH.relative_to(VAULT_ROOT)}")
         return 0
-
     if args.cmd == "upsert":
         rec = upsert(args.path)
         if not rec:
-            print(f"ERR: no parseable zettel id in {args.path}", file=sys.stderr)
+            print(f"ERR: no `address:` frontmatter in {args.path}", file=sys.stderr)
             return 3
         print(json.dumps(rec, indent=2, ensure_ascii=False))
         return 0
-
     if args.cmd == "remove":
-        removed = remove(args.path)
-        print("removed" if removed else "no matching record")
+        print("removed" if remove(args.path) else "no matching record")
         return 0
 
     index = load_index(recover=True)
 
     if args.cmd == "get":
-        rec = index.get(args.id)
+        rec = index.get(args.address)
         if not rec:
-            print(f"ERR: no note with id {args.id}", file=sys.stderr)
+            print(f"ERR: no note with address {args.address}", file=sys.stderr)
             return 3
         print(json.dumps(rec, indent=2, ensure_ascii=False))
         return 0
@@ -396,13 +420,13 @@ def main():
         print(json.dumps(find(index, args.text), indent=2, ensure_ascii=False))
         return 0
     if args.cmd == "children":
-        print(json.dumps(children(index, args.id), indent=2, ensure_ascii=False))
+        print(json.dumps(children(index, args.address), indent=2, ensure_ascii=False))
         return 0
     if args.cmd == "subtree":
-        print(json.dumps(subtree(index, args.id), indent=2, ensure_ascii=False))
+        print(json.dumps(subtree(index, args.address), indent=2, ensure_ascii=False))
         return 0
     if args.cmd == "ancestors":
-        print(json.dumps(ancestors(index, args.id), indent=2, ensure_ascii=False))
+        print(json.dumps(ancestors(index, args.address), indent=2, ensure_ascii=False))
         return 0
     if args.cmd == "collisions":
         print(json.dumps(collisions(index), indent=2, ensure_ascii=False))
