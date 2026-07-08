@@ -50,6 +50,9 @@ tags: []
 
 `address:` is the **single identity scheme** — the same DragonScale creation-order address (`c-NNNNNN`) used by every other addressed page in the vault, so zettels participate in `wiki-lint` address validation with no parallel `id:` scheme. Allocate it with `./scripts/allocate-address.sh` (atomic, flock-guarded), and record the path→address mapping in `.raw/.manifest.json`'s `address_map` exactly as `wiki-ingest` does for any new page. `parent:` and `children:` hold **addresses**, not filenames — because the folder path already encodes the hierarchy, these address references survive a rename or re-parent without going stale.
 
+> [!important] Prerequisite: DragonScale addresses (and `flock`)
+> This skill **requires** DragonScale address allocation — the `address` is the note's identity, not an optional field. `scripts/allocate-address.sh` uses **`flock`**, which is preinstalled on Linux but **not on macOS** (`brew install flock`). If `flock` is missing, address allocation fails and notes cannot be minted. This is the one hard prerequisite for Zettelkasten mode; Generic / LYT / PARA modes have no such dependency.
+
 > **See also: [[local-wiki-index]]** — the companion skill that indexes this frontmatter into a fast lookup cache and owns the attach/promote placement procedure (where a new atomic note goes). Consult it when you need to find an existing note, check what a branch already covers, or detect a slug collision without reading the whole vault.
 
 ## Math: Real LaTeX Only

@@ -671,6 +671,16 @@ This fork extends the upstream plugin with a **folder-nested, atomic-yet-compreh
 
 **Compatibility:** additive. Generic / LYT / PARA modes are unchanged; the new behavior is gated on Zettelkasten mode. All upstream skills, scripts, and tests are preserved.
 
+> [!important] Requirements for Zettelkasten mode
+> The nested-Zettelkasten workflow uses the DragonScale **address** as its note identity, so **DragonScale address allocation is required when the vault is in Zettelkasten mode** (it is optional in Generic / LYT / PARA). That means:
+> - **`flock` must be installed.** `scripts/allocate-address.sh` uses `flock` to allocate addresses atomically.
+>   - **Linux:** preinstalled (part of `util-linux`).
+>   - **macOS:** not shipped by default — install with `brew install flock`.
+>   - Without `flock`, address allocation fails and Zettelkasten ingestion cannot mint note identities.
+> - Addresses (`c-NNNNNN`) are recorded in `.raw/.manifest.json`'s `address_map` and validated by `/wiki-lint`, exactly like every other addressed page.
+>
+> Generic / LYT / PARA modes do **not** require `flock` or DragonScale — they file plain pages without addresses.
+
 See [docs/methodology-modes-guide.md](docs/methodology-modes-guide.md) §Zettelkasten for the full convention.
 
 ---

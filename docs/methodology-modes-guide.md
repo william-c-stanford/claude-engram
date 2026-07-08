@@ -116,6 +116,8 @@ v1.8.0 closes that gap. After this release, claude-obsidian is **#1 on 5 of 7 ax
 
 **Philosophy:** atomic notes (one claim each) that are *collectively* comprehensive over a topic, organized as a **folder-nested decomposition tree**. A parent note is a synthesis + index over its children; atomicity is enforced only at the leaves. Notes find each other by stable address references, and the folder path mirrors the parent chain.
 
+**Requirements (Zettelkasten mode only):** DragonScale address allocation is **required** in this mode (it is optional in Generic / LYT / PARA), because the note identity *is* the DragonScale `address`. This means `scripts/allocate-address.sh` must be able to run, which requires **`flock`**: preinstalled on Linux (`util-linux`), but **not on macOS** — install it with `brew install flock`. Without `flock`, address allocation fails and notes cannot be minted. Addresses land in `.raw/.manifest.json`'s `address_map` and are validated by `wiki-lint`.
+
 **Filing convention (v1.9+, nested):**
 - Rooted at `wiki/zettel/`. Filenames are **plain slugs** — no date/ID prefix.
 - A note with children lives at `wiki/zettel/<slug>.md` *beside* a same-named folder `wiki/zettel/<slug>/` holding its children, recursively.

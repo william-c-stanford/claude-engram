@@ -264,7 +264,7 @@ Do not silently overwrite old claims. Flag and let the user decide.
 
 ## Address Assignment (DragonScale Mechanism 2 MVP)
 
-**Opt-in feature**. DragonScale address assignment runs only if `scripts/allocate-address.sh` is present AND `.vault-meta/` exists. Otherwise, skip this entire section and proceed with ingest normally.
+**Opt-in for Generic / LYT / PARA; REQUIRED for Zettelkasten.** DragonScale address assignment runs only if `scripts/allocate-address.sh` is present AND `.vault-meta/` exists. In Generic / LYT / PARA modes it is optional — skip this entire section and proceed normally when it is not set up. **In Zettelkasten mode it is mandatory**: the `address` is the note's identity (see [[comprehensive-zettel]]), so `allocate-address.sh` must be runnable, which requires `flock` (preinstalled on Linux; `brew install flock` on macOS). If `flock`/allocation is unavailable in Zettelkasten mode, stop and tell the user to install `flock` rather than minting notes without addresses.
 
 **Feature detection (run at start of every ingest)**:
 
