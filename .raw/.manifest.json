@@ -2,8 +2,62 @@
   "version": 1,
   "created": "2026-04-23",
   "description": "Ingest delta tracker and address map for the claude-obsidian vault. Do not hand-edit; wiki-ingest maintains this.",
-  "sources": {},
+  "sources": {
+    ".raw/books/hitchhikers-guide-to-agentic-ai-01-llm-architecture-and-optimization-methods.pdf": {
+      "hash": "c5259c4e936b0490dfd843f8c885b35e",
+      "ingested_at": "2026-07-08",
+      "pages_created": [
+        "wiki/20260708210931542528-Hitchhikers-Guide-to-Agentic-AI-book.md",
+        "wiki/20260708210931565186-hitchhikers-guide-to-agentic-ai-ch1-llm-architecture.md",
+        "wiki/20260708210931162063-Tokenization.md",
+        "wiki/20260708210931185307-Transformer-Architecture.md",
+        "wiki/20260708210931208171-Self-Attention-and-Multi-Head-Attention.md",
+        "wiki/20260708210931230961-FlashAttention.md",
+        "wiki/20260708210931253339-Positional-Encodings.md",
+        "wiki/20260708210931275690-Attention-Pathologies.md",
+        "wiki/20260708210931297893-Mechanistic-Interpretability.md",
+        "wiki/20260708210931319941-LLM-Optimizers.md",
+        "wiki/20260708210931342241-Pretraining-and-SFT-Practices.md",
+        "wiki/20260708210931364606-LoRA-and-Parameter-Efficient-Fine-Tuning.md",
+        "wiki/20260708210931387576-Mixture-of-Experts.md",
+        "wiki/20260708210931410656-Decoding-Strategies.md",
+        "wiki/20260708210931433163-Prompt-Engineering.md",
+        "wiki/20260708210931455323-Model-Compression.md",
+        "wiki/20260708210931477100-Speculative-Decoding.md",
+        "wiki/20260708210931498779-Hallucination-Detection.md",
+        "wiki/20260708210931520738-LLM-Safety-and-Responsible-AI.md"
+      ],
+      "pages_updated": [
+        "wiki/index.md",
+        "wiki/concepts/_index.md",
+        "wiki/entities/_index.md",
+        "wiki/sources/_index.md",
+        "wiki/hot.md",
+        "wiki/log.md"
+      ],
+      "refiled_to_zettelkasten_at": "2026-07-08"
+    }
+  },
   "address_map": {
-    "wiki/concepts/DragonScale Memory.md": "c-000001"
+    "wiki/concepts/DragonScale Memory.md": "c-000001",
+    "wiki/20260708210931162063-Tokenization.md": "c-000003",
+    "wiki/20260708210931185307-Transformer-Architecture.md": "c-000004",
+    "wiki/20260708210931208171-Self-Attention-and-Multi-Head-Attention.md": "c-000005",
+    "wiki/20260708210931230961-FlashAttention.md": "c-000006",
+    "wiki/20260708210931253339-Positional-Encodings.md": "c-000007",
+    "wiki/20260708210931275690-Attention-Pathologies.md": "c-000008",
+    "wiki/20260708210931297893-Mechanistic-Interpretability.md": "c-000009",
+    "wiki/20260708210931319941-LLM-Optimizers.md": "c-000010",
+    "wiki/20260708210931342241-Pretraining-and-SFT-Practices.md": "c-000011",
+    "wiki/20260708210931364606-LoRA-and-Parameter-Efficient-Fine-Tuning.md": "c-000012",
+    "wiki/20260708210931387576-Mixture-of-Experts.md": "c-000013",
+    "wiki/20260708210931410656-Decoding-Strategies.md": "c-000014",
+    "wiki/20260708210931433163-Prompt-Engineering.md": "c-000015",
+    "wiki/20260708210931455323-Model-Compression.md": "c-000016",
+    "wiki/20260708210931477100-Speculative-Decoding.md": "c-000017",
+    "wiki/20260708210931498779-Hallucination-Detection.md": "c-000018",
+    "wiki/20260708210931520738-LLM-Safety-and-Responsible-AI.md": "c-000019",
+    "wiki/20260708210931542528-Hitchhikers-Guide-to-Agentic-AI-book.md": "c-000020",
+    "wiki/20260708210931565186-hitchhikers-guide-to-agentic-ai-ch1-llm-architecture.md": "c-000021"
   }
 }

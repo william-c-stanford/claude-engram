@@ -41,3 +41,6 @@ All concept pages — ideas, patterns, and frameworks extracted from sources.
 ---
 
 ## Add new concepts here as they are extracted from sources.
+
+> [!note] LLM Fundamentals moved to Zettelkasten
+> The 17 LLM-fundamentals concept pages (Tokenization, Transformer Architecture, Self-Attention, FlashAttention, Positional Encodings, Attention Pathologies, Mechanistic Interpretability, LLM Optimizers, Pretraining/SFT, LoRA/PEFT, MoE, Decoding Strategies, Prompt Engineering, Model Compression, Speculative Decoding, Hallucination Detection, LLM Safety) were re-filed as flat, timestamp-ID Zettelkasten notes directly under `wiki/` on 2026-07-08, per the vault's mode switch. They are no longer under `wiki/concepts/`. Wikilinks (e.g. `[[Tokenization]]`) still resolve via each note's `aliases:` frontmatter. See `wiki/log.md` for the reorg entry.
