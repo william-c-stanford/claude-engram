@@ -136,3 +136,4 @@ _attachments/
 .vault-meta/zettel-index.*.tmp
 
 books-to-memorize/*
+.raw/books/hitchhikers-guide-to-agentic-ai-01-llm-architecture-and-optimization-methods.pdf

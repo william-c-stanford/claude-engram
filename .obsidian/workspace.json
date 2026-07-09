@@ -193,6 +193,7 @@
   },
   "active": "de1e88ac7332215f",
   "lastOpenFiles": [
+    "PR_BODY.md",
     "scripts/__pycache__/contextual-prefix.cpython-312.pyc",
     "scripts/__pycache__/rerank.cpython-312.pyc",
     "scripts/__pycache__/retrieve.cpython-312.pyc",
@@ -228,7 +229,6 @@
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability/Attention-Is-Not-Explanation.md",
     "wiki/zettel/LLMs/Architecture/Tokenization/Tokenization-Best-Practices/Vocabulary-Size.md",
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Self-Attention",
-    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Positional-Encodings",
     "wiki/Wiki Map.canvas"
   ]
 }
