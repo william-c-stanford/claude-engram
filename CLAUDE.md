@@ -1,4 +1,4 @@
-# claude-obsidian — Claude + Obsidian Wiki Vault
+# claude-obsidian — Claude + Obsidian Wiki Vault 
 
 This folder is both a Claude Code plugin and an Obsidian vault.
 
