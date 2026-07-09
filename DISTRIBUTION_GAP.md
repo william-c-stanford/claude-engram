@@ -137,7 +137,7 @@ docs show). Called from another CWD, `resolve()` computes the wrong absolute pat
 and `relative_to` could raise. Fine for the documented invocation; worth a one-line
 guard or doc note if other callers appear.
 
-I<RESOLUTION-INSTRUCTIONS>
+<RESOLUTION-INSTRUCTIONS>
 Add the guard, and also make sure that if called from another CWD, we provide error context that an agent would be able to understand to and adapt its calling strategy accordingly easily 
 ---
 
