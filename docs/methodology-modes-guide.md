@@ -114,25 +114,28 @@ v1.8.0 closes that gap. After this release, claude-obsidian is **#1 on 5 of 7 ax
 
 ### Zettelkasten (Niklas Luhmann's slip-box)
 
-**Philosophy:** atomic notes, unique IDs, dense bidirectional linking. No folders. Every note answers exactly one idea. Notes find each other by ID references.
+**Philosophy:** atomic notes (one claim each) that are *collectively* comprehensive over a topic, organized as a **folder-nested decomposition tree**. A parent note is a synthesis + index over its children; atomicity is enforced only at the leaves. Notes find each other by stable address references, and the folder path mirrors the parent chain.
 
-**Filing convention:**
-- `wiki/<YYYYMMDDHHMMSSffffff>-<slug>.md` — flat under wiki/, timestamped IDs (20 digits = date + microseconds, collision-resistant)
-- Every note has `id:`, `parent_id:` (optional), `child_ids:` (optional) in frontmatter
-- No subdirectories; the wiki/ root is the whole vault
-- All organization is via `parent_id` / `child_ids` / `[[ID]]` references in note bodies
+**Requirements (Zettelkasten mode only):** DragonScale address allocation is **required** in this mode (it is optional in Generic / LYT / PARA), because the note identity *is* the DragonScale `address`. This means `scripts/allocate-address.sh` must be able to run, which requires **`flock`**: preinstalled on Linux (`util-linux`), but **not on macOS** — install it with `brew install flock`. Without `flock`, address allocation fails and notes cannot be minted. Addresses land in `.raw/.manifest.json`'s `address_map` and are validated by `wiki-lint`.
 
-**Templates** (under `skills/wiki-mode/templates/zettel/`):
-- `atomic-template.md` — atomic claim with parent/child IDs + reasoning + sources
+**Filing convention (v1.9+, nested):**
+- Rooted at `wiki/zettel/`. Filenames are **plain slugs** — no date/ID prefix.
+- A note with children lives at `wiki/zettel/<slug>.md` *beside* a same-named folder `wiki/zettel/<slug>/` holding its children, recursively.
+- Identity is the **single DragonScale `address`** (`c-NNNNNN`, allocated by `scripts/allocate-address.sh`) — the same scheme every other addressed page uses, so zettels pass `wiki-lint` address validation. There is no parallel `id:` scheme.
+- Frontmatter carries `address:`, `parent:` (a parent's address, `""` for a root), and `children:` (child addresses). The folder path encodes the hierarchy; the addresses keep references stable across renames/reparents.
+
+**Skills:**
+- `comprehensive-zettel` — writes atomic-yet-comprehensive nested notes (decomposition algorithm, real-LaTeX math, leaf/parent templates).
+- `local-wiki-index` — a rebuildable index (`.vault-meta/zettel-index.json`) + the attach/promote placement procedure that decides where a new atomic note goes, so `wiki-ingest` places notes without re-reading the whole vault. Backed by `scripts/zettel-index.py`.
+- `wiki-mode.py route ... zettelkasten` returns the root-level `wiki/zettel/<slug>.md`; placement relocates it deeper under its parent.
 
 **When to use:**
-- Academics and researchers
-- Long-term thinkers building permanent knowledge artifacts
-- Anyone who's read "How to Take Smart Notes" by Sönke Ahrens
-- High-discipline, small-filing-surface preference
+- Academics and researchers; long-term thinkers building permanent knowledge artifacts.
+- Anyone who's read "How to Take Smart Notes" by Sönke Ahrens.
+- You want atomic notes *and* a browsable tree structure, not a flat ID soup.
 
-**Pros:** maximum link density; encourages atomic thinking; ages well over decades.
-**Cons:** steepest discipline curve; flat file list is intimidating without good search; ID-based reference is less mnemonic than name-based.
+**Pros:** maximum link density with a legible folder tree; encourages atomic thinking; comprehensive coverage without giant pages; ages well over decades.
+**Cons:** steepest discipline curve; the decomposition pass is more work up front than dropping one flat note.
 
 ---
 

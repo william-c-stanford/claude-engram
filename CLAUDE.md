@@ -3,7 +3,7 @@
 This folder is both a Claude Code plugin and an Obsidian vault.
 
 **Plugin name:** `claude-obsidian` (v1.7+ "Compound Vault" — see [docs/compound-vault-guide.md](docs/compound-vault-guide.md); v1.8+ adds methodology modes — see [docs/methodology-modes-guide.md](docs/methodology-modes-guide.md))
-**Skills:** `/wiki`, `/wiki-ingest`, `/wiki-query`, `/wiki-lint`, `/wiki-cli` (v1.7), `/wiki-retrieve` (v1.7, opt-in), `/wiki-mode` (v1.8)
+**Skills:** `/wiki`, `/wiki-ingest`, `/wiki-query`, `/wiki-lint`, `/wiki-cli` (v1.7), `/wiki-retrieve` (v1.7, opt-in), `/wiki-mode` (v1.8), `/comprehensive-zettel` + `/local-wiki-index` (fork: nested Zettelkasten)
 **Vault path:** This directory (open in Obsidian directly)
 
 ## What This Vault Is For
@@ -61,6 +61,8 @@ Do NOT read the wiki for general coding questions or things already in this proj
 | `/wiki-retrieve` (v1.7) | Hybrid contextual + BM25 + cosine-rerank retrieval (opt-in via `bash bin/setup-retrieve.sh`) |
 | `/wiki-mode` (v1.8) | Methodology modes (LYT / PARA / Zettelkasten / Generic). Set via `bash bin/setup-mode.sh`; consumed by wiki-ingest / save / autoresearch for routing new pages |
 | `/think` (v1.9) | The 10-principle thinking loop (OBSERVE-OBSERVE-LISTEN-THINK-CONNECT-CONNECT-FEEL-ACCEPT-CREATE-GROW) as an invocable workflow. Apply to architectural decisions, audits, post-mortems, ambiguous user requests. Every other skill has a "How to think" appendix mapping this framework to its specific work |
+| `/comprehensive-zettel` (fork) | Write atomic-yet-comprehensive folder-nested Zettelkasten notes under `wiki/zettel/`. Decomposition tree: parents synthesize + index, leaves are one claim each; real-LaTeX math; DragonScale `address` identity |
+| `/local-wiki-index` (fork) | Rebuildable index (`.vault-meta/zettel-index.json`) + attach/promote placement for the nested zettel tree; consulted by wiki-ingest in Zettelkasten mode. Backed by `scripts/zettel-index.py` |
 
 ## Transport (v1.7+)
 
@@ -72,7 +74,7 @@ Do NOT read the wiki for general coding questions or things already in this proj
 
 ## Methodology Modes (v1.8+)
 
-Pick an organizational style for the vault via `bash bin/setup-mode.sh`. Four modes available: **generic** (v1.7 default — no opinion), **LYT** (Linking Your Thinking — MOCs + atomic notes), **PARA** (Projects/Areas/Resources/Archives), **Zettelkasten** (timestamped IDs, flat, dense linking). The mode is written to `.vault-meta/mode.json` (gitignored by default; `git add -f` to commit). `wiki-ingest`, `save`, and `autoresearch` consult `python3 scripts/wiki-mode.py route <type> "<name>"` before filing new pages — no special-casing needed in the consumer skills. Full guide: [docs/methodology-modes-guide.md](docs/methodology-modes-guide.md). Closes priority gap 5 from the May 2026 compass artifact.
+Pick an organizational style for the vault via `bash bin/setup-mode.sh`. Four modes available: **generic** (v1.7 default — no opinion), **LYT** (Linking Your Thinking — MOCs + atomic notes), **PARA** (Projects/Areas/Resources/Archives), **Zettelkasten** (fork: folder-nested atomic notes under `wiki/zettel/`, plain-slug filenames, DragonScale `address` identity, dense linking — see `/comprehensive-zettel` + `/local-wiki-index`). The mode is written to `.vault-meta/mode.json` (gitignored by default; `git add -f` to commit). `wiki-ingest`, `save`, and `autoresearch` consult `python3 scripts/wiki-mode.py route <type> "<name>"` before filing new pages — no special-casing needed in the consumer skills. Full guide: [docs/methodology-modes-guide.md](docs/methodology-modes-guide.md). Closes priority gap 5 from the May 2026 compass artifact.
 
 ## Pre-commit verifier (v1.7.1+)
 

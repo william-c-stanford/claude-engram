@@ -23,7 +23,7 @@ related:
 
 # Wiki Index
 
-Last updated: 2026-04-15 | Total pages: 34 | Sources ingested: 2
+Last updated: 2026-07-08 | Total pages: 53 | Sources ingested: 3
 
 Navigation: [[overview]] | [[log]] | [[hot]] | [[dashboard]] | [[Wiki Map]] | [[getting-started]]
 
@@ -44,6 +44,7 @@ Navigation: [[overview]] | [[log]] | [[hot]] | [[dashboard]] | [[Wiki Map]] | [[
 - [[Persistent Wiki Artifact]]: durable Markdown page as the LLM's memory object, distinct from ephemeral chat turns (status: developing)
 - [[Source-First Synthesis]]: provenance discipline; raw sources stay immutable while the wiki layer is synthesized and cited (status: developing)
 - [[Query-Time Retrieval]]: wiki query path synthesizes with citations; complementary to Obsidian's in-vault search (status: developing)
+- [[Tokenization]], [[Transformer Architecture]], [[Self-Attention and Multi-Head Attention]], [[FlashAttention]], [[Positional Encodings]], [[Attention Pathologies]], [[Mechanistic Interpretability]], [[LLM Optimizers]], [[Pretraining and SFT Practices]], [[LoRA and Parameter-Efficient Fine-Tuning]], [[Mixture of Experts]], [[Decoding Strategies]], [[Prompt Engineering]], [[Model Compression]], [[Speculative Decoding]], [[Hallucination Detection]], [[LLM Safety and Responsible AI]] — LLM fundamentals domain, see [[concepts/_index]] (status: current)
 
 ---
 
@@ -63,6 +64,7 @@ Navigation: [[overview]] | [[log]] | [[hot]] | [[dashboard]] | [[Wiki Map]] | [[
 ## Sources
 
 - [[claude-obsidian-ecosystem-research]] — 2026-04-08 | web research across 16+ repos | 8 wiki pages created
+- [[hitchhikers-guide-to-agentic-ai-ch1-llm-architecture]] — 2026-07-08 | book chapter, 70 pages | 19 wiki pages created
 
 ---
 
@@ -90,4 +92,4 @@ Navigation: [[overview]] | [[log]] | [[hot]] | [[dashboard]] | [[Wiki Map]] | [[
 
 ## Domains
 
-<!-- Add domain entries here after scaffold -->
+- **LLM Fundamentals** — transformer architecture, optimization, training, inference, and safety. 17 concept pages seeded from [[Hitchhikers Guide to Agentic AI (book)]] Ch.1. Filed as flat Zettelkasten notes directly under `wiki/` (vault mode switched 2026-07-08) — not under `wiki/concepts/`. All wikilinks below resolve via each note's aliases.

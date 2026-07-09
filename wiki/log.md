@@ -25,6 +25,23 @@ Parse recent entries: `grep "^## \[" wiki/log.md | head -10`
 
 ---
 
+## [2026-07-08] reorg | Re-file Hitchhiker's Guide to Agentic AI Ch.1 into Zettelkasten mode + LaTeX fix
+- Trigger: vault methodology mode switched generic → zettelkasten (`.vault-meta/mode.json`); user requested a re-run of the ingest in the new format, plus proper Obsidian LaTeX (`$...$` / `$$...$$`) for all equations.
+- Action: all 19 pages from the same-day ingest (17 concepts + 1 entity + 1 source) moved from `wiki/concepts/`, `wiki/entities/`, `wiki/sources/` to flat `wiki/<YYYYMMDDHHMMSSffffff>-<slug>.md` files per `python3 scripts/wiki-mode.py route`. Each new file has an `id:` field matching its filename timestamp and an `aliases:` field carrying the original title, so existing `[[Tokenization]]`-style wikilinks continue to resolve.
+- Equations: every formula previously written with unicode math glyphs (√, ∈, ℝ, Σ, θ, η, etc.) rewritten as proper LaTeX using MathJax/KaTeX delimiters, matching `skills/obsidian-markdown/SKILL.md` §Math.
+- Addresses: reused unchanged (`c-000003`-`c-000021`) via the `address_map` rename path in `.raw/.manifest.json` — no new DragonScale addresses allocated for this operation.
+- Pages updated: [[concepts/_index]], [[entities/_index]], [[sources/_index]], [[index]], [[hot]] (this entry does not touch the prior 2026-07-08 ingest log entry above, per append-only convention).
+- Key insight: this is a rename/reorganization, not a new ingest — same 19 pages, same source, same addresses, different filing scheme and corrected math syntax.
+
+## [2026-07-08] ingest | Hitchhiker's Guide to Agentic AI — Ch.1: LLM Architecture and Optimization Methods
+- Source: `.raw/books/hitchhikers-guide-to-agentic-ai-01-llm-architecture-and-optimization-methods.pdf` (70 pages)
+- Summary: [[hitchhikers-guide-to-agentic-ai-ch1-llm-architecture]]
+- Pages created: [[Hitchhikers Guide to Agentic AI (book)]], [[Tokenization]], [[Transformer Architecture]], [[Self-Attention and Multi-Head Attention]], [[FlashAttention]], [[Positional Encodings]], [[Attention Pathologies]], [[Mechanistic Interpretability]], [[LLM Optimizers]], [[Pretraining and SFT Practices]], [[LoRA and Parameter-Efficient Fine-Tuning]], [[Mixture of Experts]], [[Decoding Strategies]], [[Prompt Engineering]], [[Model Compression]], [[Speculative Decoding]], [[Hallucination Detection]], [[LLM Safety and Responsible AI]]
+- Pages updated: [[index]], [[concepts/_index]], [[entities/_index]], [[sources/_index]], [[hot]]
+- Key insight: New `llm-fundamentals` domain established (first genuinely technical-ML source in this vault, distinct from the wiki-system/SEO content that dominated it before). Addresses c-000003 through c-000021 assigned (DragonScale counter advanced 3 → 22); required installing `flock` via Homebrew since macOS lacks it by default and `scripts/allocate-address.sh` hard-depends on it.
+
+---
+
 ## [2026-04-24] save | v1.6.0 public release notes (Teams, Karpathy-style)
 - Type: release doc + visual assets
 - Locations (new): `docs/releases/v1.6.0.md` (346 lines, 6 sections, Karpathy-style prose), `wiki/meta/dragonscale-mechanism-overview.svg` (4-mechanism diagram with shared .vault-meta/ gate), `wiki/meta/dragonscale-6-test-flow.svg` (validation timeline), `wiki/meta/dragonscale-frontier-graph.svg` (M4 candidate + 3 filed pages)

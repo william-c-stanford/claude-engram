@@ -42,8 +42,20 @@ If `.vault-meta/mode.json` is absent, the router returns mode=generic paths (ide
 
 Mode-specific follow-up:
 - **LYT**: after filing the atomic note, update the relevant MOC (`wiki/mocs/<topic>-moc.md`) to link the new note. If no MOC exists for the topic, create one using `skills/wiki-mode/templates/lyt/moc-template.md`.
-- **Zettelkasten**: filename already includes the timestamp ID. Populate the `id:` frontmatter field to match.
+- **Zettelkasten**: notes are folder-nested plain-slug atomic notes under `wiki/zettel/`, identified by a DragonScale `address`. Run the placement procedure (see the dedicated section below) via the [[comprehensive-zettel]] / [[local-wiki-index]] skills. If those skills are absent, fall back to filing a single note at the router's `wiki/zettel/<slug>.md` path with an allocated `address:`.
 - **PARA**: new ingests land in `wiki/resources/incoming/` by default. Do NOT auto-guess the topic; leave in incoming/ for user review.
+
+### Zettelkasten placement (v1.9+, folder-nested)
+
+This branch fires **only** when `python3 scripts/wiki-mode.py get` returns `zettelkasten`. Generic / LYT / PARA ingestion is unchanged — they continue to file via `python3 scripts/wiki-mode.py route <type> "<name>"` exactly as above.
+
+In zettelkasten mode, each significant claim from the source becomes an atomic note placed into the existing nested tree rather than a flat page:
+
+1. Decompose the source into atomic claims per [[comprehensive-zettel]]'s Decomposition Algorithm (draft comprehensively, then split until every leaf is a single 1-3 sentence claim).
+2. For each atomic claim, follow the **placement decision procedure** in [[local-wiki-index]]: `find` whether a note already exists (update/cross-reference instead of duplicating); locate the parent concept; decide **attach** (parent has a folder) vs **promote** (parent is a leaf → give it a folder + synthesis rewrite) vs **new root**; `collisions`-check the slug before writing; then write per comprehensive-zettel and `upsert` every new/changed note into the index.
+3. The source-summary note itself is still created, but as a zettel (with `address`/`parent`/`children`) linking to the atomic notes it spawned, not as a `wiki/sources/` page.
+
+The index (`scripts/zettel-index.py`) is what keeps this affordable: the ingesting agent reads only the notes on the candidate parent chain, not the whole vault. Acquire `wiki-lock` on each target path before writing, exactly as in the filesystem transport path.
 
 ## Concurrency (v1.7+)
 
@@ -252,7 +264,7 @@ Do not silently overwrite old claims. Flag and let the user decide.
 
 ## Address Assignment (DragonScale Mechanism 2 MVP)
 
-**Opt-in feature**. DragonScale address assignment runs only if `scripts/allocate-address.sh` is present AND `.vault-meta/` exists. Otherwise, skip this entire section and proceed with ingest normally.
+**Opt-in for Generic / LYT / PARA; REQUIRED for Zettelkasten.** DragonScale address assignment runs only if `scripts/allocate-address.sh` is present AND `.vault-meta/` exists. In Generic / LYT / PARA modes it is optional — skip this entire section and proceed normally when it is not set up. **In Zettelkasten mode it is mandatory**: the `address` is the note's identity (see [[comprehensive-zettel]]), so `allocate-address.sh` must be runnable, which requires `flock` (preinstalled on Linux; `brew install flock` on macOS). If `flock`/allocation is unavailable in Zettelkasten mode, stop and tell the user to install `flock` rather than minting notes without addresses.
 
 **Feature detection (run at start of every ingest)**:
 

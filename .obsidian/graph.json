@@ -1,72 +1,44 @@
 {
   "collapse-filter": false,
-  "search": "path:wiki",
+  "search": "path:wiki/zettel",
   "showTags": false,
   "showAttachments": false,
   "hideUnresolved": true,
   "showOrphans": false,
-  "collapse-color-groups": false,
+  "collapse-color-groups": true,
   "colorGroups": [
     {
-      "query": "path:wiki/entities",
+      "query": "path:wiki/zettel/LLMs/Architecture  ",
       "color": {
         "a": 1,
-        "rgb": 12945088
+        "rgb": 13132287
       }
     },
     {
-      "query": "path:wiki/concepts",
+      "query": "path:wiki/zettel/LLMs/Optimization-Methods  ",
       "color": {
         "a": 1,
-        "rgb": 5227007
+        "rgb": 5734911
       }
     },
     {
-      "query": "path:wiki/sources",
+      "query": "path:wiki/zettel/LLMs  ",
       "color": {
         "a": 1,
-        "rgb": 6986069
-      }
-    },
-    {
-      "query": "path:wiki/questions",
-      "color": {
-        "a": 1,
-        "rgb": 14474410
-      }
-    },
-    {
-      "query": "path:wiki/comparisons",
-      "color": {
-        "a": 1,
-        "rgb": 13724009
-      }
-    },
-    {
-      "query": "path:wiki/meta",
-      "color": {
-        "a": 1,
-        "rgb": 5676246
-      }
-    },
-    {
-      "query": "path:wiki",
-      "color": {
-        "a": 1,
-        "rgb": 4473924
+        "rgb": 4063411
       }
     }
   ],
-  "collapse-display": true,
+  "collapse-display": false,
   "showArrow": true,
-  "textFadeMultiplier": -1,
-  "nodeSizeMultiplier": 2,
+  "textFadeMultiplier": -3,
+  "nodeSizeMultiplier": 2.86496961805556,
   "lineSizeMultiplier": 0.8,
   "collapse-forces": false,
-  "centerStrength": 0.25,
-  "repelStrength": 20,
-  "linkStrength": 1,
-  "linkDistance": 80,
-  "scale": 0.5191098990818888,
-  "close": true
+  "centerStrength": 0.245572916666667,
+  "repelStrength": 15.0668402777778,
+  "linkStrength": 0.840407986111111,
+  "linkDistance": 316,
+  "scale": 0.22988415682247107,
+  "close": false
 }

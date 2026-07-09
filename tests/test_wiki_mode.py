@@ -122,18 +122,14 @@ def test_para_routing():
     assert_true("para research → resources/<topic>/", "wiki/resources/compounding-vault/" in res, hint=res)
 
 
-# ─── Mode=zettelkasten routing: flat, timestamp-prefixed ────────────────────
+# ─── Mode=zettelkasten routing: nested plain-slug under wiki/zettel/ ─────────
 def test_zettelkasten_routing():
     cfg = dict(wm.DEFAULT_CONFIG)
     cfg["mode"] = "zettelkasten"
     p = wm.route_path("zettelkasten", "source", "Karpathy essay", cfg)
-    # Format: wiki/<20-digit-timestamp-with-microseconds>-<slug>.md
-    assert_true("zettel path starts with wiki/", p.startswith("wiki/"), hint=p)
-    assert_true("zettel no subfolders", p.count("/") == 1, hint=p)
-    fname = p.rsplit("/", 1)[1]
-    parts = fname.split("-", 1)
-    # v1.8.1 fix: IDs are 20 digits (YYYYMMDDHHMMSSffffff) for collision resistance
-    assert_true("zettel ID is 20 digits", parts[0].isdigit() and len(parts[0]) == 20, hint=fname)
+    # v1.9+: folder-nested plain-slug under wiki/zettel/ (no timestamp prefix);
+    # tree depth is set later by the local-wiki-index placement procedure.
+    assert_eq("zettel path is nested plain-slug root", "wiki/zettel/Karpathy-essay.md", p)
 
 
 # ─── Zettel ID format ───────────────────────────────────────────────────────

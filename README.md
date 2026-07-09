@@ -17,7 +17,7 @@
 
 Claude + Obsidian knowledge companion and self-organizing AI second brain. A running AI notetaker that builds and maintains a persistent, compounding wiki vault. Every source you add gets integrated. Every question you ask pulls from everything that has been read. Knowledge compounds like interest.
 
-Open-source Obsidian AI plugin for AI note-taking, personal knowledge management (PKM), second-brain workflows, and a private Notion alternative. **15 Claude Code skills**, multi-agent support, multi-writer safe (v1.7+), first-class methodology modes (LYT / PARA / Zettelkasten / Generic via v1.8), and the 10-principle thinking framework (v1.9). Based on [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
+Open-source Obsidian AI plugin for AI note-taking, personal knowledge management (PKM), second-brain workflows, and a private Notion alternative. **17 Claude Code skills**, multi-agent support, multi-writer safe (v1.7+), first-class methodology modes (LYT / PARA / Zettelkasten / Generic via v1.8), and the 10-principle thinking framework (v1.9). Based on [Andrej Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
 
 > **Two ways to get this skill.** Pick the one that fits how you work.
 >
@@ -459,7 +459,7 @@ claude-obsidian/
 ├── .claude-plugin/
 │   ├── plugin.json              # manifest
 │   └── marketplace.json         # distribution
-├── skills/                       # 15 Claude Code skills (v1.9.2)
+├── skills/                       # 17 Claude Code skills (v1.9.2 + fork)
 │   ├── wiki/                    # orchestrator + references
 │   ├── wiki-ingest/             # source ingestion
 │   ├── wiki-query/              # answer questions from the vault
@@ -656,6 +656,32 @@ Issue + PR templates available under [`.github/`](.github/). CI runs `make test`
 - ⚡ [**AI Marketing Hub Pro**](https://www.skool.com/ai-marketing-hub-pro): early access to in-development features and direct collaboration
 - 🎬 [**YouTube**](https://www.youtube.com/@AgriciDaniel): tutorials and demos
 - 🔧 [**All open-source tools**](https://github.com/AgriciDaniel): claude-seo, claude-ads, claude-blog, and more
+
+---
+
+## Fork Additions — Comprehensive Nested Zettelkasten
+
+This fork extends the upstream plugin with a **folder-nested, atomic-yet-comprehensive Zettelkasten** built on top of the existing v1.8 Zettelkasten mode. It adds two skills (bringing the total to 17) and one script, and integrates with the vault's existing DragonScale address scheme rather than inventing a parallel one.
+
+**What's new:**
+- **`comprehensive-zettel` skill** — writes notes that are simultaneously *atomic* (one claim per note) and *collectively comprehensive* over a topic, via a decomposition tree. A parent note is a synthesis + index over its children; atomicity is enforced only at the leaves. Notes nest by folder under `wiki/zettel/` (a parent note lives beside a same-named folder of its children, recursively), filenames are plain slugs, and all math is real LaTeX.
+- **`local-wiki-index` skill** + **`scripts/zettel-index.py`** — a rebuildable index (`.vault-meta/zettel-index.json`) mapping each note's address to its path/title/aliases/parent/children, plus the **attach/promote placement procedure** that decides where a new atomic note goes. This lets `wiki-ingest` place notes by consulting the index instead of re-reading the whole vault, and detects slug collisions before they break wikilinks. Includes `tests/test_zettel_index.py` (wired into `make test`).
+- **Single identity scheme.** Nested zettels use the same DragonScale `address:` (`c-NNNNNN`) as every other addressed page — no parallel `id:` scheme — so they pass `wiki-lint` address validation. `parent`/`children` frontmatter hold addresses.
+- **Mode routing updated.** `wiki-mode.py`'s Zettelkasten branch now routes to `wiki/zettel/<slug>.md` (nested plain-slug) instead of a flat timestamped filename; tree depth is set by the placement procedure.
+
+**Compatibility:** additive. Generic / LYT / PARA modes are unchanged; the new behavior is gated on Zettelkasten mode. All upstream skills, scripts, and tests are preserved.
+
+> [!important] Requirements for Zettelkasten mode
+> The nested-Zettelkasten workflow uses the DragonScale **address** as its note identity, so **DragonScale address allocation is required when the vault is in Zettelkasten mode** (it is optional in Generic / LYT / PARA). That means:
+> - **`flock` must be installed.** `scripts/allocate-address.sh` uses `flock` to allocate addresses atomically.
+>   - **Linux:** preinstalled (part of `util-linux`).
+>   - **macOS:** not shipped by default — install with `brew install flock`.
+>   - Without `flock`, address allocation fails and Zettelkasten ingestion cannot mint note identities.
+> - Addresses (`c-NNNNNN`) are recorded in `.raw/.manifest.json`'s `address_map` and validated by `/wiki-lint`, exactly like every other addressed page.
+>
+> Generic / LYT / PARA modes do **not** require `flock` or DragonScale — they file plain pages without addresses.
+
+See [docs/methodology-modes-guide.md](docs/methodology-modes-guide.md) §Zettelkasten for the full convention.
 
 ---
 
