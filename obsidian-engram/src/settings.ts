@@ -17,7 +17,7 @@ export interface EngramSettings {
   /** How many cards an all-green parent contributes as a reorientation sample. */
   reorientationSampleSize: number;
   /** When the evergreen note shows as a reading step before its cards. */
-  noteIntroMode: "first-encounter" | "always" | "never";
+  noteIntroMode: "first-encounter" | "always" | "never" | "red-yellow";
   /** Show the median next-review cadence pill on folder/note rows. */
   showCadence: boolean;
 }
@@ -30,7 +30,7 @@ export const DEFAULT_SETTINGS: EngramSettings = {
   practiceAhead: true,
   skipGreenParents: false,
   reorientationSampleSize: 3,
-  noteIntroMode: "first-encounter",
+  noteIntroMode: "red-yellow",
   showCadence: true,
 };
 
@@ -131,13 +131,20 @@ export class EngramSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Note reading step")
-      .setDesc("Show the evergreen note before its cards: on first encounter (no card reviewed yet), always, or never.")
+      .setDesc(
+        "Show the evergreen note before its cards: when the note's subtree has red/yellow cards due (default), only on first encounter (no card reviewed yet), always, or never."
+      )
       .addDropdown((d) =>
         d
-          .addOptions({ "first-encounter": "First encounter (default)", always: "Always", never: "Never" })
+          .addOptions({
+            "red-yellow": "When red/yellow cards are due (default)",
+            "first-encounter": "First encounter",
+            always: "Always",
+            never: "Never",
+          })
           .setValue(this.plugin.settings.noteIntroMode)
           .onChange(async (v) => {
-            if (v === "first-encounter" || v === "always" || v === "never") {
+            if (v === "red-yellow" || v === "first-encounter" || v === "always" || v === "never") {
               this.plugin.settings.noteIntroMode = v;
               await this.plugin.saveSettings();
             }

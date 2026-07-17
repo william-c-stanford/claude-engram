@@ -1,6 +1,7 @@
 import { Card, CardState } from "../cards/types";
 import { FlashcardIndex, NoteEntry } from "../index/flashcard-index";
 import { Bucket, bucketOf } from "../scheduler/buckets";
+import { subtreeCounts } from "../scheduler/rollup";
 
 /**
  * A lapsed card: its last rating was Again and it hasn't re-passed yet
@@ -30,7 +31,7 @@ export interface SessionCard {
 /** A session interleaves note-reading steps with card items (plan 002 KTD1). */
 export type SessionItem = { kind: "note-intro"; entry: NoteEntry } | ({ kind: "card" } & SessionCard);
 
-export type NoteIntroMode = "first-encounter" | "always" | "never";
+export type NoteIntroMode = "first-encounter" | "always" | "never" | "red-yellow";
 
 export interface QueueOptions {
   nowMs: number;
@@ -49,9 +50,25 @@ export function isFirstEncounter(entry: NoteEntry): boolean {
   return cards.length > 0 && cards.every((c) => (c.state.reviews?.length ?? 0) === 0);
 }
 
-function wantsIntro(entry: NoteEntry, mode: NoteIntroMode): boolean {
+/**
+ * First encounter mode looks only at the note's own review history; the
+ * `red-yellow` mode instead asks whether the note's whole subtree currently
+ * holds any due-or-soon card (matching the explorer chip rollups), so the
+ * reading step refreshes whenever there is live work beneath the note.
+ */
+function wantsIntro(
+  entry: NoteEntry,
+  mode: NoteIntroMode,
+  index: FlashcardIndex,
+  nowMs: number,
+  warnWindowHours: number
+): boolean {
   if (mode === "never") return false;
   if (mode === "always") return true;
+  if (mode === "red-yellow") {
+    const counts = subtreeCounts(index, entry.address, nowMs, warnWindowHours);
+    return counts.red > 0 || counts.yellow > 0;
+  }
   return isFirstEncounter(entry);
 }
 
@@ -132,7 +149,7 @@ export function buildSessionQueue(
   for (const s of ordered) {
     if (!introduced.has(s.entry.address)) {
       introduced.add(s.entry.address);
-      if (wantsIntro(s.entry, opts.noteIntroMode)) {
+      if (wantsIntro(s.entry, opts.noteIntroMode, index, opts.nowMs, opts.warnWindowHours)) {
         items.push({ kind: "note-intro", entry: s.entry });
       }
     }

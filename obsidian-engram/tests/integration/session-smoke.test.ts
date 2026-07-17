@@ -40,6 +40,24 @@ const flush = async (): Promise<void> => {
   for (let i = 0; i < 4; i++) await new Promise((r) => setTimeout(r, 0));
 };
 
+/**
+ * The committed MoE `.cards.md` sidecars accumulated real review history from
+ * manual spot-checks (due dates in the future, non-empty `reviews`). These AE
+ * regressions assume a pristine deck: every card `new` (so a red walk is
+ * populated regardless of wall-clock) and unvisited notes carrying zero
+ * reviews. Strip the persisted `%% srs <id> {json} %%` state lines at load so
+ * cards parse as new (parser.ts defaults absent state to NEW_STATE). This
+ * touches only the in-memory copy — the committed vault data is never modified.
+ * `%% srs-retired %%` lines are left intact (the pattern requires an id+JSON).
+ */
+const SRS_STATE_LINE = /^%% srs [a-z]-\d{6}-\d{2} \{.*\} %%\s*$/;
+function pristine(raw: string): string {
+  return raw
+    .split("\n")
+    .filter((line) => !SRS_STATE_LINE.test(line))
+    .join("\n");
+}
+
 function rebuildIndex(): void {
   const entries: NoteEntry[] = NOTES.map(([address, notePath, childrenAddresses]) => {
     const sidecarPath = notePath.replace(/\.md$/, ".cards.md");
@@ -61,7 +79,7 @@ beforeEach(() => {
   for (const [, notePath] of NOTES) {
     files.set(notePath, readFileSync(join(REPO, notePath), "utf8"));
     const sc = notePath.replace(/\.md$/, ".cards.md");
-    files.set(sc, readFileSync(join(REPO, sc), "utf8"));
+    files.set(sc, pristine(readFileSync(join(REPO, sc), "utf8")));
   }
   const vault = {
     getAbstractFileByPath: (p: string) => (files.has(p) ? new TFile(p) : null),

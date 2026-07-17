@@ -197,6 +197,7 @@
   },
   "active": "5565f1231fe95c42",
   "lastOpenFiles": [
+    "docs/plans/2026-07-17-008-feat-note-intro-red-yellow-mode-plan.md",
     "obsidian-engram/tests/explorer-badges.test.ts",
     "docs/plans/2026-07-17-007-feat-plain-colored-chip-restyle-plan.md",
     "obsidian-engram/tests/cadence.test.ts",
@@ -232,7 +233,6 @@
     "obsidian-engram/src/ui/stats-modal.ts",
     "obsidian-engram/src/scheduler/accuracy.ts",
     "wiki/zettel/LLMs/Architecture/Mixture-of-Experts/Noisy-Top-K-Gating.cards.md.tmp.30348.8d65dd4edcc3",
-    "skills/zettel-flashcards",
     "Untitled.canvas",
     "wiki/Wiki Map.canvas"
   ]

@@ -190,6 +190,69 @@ describe("note-intro items (plan 002 R1/R2)", () => {
   });
 });
 
+describe("note-intro red-yellow mode (plan 008)", () => {
+  const yellow = (): CardState => ({ due: new Date(NOW + 12 * 3600 * 1000).toISOString(), interval: 5, ease: 2.5, reviews: [] });
+  const ryOpts = { ...opts, noteIntroMode: "red-yellow" as const };
+  const introAddrs = (q: SessionItem[]) => q.filter((i) => i.kind === "note-intro").map((i) => i.entry.address);
+  const idxOf = (es: NoteEntry[], folders: string[]) => new FlashcardIndex(es, new Set(["wiki/zettel", ...folders]));
+
+  it("every note in a red walk whose subtree has red cards gets an intro (incl. a green-own-cards parent)", () => {
+    // Module fixture: c-000001 parent is all-green own cards but every descendant is red.
+    // It enters the red walk as a reorientation parent; its subtree is red, so its intro fires.
+    const intros = introAddrs(buildSessionQueue(index, "c-000001", "red", ryOpts));
+    expect(intros).toEqual(["c-000001", "c-000002", "c-000003", "c-000004"]);
+  });
+
+  it("a yellow walk shows intros when the subtree has yellow (due-soon) cards but no red", () => {
+    const idx = idxOf(
+      [
+        entry("c-000040", "wiki/zettel/Y.md", ["c-000041"], [yellow()]),
+        entry("c-000041", "wiki/zettel/Y/L.md", [], [yellow()]),
+      ],
+      ["wiki/zettel/Y"]
+    );
+    expect(introAddrs(buildSessionQueue(idx, "c-000040", "yellow", ryOpts))).toEqual(["c-000040", "c-000041"]);
+  });
+
+  it("an all-green walk shows no intros", () => {
+    const idx = idxOf(
+      [
+        entry("c-000050", "wiki/zettel/G.md", ["c-000051"], [green(100)]),
+        entry("c-000051", "wiki/zettel/G/L.md", [], [green(200)]),
+      ],
+      ["wiki/zettel/G"]
+    );
+    expect(introAddrs(buildSessionQueue(idx, "c-000050", "green", ryOpts))).toEqual([]);
+  });
+
+  it("the intro sits immediately before its note's card run", () => {
+    const idx = idxOf(
+      [
+        entry("c-000060", "wiki/zettel/S.md", ["c-000061"], [red()]),
+        entry("c-000061", "wiki/zettel/S/L.md", [], [red(), red()]),
+      ],
+      ["wiki/zettel/S"]
+    );
+    const shape = buildSessionQueue(idx, "c-000060", "red", ryOpts).map((i) =>
+      i.kind === "note-intro" ? `intro:${i.entry.address}` : i.entry.address
+    );
+    expect(shape).toEqual(["intro:c-000060", "c-000060", "intro:c-000061", "c-000061", "c-000061"]);
+  });
+
+  it("the trigger is subtree state, independent of the session bucket (fires in a green session on a red descendant)", () => {
+    const idx = idxOf(
+      [
+        entry("c-000070", "wiki/zettel/M.md", ["c-000071"], [green(100)]),
+        entry("c-000071", "wiki/zettel/M/L.md", [], [red()]),
+      ],
+      ["wiki/zettel/M"]
+    );
+    // Green session: only c-000070's green card is in-bucket. c-000071's red card is off-bucket and it is a
+    // leaf (no reorientation), so it contributes nothing. c-000070's subtree still holds a red card -> intro.
+    expect(introAddrs(buildSessionQueue(idx, "c-000070", "green", ryOpts))).toEqual(["c-000070"]);
+  });
+});
+
 describe("grading (KTD6)", () => {
   it("auto-checks conservatively and honors post-reveal overrides", () => {
     expect(autoRating(true)).toBe("good");
