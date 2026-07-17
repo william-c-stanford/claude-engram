@@ -7,5 +7,7 @@
   "obsidian-memos",
   "obsidian-git",
   "templater-obsidian",
-  "dataview"
+  "dataview",
+  "extended-graph",
+  "engram-flashcards"
 ]

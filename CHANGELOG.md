@@ -2,6 +2,24 @@
 
 All notable changes to claude-obsidian. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [SemVer](https://semver.org/).
 
+## [1.10.0] - 2026-07-17 (Engram Flashcards: spaced repetition over the zettel tree)
+
+Stage 1 of the memorization layer (plan: `docs/plans/2026-07-17-001-feat-zettel-flashcards-plugin-plan.md`): a real Obsidian plugin (`obsidian-engram/`, id `engram-flashcards`, v0.1.0, BRAT-installable) plus a Claude-side generation skill, meeting the vault at `<Note>.cards.md` sidecar files.
+
+### Added
+
+- **`obsidian-engram/` Obsidian plugin** (TypeScript, zero runtime deps, 48 vitest unit tests):
+  - File-explorer badges: red/yellow/green count chips on zettel folders, their paired parent notes, and leaf notes; identical subtree rollups on folder + parent rows; chips are click targets (red → due review, yellow → early review, green → practice-ahead, settings-gated); `*.cards.md` rows hidden (toggleable).
+  - Mental-palace review sessions: topological walk — parent-note cards first, then each child subtree in `children` order; all-green parents contribute a reorientation sample (default 3, skippable); shuffle only within a note.
+  - Ease-factor scheduler: 1 → 4 → interval×ease ladder (default ease 2.5, adjustable; ≈ 1 → 4 → 10 → 25 → 62 → 156 days), Anki-style Hard/Easy/Again modifiers with ease floor 1.3, append-only per-card review log (FSRS swap stays lossless). Sequence pinned by an exact-progression test.
+  - Review modal: MarkdownRenderer faces (LaTeX + code), cloze with `\boxed{?}` masking inside math, typed-answer check, MCQ auto-check with post-reveal override, fully keyboard-operable (Space/Enter reveal-confirm, 1–4 rate), in-session relearn of Again cards, batch state write per sidecar at session end.
+  - `cards_due` frontmatter writeback: diff-guarded `processFrontMatter`, parents carry subtree red counts (graph-coloring groundwork), triggers on vault open / session end / "Refresh flashcard counts" command.
+  - Rebuildable `.vault-meta/flashcard-index.json` cache; orphaned-sidecar detection (note deleted → excluded from rollups, surfaced in a notice).
+  - `.github/workflows/release-plugin.yml`: tag == manifest version, release assets `main.js`/`manifest.json`/`styles.css` (BRAT contract).
+- **`docs/flashcard-format.md`** — the shared card-format spec (five card types, `{{c::...}}` cloze incl. inside-LaTeX rule, `%% srs %%` state blocks, DragonScale-address binding, regeneration rules).
+- **`/zettel-flashcards` skill** (`skills/zettel-flashcards/`) — generates spec-conformant sidecars for a subtree (wiki-lock guarded, stable card IDs, state-preserving regeneration).
+- **First generated deck**: the Mixture-of-Experts subtree (5 notes, 22 cards, all five types), parser-validated with zero warnings.
+
 ## [1.9.2] - 2026-05-27 (prompt-cache hardening + path-handling robustness)
 
 Ports Anthropic prompt-caching best practices into the **one** place the plugin calls the Anthropic API directly: tier-1 contextual-prefix generation in `scripts/contextual-prefix.py`. Verified by full-repo sweep that `cache_control` and the Anthropic API surface exist nowhere else (incl. `claude-canvas/`). No change to retrieval output — API payload shape + observability only.

@@ -62,6 +62,7 @@ Do NOT read the wiki for general coding questions or things already in this proj
 | `/wiki-mode` (v1.8) | Methodology modes (LYT / PARA / Zettelkasten / Generic). Set via `bash bin/setup-mode.sh`; consumed by wiki-ingest / save / autoresearch for routing new pages |
 | `/think` (v1.9) | The 10-principle thinking loop (OBSERVE-OBSERVE-LISTEN-THINK-CONNECT-CONNECT-FEEL-ACCEPT-CREATE-GROW) as an invocable workflow. Apply to architectural decisions, audits, post-mortems, ambiguous user requests. Every other skill has a "How to think" appendix mapping this framework to its specific work |
 | `/comprehensive-zettel` (fork) | Write atomic-yet-comprehensive folder-nested Zettelkasten notes under `wiki/zettel/`. Decomposition tree: parents synthesize + index, leaves are one claim each; real-LaTeX math; DragonScale `address` identity |
+| `/zettel-flashcards` (v1.10) | Generate spaced-repetition flashcards for a zettel subtree: one `<Note>.cards.md` sidecar per atomic note (cloze incl. inside LaTeX, MCQ, free-response, derivation, pseudocode), per `docs/flashcard-format.md`. Reviewed/scheduled by the `engram-flashcards` Obsidian plugin (`obsidian-engram/`): explorer badges, mental-palace sessions, ease-factor ladder, `cards_due` frontmatter writeback |
 | `/local-wiki-index` (fork) | Rebuildable index (`.vault-meta/zettel-index.json`) + attach/promote placement for the nested zettel tree; consulted by wiki-ingest in Zettelkasten mode. Backed by `scripts/zettel-index.py` |
 
 ## Transport (v1.7+)

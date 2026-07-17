@@ -1,0 +1,124 @@
+/* Engram Flashcards */
+
+.engram-chips {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.engram-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.engram-chip-red {
+  background-color: var(--color-red, #e93147);
+}
+
+.engram-chip-yellow {
+  background-color: var(--color-yellow, #e0ac00);
+}
+
+.engram-chip-green {
+  background-color: var(--color-green, #08b94e);
+}
+
+.engram-chip-inert {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.engram-hidden-sidecar {
+  display: none !important;
+}
+
+/* Review modal */
+
+.engram-review-modal {
+  max-width: 720px;
+  width: 90vw;
+}
+
+.engram-review-breadcrumb {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.engram-review-card {
+  min-height: 160px;
+  padding: 12px 4px;
+}
+
+.engram-review-blank {
+  border-bottom: 2px solid var(--text-accent);
+  padding: 0 18px;
+  white-space: nowrap;
+}
+
+.engram-review-reveal {
+  border-top: 1px solid var(--background-modifier-border);
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.engram-review-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.engram-review-controls button {
+  min-width: 90px;
+}
+
+.engram-rating-again {
+  color: var(--color-red, #e93147);
+}
+
+.engram-rating-hard {
+  color: var(--color-yellow, #e0ac00);
+}
+
+.engram-rating-good {
+  color: var(--color-green, #08b94e);
+}
+
+.engram-rating-easy {
+  color: var(--color-cyan, #00bfbc);
+}
+
+.engram-mcq-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 4px 0;
+}
+
+.engram-mcq-correct {
+  outline: 2px solid var(--color-green, #08b94e);
+}
+
+.engram-mcq-wrong {
+  outline: 2px solid var(--color-red, #e93147);
+}
+
+.engram-review-progress {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 10px;
+}

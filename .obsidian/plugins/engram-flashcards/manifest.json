@@ -1,0 +1,10 @@
+{
+  "id": "engram-flashcards",
+  "name": "Engram Flashcards",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Spaced-repetition flashcards over a folder-nested Zettelkasten: due-count badges on folders and parent notes, mental-palace review sessions, ease-factor scheduling.",
+  "author": "william-c-stanford",
+  "authorUrl": "https://github.com/william-c-stanford/claude-engram",
+  "isDesktopOnly": false
+}
