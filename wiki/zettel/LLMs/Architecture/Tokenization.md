@@ -13,7 +13,7 @@ tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 12
-cards_due: 31
+cards_due: 22
 ---
 
 # Tokenization

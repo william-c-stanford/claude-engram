@@ -40,3 +40,7 @@ What is the core problem with word-level tokenization?
 type: cloze
 
 Under subword tokenization, common words stay single tokens ("the") while rare words decompose into known pieces, so the vocabulary stays bounded but nothing is ever {{c::out-of-vocabulary}}.
+%% srs c-000043-04 {"due":"2026-07-18T22:56:24.407Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T22:56:24.407Z","rating":"good"}]} %%
+%% srs c-000043-01 {"due":"2026-07-18T22:56:44.737Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T22:56:44.737Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000043-03 {"due":"2026-07-21T23:05:34.937Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T23:05:34.937Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000043-02 {"due":"2026-07-21T23:06:21.641Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T23:06:21.641Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%

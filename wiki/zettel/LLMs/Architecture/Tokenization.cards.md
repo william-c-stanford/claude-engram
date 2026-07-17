@@ -30,3 +30,6 @@ The design space of tokenization resolves into four decisions, each a child of t
 type: cloze
 
 The tokenizer's output integers are not used as numeric values; each token ID instead {{c::indexes into the embedding table}} of the transformer.
+%% srs c-000044-02 {"due":"2026-07-21T22:55:20.936Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T22:55:20.936Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000044-01 {"due":"2026-07-18T22:55:35.311Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T22:55:35.311Z","rating":"good"}]} %%
+%% srs c-000044-03 {"due":"2026-07-18T22:55:58.332Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T22:55:58.332Z","rating":"hard"}],"easeDelta":-0.15} %%

@@ -9,7 +9,7 @@ tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 0
-cards_due: 4
+cards_due: 0
 ---
 
 # Why Subword Tokenization

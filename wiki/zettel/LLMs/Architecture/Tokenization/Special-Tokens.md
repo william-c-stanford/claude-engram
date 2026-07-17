@@ -12,7 +12,7 @@ tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 3
-cards_due: 12
+cards_due: 10
 ---
 
 # Special Tokens

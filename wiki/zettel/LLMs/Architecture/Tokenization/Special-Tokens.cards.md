@@ -25,3 +25,5 @@ What distinguishes special tokens from ordinary vocabulary entries?
 - [ ] They are the most frequent tokens in the training corpus
 - [ ] They are always multi-character subword merges
 - [ ] They are the only tokens with trainable embeddings
+%% srs c-000038-02 {"due":"2026-07-21T23:08:40.075Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T23:08:40.075Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000038-01 {"due":"2026-07-18T23:09:06.861Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T23:09:06.861Z","rating":"hard"}],"easeDelta":-0.15} %%
