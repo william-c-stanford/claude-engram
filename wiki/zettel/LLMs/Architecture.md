@@ -1,19 +1,19 @@
 ---
 type: zettel
-address: "c-000073"
-title: "Architecture"
-created: "2026-07-08"
-parent: "c-000152"
+address: c-000073
+title: Architecture
+created: 2026-07-08
+parent: c-000152
 children:
-  - "c-000044"
-  - "c-000072"
-  - "c-000031"
-  - "c-000026"
+  - c-000044
+  - c-000072
+  - c-000031
+  - c-000026
 tags:
   - llm-fundamentals
   - architecture
 subtree_size: 51
-cards_due: 0
+cards_due: 22
 ---
 
 # Architecture

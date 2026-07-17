@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000022"
-title: "MoE Architecture"
-created: "2026-07-08"
-parent: "c-000026"
+address: c-000022
+title: MoE Architecture
+created: 2026-07-08
+parent: c-000026
 children: []
 tags:
   - llm-fundamentals
   - moe
 subtree_size: 0
-cards_due: 0
+cards_due: 5
 ---
 
 # MoE Architecture

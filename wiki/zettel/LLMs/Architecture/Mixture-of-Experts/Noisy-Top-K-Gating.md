@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000024"
-title: "Noisy Top-K Gating"
-created: "2026-07-08"
-parent: "c-000026"
+address: c-000024
+title: Noisy Top-K Gating
+created: 2026-07-08
+parent: c-000026
 children: []
 tags:
   - llm-fundamentals
   - moe
 subtree_size: 0
-cards_due: 0
+cards_due: 5
 ---
 
 # Noisy Top-K Gating

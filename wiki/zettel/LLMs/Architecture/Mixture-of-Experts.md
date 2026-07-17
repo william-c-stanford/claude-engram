@@ -1,20 +1,20 @@
 ---
 type: zettel
-address: "c-000026"
-title: "Mixture of Experts (MoE)"
-created: "2026-07-08"
-parent: "c-000073"
+address: c-000026
+title: Mixture of Experts (MoE)
+created: 2026-07-08
+parent: c-000073
 children:
-  - "c-000022"
-  - "c-000023"
-  - "c-000024"
-  - "c-000025"
+  - c-000022
+  - c-000023
+  - c-000024
+  - c-000025
 tags:
   - llm-fundamentals
   - moe
   - architecture
 subtree_size: 4
-cards_due: 0
+cards_due: 22
 ---
 
 # Mixture of Experts (MoE)

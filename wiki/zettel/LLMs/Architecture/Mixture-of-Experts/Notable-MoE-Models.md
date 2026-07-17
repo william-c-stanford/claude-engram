@@ -1,16 +1,16 @@
 ---
 type: zettel
-address: "c-000025"
-title: "Notable MoE Models"
-created: "2026-07-08"
-parent: "c-000026"
+address: c-000025
+title: Notable MoE Models
+created: 2026-07-08
+parent: c-000026
 children: []
 tags:
   - llm-fundamentals
   - moe
   - reference
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Notable MoE Models

@@ -1,18 +1,18 @@
 ---
 type: zettel
-address: "c-000152"
-title: "LLMs"
-created: "2026-07-08"
+address: c-000152
+title: LLMs
+created: 2026-07-08
 parent: ""
 children:
-  - "c-000073"
-  - "c-000151"
-  - "c-000074"
+  - c-000073
+  - c-000151
+  - c-000074
 tags:
   - llm-fundamentals
   - moc
 subtree_size: 130
-cards_due: 0
+cards_due: 22
 ---
 
 # LLMs
