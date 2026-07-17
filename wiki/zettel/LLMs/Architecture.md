@@ -13,7 +13,7 @@ tags:
   - llm-fundamentals
   - architecture
 subtree_size: 51
-cards_due: 139
+cards_due: 143
 ---
 
 # Architecture

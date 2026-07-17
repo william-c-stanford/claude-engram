@@ -2,15 +2,19 @@ import { describe, expect, it } from "vitest";
 import { FlashcardIndex, NoteEntry } from "../src/index/flashcard-index";
 import { Card, CardState, ParsedSidecar } from "../src/cards/types";
 import {
-  folderMedianDueOffsetMs,
+  cardsInFolder,
+  cardsInNote,
+  cardsInSubtree,
   formatDueOffset,
-  noteMedianDueOffsetMs,
-  subtreeMedianDueOffsetMs,
+  formatIntervalDays,
+  medianDueOffsetMs,
+  medianIntervalDays,
 } from "../src/scheduler/cadence";
 
 const NOW = Date.parse("2026-07-17T09:00:00.000Z");
 const DAY = 86_400_000;
 const at = (days: number): string => new Date(NOW + days * DAY).toISOString();
+const due = (days: number): CardState => ({ due: at(days), interval: days, ease: 2.5, reviews: [] });
 
 function sidecar(address: string, states: CardState[]): ParsedSidecar {
   const cards: Card[] = states.map((state, i) => ({
@@ -33,43 +37,59 @@ function entry(address: string, notePath: string, children: string[], states: Ca
   };
 }
 
-const due = (days: number): CardState => ({ due: at(days), interval: days, ease: 2.5, reviews: [] });
+describe("median due-offset", () => {
+  const cards = (states: CardState[]): Card[] => cardsInNote(entry("c-1", "wiki/zettel/N.md", [], states));
 
-describe("median due-offset (cadence)", () => {
-  it("odd count returns the middle due date, as an offset from now (in days)", () => {
-    const e = entry("c-1", "wiki/zettel/N.md", [], [due(2), due(10), due(30)]);
-    expect(noteMedianDueOffsetMs(e, NOW)! / DAY).toBeCloseTo(10);
+  it("odd count returns the middle due date as an offset from now (days)", () => {
+    expect(medianDueOffsetMs(cards([due(2), due(10), due(30)]), NOW)! / DAY).toBeCloseTo(10);
   });
 
   it("even count averages the two middle due dates", () => {
-    const e = entry("c-1", "wiki/zettel/N.md", [], [due(2), due(8), due(12), due(30)]);
-    expect(noteMedianDueOffsetMs(e, NOW)! / DAY).toBeCloseTo(10); // (8 + 12) / 2
+    expect(medianDueOffsetMs(cards([due(2), due(8), due(12), due(30)]), NOW)! / DAY).toBeCloseTo(10);
   });
 
   it("is not dragged by a long right tail the way a mean would be", () => {
-    // 3 cards due in ~2 days, one mature card due in 2 years: median stays near 2d.
-    const e = entry("c-1", "wiki/zettel/N.md", [], [due(1), due(2), due(3), due(730)]);
-    expect(noteMedianDueOffsetMs(e, NOW)! / DAY).toBeCloseTo(2.5); // (2 + 3) / 2, not ~184 (the mean)
+    // 3 near-due cards + one 2-year mature card: median stays near 2.5d, not ~184 (the mean).
+    expect(medianDueOffsetMs(cards([due(1), due(2), due(3), due(730)]), NOW)! / DAY).toBeCloseTo(2.5);
   });
 
   it("overdue cards yield a negative offset", () => {
-    const e = entry("c-1", "wiki/zettel/N.md", [], [due(-5), due(-3), due(-1)]);
-    expect(noteMedianDueOffsetMs(e, NOW)! / DAY).toBeCloseTo(-3);
+    expect(medianDueOffsetMs(cards([due(-5), due(-3), due(-1)]), NOW)! / DAY).toBeCloseTo(-3);
   });
 
   it("new cards count as due now (0 offset)", () => {
-    const e = entry("c-1", "wiki/zettel/N.md", [], [{ state: "new" }, { state: "new" }, due(20)]);
-    expect(noteMedianDueOffsetMs(e, NOW)! / DAY).toBeCloseTo(0); // median of [0, 0, 20]
+    expect(medianDueOffsetMs(cards([{ state: "new" }, { state: "new" }, due(20)]), NOW)! / DAY).toBeCloseTo(0);
   });
 
-  it("returns null when a scope has no cards", () => {
-    expect(noteMedianDueOffsetMs(entry("c-1", "wiki/zettel/N.md", [], null), NOW)).toBeNull();
-    expect(noteMedianDueOffsetMs(entry("c-1", "wiki/zettel/N.md", [], []), NOW)).toBeNull();
+  it("returns null for an empty scope", () => {
+    expect(medianDueOffsetMs([], NOW)).toBeNull();
+  });
+});
+
+describe("median interval (maturity)", () => {
+  const cards = (states: CardState[]): Card[] => cardsInNote(entry("c-1", "wiki/zettel/N.md", [], states));
+
+  it("is the median current spacing in days", () => {
+    expect(medianIntervalDays(cards([due(4), due(10), due(40)]))).toBeCloseTo(10);
+  });
+
+  it("counts new/unlearned cards as 0", () => {
+    expect(medianIntervalDays(cards([{ state: "new" }, { state: "new" }, due(20)]))).toBeCloseTo(0);
+  });
+
+  it("does not go negative for overdue cards (interval is spacing, not position)", () => {
+    // A card overdue by 5 days can still carry a 30-day interval.
+    const overdueButMature: CardState = { due: at(-5), interval: 30, ease: 2.5, reviews: [] };
+    expect(medianIntervalDays(cards([overdueButMature, overdueButMature, overdueButMature]))).toBeCloseTo(30);
+  });
+
+  it("returns null for an empty scope", () => {
+    expect(medianIntervalDays([])).toBeNull();
   });
 });
 
 describe("cadence rollups mirror the count topology", () => {
-  // Root -> [A -> [A1], B]; pool every card for one median.
+  // Root -> [A -> [A1], B]; all cards pooled for one median.
   const entries = [
     entry("c-000001", "wiki/zettel/Root.md", ["c-000002", "c-000004"], [due(4), due(40)]),
     entry("c-000002", "wiki/zettel/Root/A.md", ["c-000003"], [due(10)]),
@@ -81,41 +101,35 @@ describe("cadence rollups mirror the count topology", () => {
     new Set(["wiki/zettel", "wiki/zettel/Root", "wiki/zettel/Root/A"])
   );
 
-  it("subtree pools all descendant cards into one median", () => {
-    // A subtree cards: A(10), A1(6,6) -> median of [6,6,10] = 6
-    expect(subtreeMedianDueOffsetMs(index, "c-000002", NOW)! / DAY).toBeCloseTo(6);
+  it("subtree pools all descendant cards", () => {
+    // A subtree: A(10), A1(6,6) -> median [6,6,10] = 6
+    expect(medianDueOffsetMs(cardsInSubtree(index, "c-000002"), NOW)! / DAY).toBeCloseTo(6);
   });
 
   it("folder with a paired note equals that note's subtree exactly (R9)", () => {
-    expect(folderMedianDueOffsetMs(index, "wiki/zettel/Root/A", NOW)).toBe(
-      subtreeMedianDueOffsetMs(index, "c-000002", NOW)
-    );
+    expect(cardsInFolder(index, "wiki/zettel/Root/A")).toEqual(cardsInSubtree(index, "c-000002"));
   });
 
   it("folder with no paired note pools across the notes inside it", () => {
-    // All cards under the root: 4,40 (Root) + 10 (A) + 6,6 (A1) -> [4,6,6,10,40] median 6
-    expect(folderMedianDueOffsetMs(index, "wiki/zettel", NOW)! / DAY).toBeCloseTo(6);
+    // All cards under root: 4,40,10,6,6 -> median [4,6,6,10,40] = 6
+    expect(medianDueOffsetMs(cardsInFolder(index, "wiki/zettel"), NOW)! / DAY).toBeCloseTo(6);
   });
 });
 
-describe("formatDueOffset", () => {
-  it("shows 'now' at or before zero", () => {
+describe("formatting", () => {
+  it("due offset: 'now' at or before zero, else a rounded unit", () => {
     expect(formatDueOffset(0)).toBe("now");
     expect(formatDueOffset(-5 * DAY)).toBe("now");
-  });
-  it("rounds sub-day positive offsets up to 1d", () => {
     expect(formatDueOffset(0.3 * DAY)).toBe("1d");
-  });
-  it("uses days under a fortnight", () => {
     expect(formatDueOffset(4 * DAY)).toBe("4d");
-    expect(formatDueOffset(13 * DAY)).toBe("13d");
-  });
-  it("uses weeks up to two months", () => {
     expect(formatDueOffset(21 * DAY)).toBe("3w");
-    expect(formatDueOffset(56 * DAY)).toBe("8w");
-  });
-  it("uses months beyond", () => {
     expect(formatDueOffset(90 * DAY)).toBe("3mo");
-    expect(formatDueOffset(365 * DAY)).toBe("12mo");
+  });
+
+  it("interval: 'new' at zero, else a rounded unit", () => {
+    expect(formatIntervalDays(0)).toBe("new");
+    expect(formatIntervalDays(10)).toBe("10d");
+    expect(formatIntervalDays(56)).toBe("8w");
+    expect(formatIntervalDays(365)).toBe("12mo");
   });
 });

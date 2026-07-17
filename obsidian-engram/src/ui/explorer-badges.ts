@@ -11,11 +11,15 @@ import {
   subtreeUncovered,
 } from "../scheduler/rollup";
 import {
-  folderMedianDueOffsetMs,
+  cardsInFolder,
+  cardsInNote,
+  cardsInSubtree,
   formatDueOffset,
-  noteMedianDueOffsetMs,
-  subtreeMedianDueOffsetMs,
+  formatIntervalDays,
+  medianDueOffsetMs,
+  medianIntervalDays,
 } from "../scheduler/cadence";
+import { Card } from "../cards/types";
 import { chipsFor } from "./chips";
 import { buildSessionQueue, SessionItem } from "./session-queue";
 import { ReviewModal } from "./review-modal";
@@ -82,13 +86,13 @@ export class ExplorerBadges {
 
       let counts: Counts | null = null;
       let uncovered = 0;
-      let cadenceMs: number | null = null;
+      let scopeCards: Card[] = [];
       let scope: NoteEntry | { folderPath: string } | null = null;
 
       if (index.folderPaths.has(path)) {
         counts = folderCounts(index, path, nowMs, warn);
         uncovered = folderUncovered(index, path);
-        cadenceMs = folderMedianDueOffsetMs(index, path, nowMs);
+        scopeCards = cardsInFolder(index, path);
         scope = index.noteForFolder(path) ?? { folderPath: path };
       } else {
         const entry = index.byNotePath.get(path);
@@ -96,7 +100,7 @@ export class ExplorerBadges {
           const parent = index.hasFolder(entry); // parent note mirrors its folder (R9)
           counts = parent ? subtreeCounts(index, entry.address, nowMs, warn) : noteCounts(entry, nowMs, warn);
           uncovered = parent ? subtreeUncovered(index, entry.address) : noteUncovered(entry);
-          cadenceMs = parent ? subtreeMedianDueOffsetMs(index, entry.address, nowMs) : noteMedianDueOffsetMs(entry, nowMs);
+          scopeCards = parent ? cardsInSubtree(index, entry.address) : cardsInNote(entry);
           scope = entry;
         }
       }
@@ -134,15 +138,22 @@ export class ExplorerBadges {
         }
       }
 
-      // Review cadence: median next-review across the scope, "~" for future,
-      // "now" when due/overdue. Inert — a summary metric, not a review entry point.
-      if (this.plugin.settings.showCadence && cadenceMs !== null) {
-        const label = formatDueOffset(cadenceMs);
+      // Review cadence pill: median next-review | median interval across the
+      // scope. Left = urgency (drifts to "now" as you fall behind), right =
+      // maturity (stable spacing). Inert — a summary metric, not an entry point.
+      if (this.plugin.settings.showCadence && scopeCards.length > 0) {
+        const dueMs = medianDueOffsetMs(scopeCards, nowMs)!;
+        const intervalDays = medianIntervalDays(scopeCards)!;
+        const dueLabel = dueMs > 0 ? `~${formatDueOffset(dueMs)}` : formatDueOffset(dueMs);
+        const intLabel = formatIntervalDays(intervalDays);
         const el = wrap.createSpan({
           cls: "engram-chip engram-chip-cadence engram-chip-inert",
-          text: cadenceMs > 0 ? `~${label}` : label,
+          text: `${dueLabel} | ${intLabel}`,
         });
-        el.setAttribute("aria-label", `median next review ${cadenceMs > 0 ? `in ${label}` : "due now"}`);
+        el.setAttribute(
+          "aria-label",
+          `median next review ${dueMs > 0 ? `in ${formatDueOffset(dueMs)}` : "due now"}, median interval ${intLabel}`
+        );
       }
     }
   }

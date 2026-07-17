@@ -2,77 +2,84 @@ import { FlashcardIndex, NoteEntry } from "../index/flashcard-index";
 import { Card, CardState } from "../cards/types";
 
 /**
- * Branch review cadence: the MEDIAN due date of every card in a scope, expressed
- * as an offset from now (ms; negative = the branch is overdue). Median, not mean,
- * because interval distributions are strongly right-skewed (the ladder is roughly
- * geometric) and a few long-interval mature cards would drag a mean far into the
- * future, hiding a near-term review load. A new (never-reviewed) card is due now,
- * so it contributes a 0 offset.
+ * Branch review cadence — two medians over every card in a scope:
+ *   - due offset: the median DUE date, as time from now (negative = overdue).
+ *     Answers "when is this branch ripe for a walk?" — it drifts toward now as
+ *     you fall behind.
+ *   - interval: the median current spacing. Answers "how mature is this branch?"
+ *     — stable over time, independent of where you are in the schedule.
+ * Median, not mean: spaced-repetition intervals are strongly right-skewed (the
+ * ladder is roughly geometric), so a mean is dragged into the future by a few
+ * mature cards and hides a near-term load. A new (never-reviewed) card is due
+ * now (0 offset) and has no spacing yet (interval 0).
  */
+
+const DAY = 86_400_000;
+
+// ---- scope → cards (rollup topology mirrors the count chips, R9) ----
+
+export function cardsInNote(entry: NoteEntry): Card[] {
+  return entry.sidecar?.cards ?? [];
+}
+
+export function cardsInSubtree(index: FlashcardIndex, address: string): Card[] {
+  const out: Card[] = [];
+  for (const e of index.subtreeOf(address)) if (e.sidecar) out.push(...e.sidecar.cards);
+  return out;
+}
+
+export function cardsInFolder(index: FlashcardIndex, folderPath: string): Card[] {
+  const paired = index.noteForFolder(folderPath);
+  if (paired) return cardsInSubtree(index, paired.address);
+  const out: Card[] = [];
+  for (const e of index.notesDirectlyIn(folderPath)) out.push(...cardsInSubtree(index, e.address));
+  return out;
+}
+
+// ---- per-card values ----
+
 function cardDueMs(state: CardState, nowMs: number): number {
   if (state.state === "new" || !state.due) return nowMs;
   const t = Date.parse(state.due);
   return Number.isNaN(t) ? nowMs : t;
 }
 
-function collect(cards: Card[], nowMs: number, out: number[]): void {
-  for (const c of cards) out.push(cardDueMs(c.state, nowMs));
+function cardIntervalDays(state: CardState): number {
+  return typeof state.interval === "number" && state.interval > 0 ? state.interval : 0;
 }
 
-/** Median of a non-empty array; averages the two middle values for even length. */
 function median(xs: number[]): number {
   const s = [...xs].sort((a, b) => a - b);
   const mid = s.length >> 1;
   return s.length % 2 ? s[mid]! : (s[mid - 1]! + s[mid]!) / 2;
 }
 
-function medianOffset(dues: number[], nowMs: number): number | null {
-  return dues.length > 0 ? median(dues) - nowMs : null;
+/** Median due date across the cards, as ms from now (negative = overdue); null if empty. */
+export function medianDueOffsetMs(cards: Card[], nowMs: number): number | null {
+  if (cards.length === 0) return null;
+  return median(cards.map((c) => cardDueMs(c.state, nowMs))) - nowMs;
 }
 
-/** Median due offset (ms from now) for a single note's own cards, or null if it has none. */
-export function noteMedianDueOffsetMs(entry: NoteEntry, nowMs: number): number | null {
-  const dues: number[] = [];
-  if (entry.sidecar) collect(entry.sidecar.cards, nowMs, dues);
-  return medianOffset(dues, nowMs);
+/** Median current interval in days; new/unlearned cards count as 0; null if empty. */
+export function medianIntervalDays(cards: Card[]): number | null {
+  if (cards.length === 0) return null;
+  return median(cards.map((c) => cardIntervalDays(c.state)));
 }
 
-/** Median due offset across a parent note's whole subtree (R9 rollup), or null if empty. */
-export function subtreeMedianDueOffsetMs(index: FlashcardIndex, address: string, nowMs: number): number | null {
-  const dues: number[] = [];
-  for (const entry of index.subtreeOf(address)) {
-    if (entry.sidecar) collect(entry.sidecar.cards, nowMs, dues);
-  }
-  return medianOffset(dues, nowMs);
-}
+// ---- compact labels ----
 
-/**
- * Median due offset for a folder row. Mirrors folderCounts: a folder with a
- * paired parent note reports that note's subtree exactly; otherwise it pools
- * every card across the subtrees of the notes directly inside it and takes one
- * median over the pool (not a median-of-medians).
- */
-export function folderMedianDueOffsetMs(index: FlashcardIndex, folderPath: string, nowMs: number): number | null {
-  const paired = index.noteForFolder(folderPath);
-  if (paired) return subtreeMedianDueOffsetMs(index, paired.address, nowMs);
-  const dues: number[] = [];
-  for (const entry of index.notesDirectlyIn(folderPath)) {
-    for (const n of index.subtreeOf(entry.address)) {
-      if (n.sidecar) collect(n.sidecar.cards, nowMs, dues);
-    }
-  }
-  return medianOffset(dues, nowMs);
-}
-
-/**
- * Compact human label for a due offset: "now" when due or overdue, else a
- * single rounded unit — days under a fortnight, weeks under two months, months
- * beyond. Callers prefix "~" for positive offsets to signal it's a median.
- */
-export function formatDueOffset(ms: number): string {
-  if (ms <= 0) return "now";
-  const days = ms / 86_400_000;
+function tier(days: number): string {
   if (days < 14) return `${Math.max(1, Math.round(days))}d`;
   if (days < 60) return `${Math.round(days / 7)}w`;
   return `${Math.round(days / 30.44)}mo`;
+}
+
+/** Due-offset label: "now" at or before zero, else a single rounded unit. */
+export function formatDueOffset(ms: number): string {
+  return ms <= 0 ? "now" : tier(ms / DAY);
+}
+
+/** Interval label: "new" when nothing has matured yet (median 0), else a unit. */
+export function formatIntervalDays(days: number): string {
+  return days <= 0 ? "new" : tier(days);
 }
