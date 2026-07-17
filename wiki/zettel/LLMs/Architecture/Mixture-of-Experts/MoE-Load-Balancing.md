@@ -9,7 +9,7 @@ tags:
   - llm-fundamentals
   - moe
 subtree_size: 0
-cards_due: 5
+cards_due: 0
 ---
 
 # MoE Load Balancing

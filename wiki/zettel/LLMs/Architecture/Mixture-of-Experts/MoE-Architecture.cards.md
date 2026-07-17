@@ -52,3 +52,8 @@ It replaces the block's single dense FFN with $N$ parallel expert FFNs plus a ro
 **Notes**
 
 My cue: "only the FFN forks" — everything else in the block stays shared.
+%% srs c-000022-01 {"due":"2026-07-18T18:17:16.583Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:17:16.583Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000022-02 {"due":"2026-07-18T18:18:09.705Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T18:18:09.705Z","rating":"good"}]} %%
+%% srs c-000022-04 {"due":"2026-07-21T18:18:20.783Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:18:20.783Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000022-03 {"due":"2026-07-18T18:18:49.817Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T18:18:49.817Z","rating":"good"}]} %%
+%% srs c-000022-05 {"due":"2026-07-21T18:19:51.305Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:19:51.305Z","rating":"easy"}],"easeDelta":0.15} %%

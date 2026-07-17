@@ -30,3 +30,6 @@ Which component of a MoE layer is the source of its main training difficulties?
 - [x] The router, because uniform utilization and differentiable selection both have to be engineered
 - [ ] The attention block, because experts change its head dimension
 - [ ] The embedding layer, because vocabulary must be split across experts
+%% srs c-000026-02 {"due":"2026-07-18T18:31:44.067Z","interval":1,"ease":1.9,"reviews":[{"at":"2026-07-17T17:58:48.089Z","rating":"again"},{"at":"2026-07-17T17:59:27.722Z","rating":"again"},{"at":"2026-07-17T18:01:50.685Z","rating":"again"},{"at":"2026-07-17T18:31:44.067Z","rating":"good"}],"easeDelta":-0.6000000000000001} %%
+%% srs c-000026-03 {"due":"2026-07-18T17:59:03.776Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T17:59:03.776Z","rating":"good"}]} %%
+%% srs c-000026-01 {"due":"2026-07-18T18:19:16.945Z","interval":1,"ease":2.15,"reviews":[{"at":"2026-07-17T17:59:55.779Z","rating":"again"},{"at":"2026-07-17T18:19:16.945Z","rating":"hard"}],"easeDelta":-0.35} %%

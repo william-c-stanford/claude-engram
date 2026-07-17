@@ -14,7 +14,7 @@ tags:
   - moe
   - architecture
 subtree_size: 4
-cards_due: 22
+cards_due: 7
 ---
 
 # Mixture of Experts (MoE)

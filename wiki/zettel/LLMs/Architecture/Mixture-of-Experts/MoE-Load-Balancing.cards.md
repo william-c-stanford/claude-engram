@@ -48,3 +48,8 @@ Besides wasted capacity, why is expert collapse an *infrastructure* problem?
 type: cloze
 
 {{c::Switch Transformer}} relies on the auxiliary balancing loss alone, with Top-1 routing and no noise.
+%% srs c-000023-01 {"due":"2026-07-21T18:31:09.407Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:31:09.407Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000023-02 {"due":"2026-07-21T18:32:09.304Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:32:09.304Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000023-03 {"due":"2026-07-21T18:32:16.501Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:32:16.501Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000023-04 {"due":"2026-07-21T18:32:34.737Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:32:34.737Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000023-05 {"due":"2026-07-18T18:32:46.827Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:32:46.827Z","rating":"hard"}],"easeDelta":-0.15} %%

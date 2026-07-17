@@ -60,3 +60,5 @@ gates  = softmax(h[topk])
 y      = sum(gates[i] * expert[i](x) for i in topk)
 # inference: drop the noise term for deterministic routing
 ```
+%% srs c-000024-05 {"due":"2026-07-18T18:37:53.447Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:37:53.447Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000024-04 {"due":"2026-07-21T18:38:12.122Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:38:12.122Z","rating":"easy"}],"easeDelta":0.15} %%
