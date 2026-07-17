@@ -70,6 +70,39 @@ describe("FlashcardIndex", () => {
     expect(children).toEqual(["c-000102", "c-000104", "c-000199"]);
   });
 
+  it("lineageOf resolves every ancestor title root→source (AE1)", () => {
+    const leaf = index.byAddress.get("c-000103")!;
+    expect(index.lineageOf(leaf, "wiki/zettel")).toEqual([
+      "wiki/zettel/LLMs.md",
+      "wiki/zettel/LLMs/Architecture.md",
+      "wiki/zettel/LLMs/Architecture/Mixture-of-Experts.md",
+      "wiki/zettel/LLMs/Architecture/Mixture-of-Experts/MoE-Architecture.md",
+    ]); // fixture titles are the note paths
+  });
+
+  it("lineageOf on a root-level note is a single element (AE2)", () => {
+    const root = index.byAddress.get("c-000100")!;
+    expect(index.lineageOf(root, "wiki/zettel")).toEqual(["wiki/zettel/LLMs.md"]);
+  });
+
+  it("lineageOf falls back to the folder name when an ancestor has no paired note", () => {
+    const stray = entry("c-000198", "wiki/zettel/LLMs/NoNote/Stray.md");
+    const idx = new FlashcardIndex([...entries, stray], folders);
+    expect(idx.lineageOf(stray, "wiki/zettel")).toEqual([
+      "wiki/zettel/LLMs.md",
+      "NoNote",
+      "wiki/zettel/LLMs/NoNote/Stray.md",
+    ]);
+  });
+
+  it("lineageOf respects a custom zettel root (nothing above it appears)", () => {
+    const moe = index.byAddress.get("c-000102")!;
+    expect(index.lineageOf(moe, "wiki/zettel/LLMs")).toEqual([
+      "wiki/zettel/LLMs/Architecture.md",
+      "wiki/zettel/LLMs/Architecture/Mixture-of-Experts.md",
+    ]);
+  });
+
   it("survives a frontmatter cycle without hanging", () => {
     const a = entry("c-000201", "wiki/zettel/A.md", ["c-000202"]);
     const b = entry("c-000202", "wiki/zettel/A/B.md", ["c-000201"]);

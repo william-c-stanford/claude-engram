@@ -104,6 +104,27 @@ export class FlashcardIndex {
     return out;
   }
 
+  /**
+   * Ancestor titles from the first node inside the zettel root down to the
+   * entry itself (plan 003 KTD1): the folder path is the parent chain, each
+   * ancestor segment resolves its paired note's title, and a folder with no
+   * paired note falls back to its folder name.
+   */
+  lineageOf(entry: NoteEntry, zettelRoot: string): string[] {
+    const rel = entry.notePath.startsWith(`${zettelRoot}/`)
+      ? entry.notePath.slice(zettelRoot.length + 1)
+      : entry.notePath;
+    const segments = rel.replace(/\.md$/, "").split("/");
+    const out: string[] = [];
+    let folder = zettelRoot;
+    for (let i = 0; i < segments.length - 1; i++) {
+      folder = `${folder}/${segments[i]}`;
+      out.push(this.byNotePath.get(`${folder}.md`)?.title ?? segments[i]!);
+    }
+    out.push(entry.title);
+    return out;
+  }
+
   /** Root entries directly under a folder path (used for folder rows with no paired note). */
   notesDirectlyIn(folderPath: string): NoteEntry[] {
     return [...this.byNotePath.values()]

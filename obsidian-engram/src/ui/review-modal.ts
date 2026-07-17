@@ -153,15 +153,14 @@ export class ReviewModal extends Modal {
     }
 
     if (item.kind === "note-intro") {
-      await this.renderNoteIntro(item.entry.title, file);
+      await this.renderNoteIntro(item.entry, file);
       return;
     }
 
-    // Breadcrumb: session scope, then the note only when it differs.
-    const parts = [this.sessionTitle];
-    if (item.entry.title !== this.sessionTitle) parts.push(item.entry.title);
-    if (item.reorientation) parts.push("reorientation");
-    contentEl.createDiv({ cls: "engram-review-breadcrumb" }).setText(parts.join(" · "));
+    const extra: string[] = [];
+    if (item.reorientation) extra.push("reorientation");
+    extra.push(item.card.type);
+    this.renderBreadcrumb(item.entry, extra);
 
     const cardEl = contentEl.createDiv({ cls: "engram-review-card" });
     const sourcePath = item.entry.notePath;
@@ -228,9 +227,25 @@ export class ReviewModal extends Modal {
     this.contentEl.createDiv({ cls: "engram-review-progress" }).setText(`${Math.min(done + 1, total)} / ${total}`);
   }
 
-  private async renderNoteIntro(title: string, file: TFile): Promise<void> {
+  /**
+   * Session-scope line plus the ancestry strip (plan 003): topmost node inside
+   * the zettel root → … → source note, own scroll container, opened scrolled
+   * fully right so the source note is visible (R2/R3).
+   */
+  private renderBreadcrumb(entry: SessionItem["entry"], extra: string[]): void {
     const { contentEl } = this;
-    contentEl.createDiv({ cls: "engram-review-breadcrumb" }).setText(`${this.sessionTitle} · reading — ${title}`);
+    contentEl.createDiv({ cls: "engram-review-breadcrumb" }).setText([this.sessionTitle, ...extra].join(" · "));
+    const lineage = this.plugin.scanner.index.lineageOf(entry, this.plugin.settings.zettelRoot);
+    const strip = contentEl.createDiv({ cls: "engram-lineage" });
+    strip.setText(lineage.join(" → "));
+    queueMicrotask(() => {
+      strip.scrollLeft = strip.scrollWidth; // no-op outside a real DOM
+    });
+  }
+
+  private async renderNoteIntro(entry: SessionItem["entry"], file: TFile): Promise<void> {
+    const { contentEl } = this;
+    this.renderBreadcrumb(entry, ["reading"]);
     const body = contentEl.createDiv({ cls: "engram-note-intro" });
     const raw = await this.app.vault.cachedRead(file);
     await renderMarkdown(this.app, stripFrontmatter(raw), body, file.path, this.component);

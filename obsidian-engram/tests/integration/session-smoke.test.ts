@@ -127,14 +127,19 @@ describe("AE1 — note-first reading step", () => {
   it("a never-reviewed note renders its content with Proceed before the first card", async () => {
     const modal = openModal(queueFor("c-000024"), "Noisy Top-K Gating");
     await flush();
-    expect(screen(modal)).toContain("reading — Noisy Top-K Gating");
+    expect(screen(modal)).toContain("reading");
     expect(screen(modal)).toContain("non-differentiable"); // the note's Claim text
     expect(screen(modal)).not.toContain("type the answer");
+    // Lineage strip: root→source, ancestors falling back to folder names when
+    // their paired notes are outside this harness's entry set (AE1 of plan 003).
+    const strip = (modal.contentEl as unknown as FakeEl).querySelector(".engram-lineage")!;
+    expect(strip.textContent).toBe("LLMs → Architecture → Mixture of Experts (MoE) → Noisy Top-K Gating");
 
     btn(modal, "Proceed")!.click();
     await flush();
-    expect(screen(modal)).not.toContain("reading —");
-    expect(screen(modal)).toContain("Noisy Top-K Gating"); // now the card breadcrumb
+    expect(screen(modal)).not.toContain("· reading");
+    const cardStrip = (modal.contentEl as unknown as FakeEl).querySelector(".engram-lineage")!;
+    expect(cardStrip.textContent).toContain("→ Noisy Top-K Gating"); // source note ends the strip
     modal.close();
     await flush();
   });
@@ -154,7 +159,7 @@ describe("AE1 — note-first reading step", () => {
     expect(queue.some((i) => i.kind === "note-intro")).toBe(false);
     const second = openModal(queue, "Noisy Top-K Gating");
     await flush();
-    expect(screen(second)).not.toContain("reading —");
+    expect(screen(second)).not.toContain("· reading");
     second.close();
     await flush();
   });

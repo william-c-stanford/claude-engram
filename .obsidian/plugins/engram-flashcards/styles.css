@@ -59,7 +59,23 @@
   font-size: var(--font-ui-smaller);
   color: var(--text-faint);
   letter-spacing: 0.02em;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
+}
+
+/* Ancestry strip: own scroll container, never widens the card (plan 003) */
+
+.engram-lineage {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  padding-bottom: 3px;
+  scrollbar-width: thin;
+  /* Left-edge fade hints that ancestors continue off-screen */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 28px, black 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 28px, black 100%);
 }
 
 .engram-review-card {

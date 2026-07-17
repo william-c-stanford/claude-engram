@@ -2,6 +2,14 @@
 
 All notable changes to claude-obsidian. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [SemVer](https://semver.org/).
 
+## [1.10.2] - 2026-07-17 (Engram Flashcards 0.2.1: lineage breadcrumb)
+
+Plan: `docs/plans/2026-07-17-003-feat-card-lineage-breadcrumb-plan.md`. Plugin 0.2.0 → 0.2.1.
+
+### Added
+
+- **Ancestry strip on card screens and reading steps**: the full lineage from the topmost node inside the zettel root down to the source note (`LLMs → Architecture → Mixture of Experts (MoE) → MoE Architecture`), rendered in its own horizontal scroll container that never widens the card, opened scrolled fully right with a left-edge fade hinting at off-screen ancestors. `lineageOf` derives ancestry from the folder path (paired-note titles, folder-name fallback) — no new stored state. 93 tests.
+
 ## [1.10.1] - 2026-07-17 (Engram Flashcards 0.2.0: session study affordances)
 
 Plan: `docs/plans/2026-07-17-002-feat-session-study-affordances-plan.md`. Plugin 0.1.1 → 0.2.0.
