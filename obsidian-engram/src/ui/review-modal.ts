@@ -1,6 +1,6 @@
 import { Component, Modal, Notice, TFile } from "obsidian";
 import type EngramPlugin from "../main";
-import { CardState, Rating } from "../cards/types";
+import { CardState, Rating, Verdict } from "../cards/types";
 import { rate, resetLadder } from "../scheduler/scheduler";
 import { stripFrontmatter } from "../cards/content";
 import { parseSidecar, rewriteCardBlock, splitNotes } from "../cards/parser";
@@ -46,6 +46,8 @@ export class ReviewModal extends Modal {
 
   private revealed = false;
   private currentAuto: Rating | null = null;
+  /** Raw check outcome, frozen at answer time — never mutated by overrides (KTD2). */
+  private currentVerdict: Verdict | null = null;
   private revealEl: HTMLElement | null = null;
   private revealFn: ((el: HTMLElement) => Promise<void>) | null = null;
   private clozeInput: HTMLInputElement | null = null;
@@ -131,6 +133,7 @@ export class ReviewModal extends Modal {
     contentEl.empty();
     this.revealed = false;
     this.currentAuto = null;
+    this.currentVerdict = null;
     this.revealFn = null;
     this.clozeInput = null;
     this.clozeAnswers = [];
@@ -188,6 +191,7 @@ export class ReviewModal extends Modal {
         return;
       }
       void view.answered.then((correct) => {
+        this.currentVerdict = correct ? "correct" : "incorrect";
         this.currentAuto = autoRating(correct);
         void this.reveal();
       });
@@ -306,7 +310,9 @@ export class ReviewModal extends Modal {
 
   private checkCloze(): void {
     if (!this.clozeInput) return;
-    this.currentAuto = autoRating(clozeAnswerMatches(this.clozeInput.value, this.clozeAnswers));
+    const correct = clozeAnswerMatches(this.clozeInput.value, this.clozeAnswers);
+    this.currentVerdict = correct ? "correct" : "incorrect";
+    this.currentAuto = autoRating(correct);
     void this.reveal();
   }
 
@@ -444,7 +450,13 @@ export class ReviewModal extends Modal {
     if (item?.kind !== "card" || this.editorOpen) return;
     const effective = finalRating(this.currentAuto ?? rating, rating);
 
-    const newState = rate(item.card.state, effective, { easeFactor: this.plugin.settings.easeFactor }, new Date());
+    const newState = rate(
+      item.card.state,
+      effective,
+      { easeFactor: this.plugin.settings.easeFactor },
+      new Date(),
+      this.currentVerdict ?? undefined
+    );
     item.card.state = newState;
     this.stageState(item.entry.sidecarPath, item.card.id, newState);
     this.rated++;

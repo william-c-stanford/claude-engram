@@ -2,6 +2,15 @@
 
 All notable changes to claude-obsidian. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [SemVer](https://semver.org/).
 
+## [1.11.0] - 2026-07-17 (Engram Flashcards 0.3.0: verdict logging + accuracy stats)
+
+Plan: `docs/plans/2026-07-17-005-feat-verdict-logging-accuracy-stats-plan.md`. Plugin 0.2.1 → 0.3.0.
+
+### Added
+
+- **Verdict logging**: review-log entries gain an optional `verdict: correct|incorrect`, frozen at check time for mechanically checked answers (typed cloze, MCQ) and independent of rating overrides — `{rating: "good", verdict: "incorrect"}` records a known-answer-badly-typed honestly. No migration: old entries simply lack the field and are excluded from accuracy math; open-ended cards and `reset` events never carry verdicts.
+- **"Flashcard stats" command**: per-note and per-subtree accuracy (`60% (6/10)`, em dash when never checked) over the topological walk, computed by the pure `accuracyOf` and rendered in a read-only modal. 102 tests.
+
 ## [1.10.2] - 2026-07-17 (Engram Flashcards 0.2.1: lineage breadcrumb)
 
 Plan: `docs/plans/2026-07-17-003-feat-card-lineage-breadcrumb-plan.md`. Plugin 0.2.0 → 0.2.1.

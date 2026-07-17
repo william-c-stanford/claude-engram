@@ -7,9 +7,18 @@ export type Rating = "again" | "hard" | "good" | "easy";
 /** Log entries record the four ratings plus `reset` (source-note re-read; not a rating). */
 export type ReviewEventKind = Rating | "reset";
 
+/** Raw outcome of a mechanical check (typed cloze, MCQ) at answer time. */
+export type Verdict = "correct" | "incorrect";
+
 export interface ReviewLogEntry {
   at: string; // ISO 8601 UTC
   rating: ReviewEventKind;
+  /**
+   * Present only when the answer was mechanically checked; frozen before any
+   * rating override, so accuracy stays honest even when the user rates Good
+   * over an incorrect check (plan 005 R1). Absent = not checked.
+   */
+  verdict?: Verdict;
 }
 
 /** Scheduling state per docs/flashcard-format.md. A never-reviewed card is {state:"new"}. */

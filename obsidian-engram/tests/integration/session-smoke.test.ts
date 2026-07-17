@@ -239,6 +239,18 @@ describe("AE2 — source review resets exactly one note's ladder (full-session w
     // …and the real vault deck on disk was never touched by this harness.
     const onDisk = readFileSync(join(REPO, `${BASE}/Mixture-of-Experts/MoE-Load-Balancing.cards.md`), "utf8");
     expect(onDisk).not.toContain('"rating":"reset"');
+
+    // Verdict logging (plan 005 AE1/AE2): the walk clicks the first MCQ option
+    // (often wrong) and rates Good — those entries must carry the raw verdict;
+    // open-ended and reveal-only cloze entries must carry none.
+    const allCards = NOTES.flatMap(([, notePath]) => parseSidecar(files.get(notePath.replace(/\.md$/, ".cards.md"))!)?.cards ?? []);
+    const entriesOf = (types: string[]) =>
+      allCards.filter((c) => types.includes(c.type)).flatMap((c) => c.state.reviews ?? []).filter((r) => r.rating !== "reset");
+    const mcqEntries = entriesOf(["mcq"]);
+    expect(mcqEntries.length).toBeGreaterThan(0);
+    expect(mcqEntries.every((r) => r.verdict === "correct" || r.verdict === "incorrect")).toBe(true);
+    expect(allCards.some((c) => c.type === "mcq" && c.state.reviews!.some((r) => r.verdict === "incorrect" && r.rating === "good"))).toBe(true); // AE1
+    expect(entriesOf(["free", "derivation", "pseudocode", "cloze"]).every((r) => r.verdict === undefined)).toBe(true); // AE2 + reveal-only cloze
   });
 });
 

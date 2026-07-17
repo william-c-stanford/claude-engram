@@ -136,6 +136,33 @@ describe("resetLadder (plan 002 U2)", () => {
   });
 });
 
+describe("verdict logging (plan 005 U1)", () => {
+  it("rate with a verdict appends it; rating override and verdict coexist (AE1)", () => {
+    const s = rate(NEW_STATE, "good", config, t0, "incorrect");
+    const entry = s.reviews!.at(-1)!;
+    expect(entry.rating).toBe("good");
+    expect(entry.verdict).toBe("incorrect"); // schedule advanced, miss remembered
+  });
+
+  it("rate without a verdict emits an entry with no verdict key (clean JSON, AE4)", () => {
+    const s = rate(NEW_STATE, "hard", config, t0);
+    const entry = s.reviews!.at(-1)!;
+    expect("verdict" in entry).toBe(false);
+    expect(JSON.stringify(entry)).not.toContain("verdict");
+  });
+
+  it("resetLadder entries never carry verdicts", () => {
+    const mature = run(["good", "good"]).at(-1)!;
+    const reset = resetLadder(mature, t0);
+    expect("verdict" in reset.reviews!.at(-1)!).toBe(false);
+  });
+
+  it("legacy entries without verdicts round-trip byte-identically", () => {
+    const legacy = { at: "2026-07-10T00:00:00.000Z", rating: "good" as const };
+    expect(JSON.parse(JSON.stringify(legacy))).toEqual(legacy);
+  });
+});
+
 describe("buckets (R7)", () => {
   const now = t0.getTime();
   const hours = (n: number) => new Date(now + n * 3600 * 1000).toISOString();

@@ -228,6 +228,49 @@
   letter-spacing: 0.05em;
 }
 
+/* Stats modal */
+
+.engram-stats-modal {
+  max-width: 640px;
+  width: 85vw;
+}
+
+.engram-stats-table {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-top: 8px;
+}
+
+.engram-stats-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 3px 4px;
+  border-bottom: 1px solid var(--background-modifier-border-hover);
+}
+
+.engram-stats-header {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.engram-stats-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.engram-stats-val {
+  min-width: 96px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+}
+
 /* Card editor */
 
 .engram-card-editor {

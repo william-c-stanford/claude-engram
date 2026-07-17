@@ -3,6 +3,7 @@ import { DEFAULT_SETTINGS, EngramSettings, EngramSettingTab } from "./settings";
 import { VaultScanner } from "./index/scanner";
 import { ExplorerBadges } from "./ui/explorer-badges";
 import { ReviewModal } from "./ui/review-modal";
+import { StatsModal } from "./ui/stats-modal";
 import { buildSessionQueue } from "./ui/session-queue";
 import { rewriteStates } from "./cards/parser";
 import { CardState } from "./cards/types";
@@ -37,6 +38,12 @@ export default class EngramPlugin extends Plugin {
         const written = await applyCardsDue(this);
         new Notice(`Engram: counts refreshed (${written} note(s) updated).`);
       },
+    });
+
+    this.addCommand({
+      id: "flashcard-stats",
+      name: "Flashcard stats (accuracy by subtree)",
+      callback: () => new StatsModal(this).open(),
     });
 
     this.addCommand({

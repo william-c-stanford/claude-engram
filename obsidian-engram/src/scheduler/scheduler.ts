@@ -1,4 +1,4 @@
-import { CardState, Rating } from "../cards/types";
+import { CardState, Rating, ReviewLogEntry, Verdict } from "../cards/types";
 
 export interface ScheduleConfig {
   /** Base ease factor from settings (default 2.5). */
@@ -54,7 +54,7 @@ export function resetLadder(state: CardState, now: Date): CardState {
  * Hard dampens, Easy boosts, Again lapses to the ladder start with an ease
  * penalty (KTD6). Returns the fully-updated state with the review appended.
  */
-export function rate(state: CardState, rating: Rating, config: ScheduleConfig, now: Date): CardState {
+export function rate(state: CardState, rating: Rating, config: ScheduleConfig, now: Date, verdict?: Verdict): CardState {
   const prevInterval = state.interval ?? 0;
   const prevDelta = (state as { easeDelta?: number }).easeDelta ?? 0;
   const ease = effectiveEase(state, config);
@@ -83,7 +83,11 @@ export function rate(state: CardState, rating: Rating, config: ScheduleConfig, n
   }
 
   const due = new Date(now.getTime() + interval * 24 * 3600 * 1000);
-  const reviews = [...(state.reviews ?? []), { at: now.toISOString(), rating }];
+  // The verdict key is omitted (not undefined-valued) when absent so the
+  // serialized JSON stays clean and old entries remain byte-stable (AE4).
+  const entry: ReviewLogEntry = { at: now.toISOString(), rating };
+  if (verdict !== undefined) entry.verdict = verdict;
+  const reviews = [...(state.reviews ?? []), entry];
 
   const next: CardState & { easeDelta?: number } = {
     due: due.toISOString(),
