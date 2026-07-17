@@ -47,6 +47,18 @@
   border: 1px solid var(--background-modifier-border, #d0d0d0);
 }
 
+/*
+ * Review-cadence pill: median next-review across the scope. Neutral outline —
+ * deliberately not a saturated bucket colour and not the white uncovered tile,
+ * so it reads as an informational summary rather than a review-load count.
+ */
+.engram-chip-cadence {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--background-modifier-border, #555);
+  font-weight: 500;
+}
+
 .engram-chip-inert {
   cursor: default;
   opacity: 0.85;

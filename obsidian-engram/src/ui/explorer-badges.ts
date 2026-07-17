@@ -10,6 +10,12 @@ import {
   subtreeCounts,
   subtreeUncovered,
 } from "../scheduler/rollup";
+import {
+  folderMedianDueOffsetMs,
+  formatDueOffset,
+  noteMedianDueOffsetMs,
+  subtreeMedianDueOffsetMs,
+} from "../scheduler/cadence";
 import { chipsFor } from "./chips";
 import { buildSessionQueue, SessionItem } from "./session-queue";
 import { ReviewModal } from "./review-modal";
@@ -76,11 +82,13 @@ export class ExplorerBadges {
 
       let counts: Counts | null = null;
       let uncovered = 0;
+      let cadenceMs: number | null = null;
       let scope: NoteEntry | { folderPath: string } | null = null;
 
       if (index.folderPaths.has(path)) {
         counts = folderCounts(index, path, nowMs, warn);
         uncovered = folderUncovered(index, path);
+        cadenceMs = folderMedianDueOffsetMs(index, path, nowMs);
         scope = index.noteForFolder(path) ?? { folderPath: path };
       } else {
         const entry = index.byNotePath.get(path);
@@ -88,6 +96,7 @@ export class ExplorerBadges {
           const parent = index.hasFolder(entry); // parent note mirrors its folder (R9)
           counts = parent ? subtreeCounts(index, entry.address, nowMs, warn) : noteCounts(entry, nowMs, warn);
           uncovered = parent ? subtreeUncovered(index, entry.address) : noteUncovered(entry);
+          cadenceMs = parent ? subtreeMedianDueOffsetMs(index, entry.address, nowMs) : noteMedianDueOffsetMs(entry, nowMs);
           scope = entry;
         }
       }
@@ -123,6 +132,17 @@ export class ExplorerBadges {
             this.openSession(scope!, bucket);
           });
         }
+      }
+
+      // Review cadence: median next-review across the scope, "~" for future,
+      // "now" when due/overdue. Inert — a summary metric, not a review entry point.
+      if (this.plugin.settings.showCadence && cadenceMs !== null) {
+        const label = formatDueOffset(cadenceMs);
+        const el = wrap.createSpan({
+          cls: "engram-chip engram-chip-cadence engram-chip-inert",
+          text: cadenceMs > 0 ? `~${label}` : label,
+        });
+        el.setAttribute("aria-label", `median next review ${cadenceMs > 0 ? `in ${label}` : "due now"}`);
       }
     }
   }

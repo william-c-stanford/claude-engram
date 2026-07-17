@@ -18,6 +18,8 @@ export interface EngramSettings {
   reorientationSampleSize: number;
   /** When the evergreen note shows as a reading step before its cards. */
   noteIntroMode: "first-encounter" | "always" | "never";
+  /** Show the median next-review cadence pill on folder/note rows. */
+  showCadence: boolean;
 }
 
 export const DEFAULT_SETTINGS: EngramSettings = {
@@ -29,6 +31,7 @@ export const DEFAULT_SETTINGS: EngramSettings = {
   skipGreenParents: false,
   reorientationSampleSize: 3,
   noteIntroMode: "first-encounter",
+  showCadence: true,
 };
 
 export class EngramSettingTab extends PluginSettingTab {
@@ -90,6 +93,17 @@ export class EngramSettingTab extends PluginSettingTab {
       .addToggle((t) =>
         t.setValue(this.plugin.settings.hideSidecars).onChange(async (v) => {
           this.plugin.settings.hideSidecars = v;
+          await this.plugin.saveSettings();
+          this.plugin.refreshBadges();
+        })
+      );
+
+    new Setting(containerEl)
+      .setName("Show review cadence")
+      .setDesc("Show a neutral pill with the median next-review time across each folder/note (e.g. ~4d, now) to gauge review frequency across the tree.")
+      .addToggle((t) =>
+        t.setValue(this.plugin.settings.showCadence).onChange(async (v) => {
+          this.plugin.settings.showCadence = v;
           await this.plugin.saveSettings();
           this.plugin.refreshBadges();
         })

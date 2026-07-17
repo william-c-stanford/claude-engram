@@ -197,6 +197,8 @@
   },
   "active": "5565f1231fe95c42",
   "lastOpenFiles": [
+    "obsidian-engram/tests/cadence.test.ts",
+    "obsidian-engram/src/scheduler/cadence.ts",
     "wiki/zettel/LLMs/Architecture.cards.md",
     "wiki/zettel/LLMs/LLM-Pipeline-Overview.md",
     "wiki/zettel/LLMs/Architecture.md",
@@ -223,7 +225,6 @@
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability/Attention-Is-Not-Explanation.cards.md",
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability.cards.md",
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Head-Roles.cards.md",
-    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Dilution.cards.md",
     "obsidian-engram/tests/_ph_check.test.ts",
     "wiki/zettel/LLMs/Architecture/Tokenization/Tokenization-Best-Practices/Vocabulary-Size.cards.md.tmp.30348.f6d534d9345e",
     "obsidian-engram/tests/accuracy.test.ts",
@@ -232,7 +233,6 @@
     "wiki/zettel/LLMs/Architecture/Mixture-of-Experts/Noisy-Top-K-Gating.cards.md.tmp.30348.8d65dd4edcc3",
     "skills/zettel-flashcards",
     "obsidian-engram/src/frontmatter/compute.ts",
-    "obsidian-engram/tests/writeback.test.ts",
     "Untitled.canvas",
     "wiki/Wiki Map.canvas"
   ]
