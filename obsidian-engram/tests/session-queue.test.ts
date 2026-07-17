@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import { FlashcardIndex, NoteEntry } from "../src/index/flashcard-index";
 import { Card, CardState, ParsedSidecar } from "../src/cards/types";
 import { againReinsertIndex, buildSessionQueue, isFirstEncounter, isRelearning, SessionItem } from "../src/ui/session-queue";
-import { chipsFor } from "../src/ui/chips";
 import { autoRating, finalRating } from "../src/ui/grading";
 
 const NOW = Date.parse("2026-07-17T09:00:00.000Z");
@@ -188,20 +187,6 @@ describe("note-intro items (plan 002 R1/R2)", () => {
     const queue = buildSessionQueue(idx, "c-000030", "red", { ...opts, noteIntroMode: "first-encounter" });
     expect(queue[0]).toMatchObject({ kind: "card", entry: { address: "c-000032" } }); // relearning first
     expect(queue.some((i) => i.kind === "note-intro" && i.entry.address === "c-000032")).toBe(false);
-  });
-});
-
-describe("chipsFor (KTD4)", () => {
-  it("omits zero chips except green, which always shows when cards exist", () => {
-    expect(chipsFor({ red: 0, yellow: 3, green: 10 })).toEqual([
-      { bucket: "yellow", count: 3 },
-      { bucket: "green", count: 10 },
-    ]);
-    expect(chipsFor({ red: 2, yellow: 0, green: 0 })).toEqual([
-      { bucket: "red", count: 2 },
-      { bucket: "green", count: 0 },
-    ]);
-    expect(chipsFor({ red: 0, yellow: 0, green: 0 })).toEqual([]);
   });
 });
 

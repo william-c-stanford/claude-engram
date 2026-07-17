@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { FlashcardIndex, NoteEntry } from "../src/index/flashcard-index";
 import { Card, CardState, ParsedSidecar } from "../src/cards/types";
-import { folderCounts, noteCounts, subtreeCounts } from "../src/scheduler/rollup";
+import {
+  folderCounts,
+  folderUncovered,
+  noteCounts,
+  noteUncovered,
+  subtreeCounts,
+  subtreeUncovered,
+} from "../src/scheduler/rollup";
 
 const NOW = Date.parse("2026-07-17T09:00:00.000Z");
 const WARN = 24;
@@ -67,5 +74,62 @@ describe("rollups (R10, R14)", () => {
 
   it("a folder with no paired note sums the subtrees of the notes inside it", () => {
     expect(folderCounts(index, "wiki/zettel", NOW, WARN)).toEqual({ red: 3, yellow: 1, green: 2 });
+  });
+});
+
+describe("uncovered-note rollups (R1, R2, R3)", () => {
+  it("a leaf with cards is covered; a leaf with no sidecar is uncovered", () => {
+    expect(noteUncovered(index.byAddress.get("c-000003")!)).toBe(0); // A1 has cards
+    expect(noteUncovered(index.byAddress.get("c-000004")!)).toBe(1); // B has no sidecar
+  });
+
+  it("subtree count is the number of carded-less notes in the subtree", () => {
+    // Root tree: only B (c-000004) is uncovered.
+    expect(subtreeUncovered(index, "c-000001")).toBe(1);
+    // A -> A1 are both covered.
+    expect(subtreeUncovered(index, "c-000002")).toBe(0);
+  });
+
+  it("adding another uncovered leaf raises the subtree count", () => {
+    // Root -> [A -> [A1, A2(uncovered)], B(uncovered)]
+    const entries2 = [
+      entry("c-000001", "wiki/zettel/Root.md", ["c-000002", "c-000004"], [red, green]),
+      entry("c-000002", "wiki/zettel/Root/A.md", ["c-000003", "c-000005"], [yellow]),
+      entry("c-000003", "wiki/zettel/Root/A/A1.md", [], [red, red, green]),
+      entry("c-000005", "wiki/zettel/Root/A/A2.md", [], []),
+      entry("c-000004", "wiki/zettel/Root/B.md", [], []),
+    ];
+    const index2 = new FlashcardIndex(
+      entries2,
+      new Set(["wiki/zettel", "wiki/zettel/Root", "wiki/zettel/Root/A"])
+    );
+    expect(subtreeUncovered(index2, "c-000001")).toBe(2); // A2 and B
+  });
+
+  it("a sidecar that exists but holds zero cards counts as uncovered", () => {
+    const emptySidecar: ParsedSidecar = {
+      noteAddress: "c-000009",
+      noteTitle: "Empty",
+      cards: [],
+      orphanedStateIds: [],
+      retiredLines: [],
+      warnings: [],
+    };
+    const emptyEntry: NoteEntry = {
+      address: "c-000009",
+      notePath: "wiki/zettel/Empty.md",
+      title: "Empty",
+      childrenAddresses: [],
+      sidecar: emptySidecar,
+    };
+    expect(noteUncovered(emptyEntry)).toBe(1);
+  });
+
+  it("folder uncovered matches the paired parent note's subtree exactly (R9)", () => {
+    expect(folderUncovered(index, "wiki/zettel/Root/A")).toBe(subtreeUncovered(index, "c-000002"));
+  });
+
+  it("a folder with no paired note sums uncovered across the notes inside it", () => {
+    expect(folderUncovered(index, "wiki/zettel")).toBe(1); // only B under the root
   });
 });

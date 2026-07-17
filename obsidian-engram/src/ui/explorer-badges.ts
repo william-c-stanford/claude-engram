@@ -2,7 +2,14 @@ import { WorkspaceLeaf } from "obsidian";
 import type EngramPlugin from "../main";
 import { NoteEntry, isSidecarPath, pairedFolderPath } from "../index/flashcard-index";
 import { Bucket, Counts } from "../scheduler/buckets";
-import { folderCounts, noteCounts, subtreeCounts } from "../scheduler/rollup";
+import {
+  folderCounts,
+  folderUncovered,
+  noteCounts,
+  noteUncovered,
+  subtreeCounts,
+  subtreeUncovered,
+} from "../scheduler/rollup";
 import { chipsFor } from "./chips";
 import { buildSessionQueue, SessionItem } from "./session-queue";
 import { ReviewModal } from "./review-modal";
@@ -68,17 +75,19 @@ export class ExplorerBadges {
       }
 
       let counts: Counts | null = null;
+      let uncovered = 0;
       let scope: NoteEntry | { folderPath: string } | null = null;
 
       if (index.folderPaths.has(path)) {
         counts = folderCounts(index, path, nowMs, warn);
+        uncovered = folderUncovered(index, path);
         scope = index.noteForFolder(path) ?? { folderPath: path };
       } else {
         const entry = index.byNotePath.get(path);
         if (entry) {
-          counts = index.hasFolder(entry)
-            ? subtreeCounts(index, entry.address, nowMs, warn) // parent note mirrors its folder (R9)
-            : noteCounts(entry, nowMs, warn);
+          const parent = index.hasFolder(entry); // parent note mirrors its folder (R9)
+          counts = parent ? subtreeCounts(index, entry.address, nowMs, warn) : noteCounts(entry, nowMs, warn);
+          uncovered = parent ? subtreeUncovered(index, entry.address) : noteUncovered(entry);
           scope = entry;
         }
       }
@@ -86,22 +95,32 @@ export class ExplorerBadges {
       rowEl.querySelector(":scope > .engram-chips")?.remove();
       if (!counts || !scope) continue;
 
-      const chips = chipsFor(counts);
+      const chips = chipsFor(counts, uncovered);
       if (chips.length === 0) continue;
 
       const wrap = rowEl.createSpan({ cls: "engram-chips" });
       for (const chip of chips) {
-        const inert = chip.bucket === "green" && !this.plugin.settings.practiceAhead;
+        // The uncovered chip is purely informational — nothing to review (R6).
+        if (chip.kind === "uncovered") {
+          const el = wrap.createSpan({
+            cls: "engram-chip engram-chip-uncovered engram-chip-inert",
+            text: String(chip.count),
+          });
+          el.setAttribute("aria-label", `${chip.count} ${chip.count === 1 ? "note" : "notes"} without flashcards`);
+          continue;
+        }
+        const inert = chip.kind === "green" && !this.plugin.settings.practiceAhead;
         const el = wrap.createSpan({
-          cls: `engram-chip engram-chip-${chip.bucket}${inert ? " engram-chip-inert" : ""}`,
+          cls: `engram-chip engram-chip-${chip.kind}${inert ? " engram-chip-inert" : ""}`,
           text: String(chip.count),
         });
-        el.setAttribute("aria-label", `${chip.count} ${chip.bucket === "red" ? "due" : chip.bucket === "yellow" ? "due soon" : "healthy"} — click to review`);
+        el.setAttribute("aria-label", `${chip.count} ${chip.kind === "red" ? "due" : chip.kind === "yellow" ? "due soon" : "healthy"} — click to review`);
         if (!inert) {
+          const bucket = chip.kind;
           el.addEventListener("click", (evt) => {
             evt.preventDefault();
             evt.stopPropagation(); // must not toggle folder collapse or open the note
-            this.openSession(scope!, chip.bucket);
+            this.openSession(scope!, bucket);
           });
         }
       }

@@ -32,3 +32,41 @@ export function folderCounts(index: FlashcardIndex, folderPath: string, nowMs: n
   }
   return total;
 }
+
+/**
+ * A note is uncovered when it has no flashcards at all: no sidecar, or a
+ * sidecar whose card list is empty. Coverage is time-independent, so these
+ * rollups take no nowMs/warnWindowHours (unlike the card-bucket rollups above).
+ */
+export function isUncovered(entry: NoteEntry): boolean {
+  return !entry.sidecar || entry.sidecar.cards.length === 0;
+}
+
+/** 1 if this single note has no cards, else 0. */
+export function noteUncovered(entry: NoteEntry): number {
+  return isUncovered(entry) ? 1 : 0;
+}
+
+/** Count of uncovered notes anywhere in a parent note's subtree (R2). */
+export function subtreeUncovered(index: FlashcardIndex, address: string): number {
+  let total = 0;
+  for (const entry of index.subtreeOf(address)) {
+    if (isUncovered(entry)) total++;
+  }
+  return total;
+}
+
+/**
+ * Uncovered count for a folder row: mirrors folderCounts. A folder with a
+ * paired parent note reports that note's subtree exactly (R9 parity);
+ * otherwise it sums the subtrees of the notes directly inside it.
+ */
+export function folderUncovered(index: FlashcardIndex, folderPath: string): number {
+  const paired = index.noteForFolder(folderPath);
+  if (paired) return subtreeUncovered(index, paired.address);
+  let total = 0;
+  for (const entry of index.notesDirectlyIn(folderPath)) {
+    total += subtreeUncovered(index, entry.address);
+  }
+  return total;
+}

@@ -5,6 +5,7 @@ Spaced-repetition flashcards over a folder-nested Zettelkasten vault. Companion 
 ## What it does
 
 - **Due-count badges in the file explorer.** Every zettel folder and its paired parent note show colored chips: red = due/overdue, yellow = due soon, green = healthy. Folder and parent-note rows carry identical subtree rollups; leaf notes show their own cards.
+- **Coverage gaps in white.** A white chip counts notes that have no flashcards yet (subtree rollup on folders and parent notes; `1` on an uncarded leaf). It appears the moment a note is ingested or created and disappears once the note has a card. It's informational only — nothing to review, so it doesn't open a session.
 - **Click a chip to review.** Red opens the subtree's due cards, yellow opens early review, green opens practice-ahead (optional).
 - **Mental-palace sessions.** A folder session walks the tree topologically — parent-note cards first, then each child subtree recursively — instead of shuffling the whole folder. All-green parents contribute a small reorientation sample first (skippable in settings).
 - **Note-first reading.** The first time a note's cards come up (no review history yet), the session shows the evergreen note itself as a reading step before quizzing — a settings option makes this always or never.

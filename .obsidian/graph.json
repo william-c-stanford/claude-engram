@@ -3,42 +3,20 @@
   "search": "path:wiki/zettel",
   "showTags": false,
   "showAttachments": false,
-  "hideUnresolved": true,
-  "showOrphans": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
   "collapse-color-groups": true,
-  "colorGroups": [
-    {
-      "query": "path:wiki/zettel/LLMs/Architecture  ",
-      "color": {
-        "a": 1,
-        "rgb": 13132287
-      }
-    },
-    {
-      "query": "path:wiki/zettel/LLMs/Optimization-Methods  ",
-      "color": {
-        "a": 1,
-        "rgb": 5734911
-      }
-    },
-    {
-      "query": "path:wiki/zettel/LLMs  ",
-      "color": {
-        "a": 1,
-        "rgb": 4063411
-      }
-    }
-  ],
+  "colorGroups": [],
   "collapse-display": false,
-  "showArrow": true,
-  "textFadeMultiplier": -3,
-  "nodeSizeMultiplier": 2.86496961805556,
-  "lineSizeMultiplier": 0.8,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 1,
   "collapse-forces": false,
-  "centerStrength": 0.245572916666667,
-  "repelStrength": 15.0668402777778,
-  "linkStrength": 0.840407986111111,
-  "linkDistance": 316,
-  "scale": 0.22988415682247107,
-  "close": false
+  "centerStrength": 0.518713248970312,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 0.87830515806547,
+  "close": true
 }
