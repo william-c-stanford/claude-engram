@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - compression
   - pruning
+subtree_size: 0
+cards_due: 0
 ---
 
 # Pruning
@@ -36,3 +38,5 @@ Unlike quantization (which lowers precision of *all* weights uniformly), pruning
 
 - Parent: [[Model-Compression]]
 - Which heads are safe to prune: [[Attention-Head-Roles]]
+
+

@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - prompting
+subtree_size: 0
+cards_due: 0
 ---
 
 # Few-Shot Prompting
@@ -36,3 +38,5 @@ Beyond ~20 examples gains are marginal and you risk filling the context window. 
 
 - Parent: [[Prompt-Engineering]]
 - Mechanism: [[In-Context-Learning]]
+
+

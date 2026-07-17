@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # BPE Merge Algorithm
@@ -41,3 +43,5 @@ Each iteration adds exactly one token to the vocabulary, so $k$ directly sets th
 
 - Parent: [[Byte-Pair-Encoding]]
 - Contrast: [[Subword-Tokenizer-Variants]] (other merge criteria)
+
+

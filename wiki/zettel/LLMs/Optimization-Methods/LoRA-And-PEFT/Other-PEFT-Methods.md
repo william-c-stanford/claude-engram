@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - peft
+subtree_size: 0
+cards_due: 0
 ---
 
 # Other PEFT Methods
@@ -36,3 +38,5 @@ LoRA's advantages — (1) mergeable, so zero added latency (unlike adapters/pref
 
 - Parent: [[LoRA-And-PEFT]]
 - The standard: [[LoRA-Insight]]
+
+

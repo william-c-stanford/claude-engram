@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Diverse Beam Search
@@ -30,3 +32,5 @@ where $\Delta$ measures overlap (e.g. Hamming diversity) with tokens already cho
 
 - Parent: [[Decoding-Methods]]
 - Base method: [[Beam-Search]]
+
+

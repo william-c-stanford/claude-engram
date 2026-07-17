@@ -21,6 +21,8 @@ tags:
   - llm-fundamentals
   - optimization
   - methods
+subtree_size: 76
+cards_due: 0
 ---
 
 # Optimization Methods
@@ -52,3 +54,5 @@ Optimization Methods are everything you *do* around the architecture, grouped by
 
 - Parent: [[LLMs]]
 - Sibling: [[Architecture]] (the structure these methods act on)
+
+

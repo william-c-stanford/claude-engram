@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - sft
+subtree_size: 0
+cards_due: 0
 ---
 
 # SFT Best Practices
@@ -31,3 +33,5 @@ Four practical SFT levers: **pack** short examples into full sequences to avoid 
 
 - Parent: [[Supervised-Fine-Tuning]]
 - Templates use [[Special-Tokens]]
+
+

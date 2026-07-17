@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Beam Search
@@ -32,3 +34,5 @@ It explores $B$ paths in parallel and keeps the most promising — excellent for
 
 - Parent: [[Decoding-Methods]]
 - Diversity fix: [[Diverse-Beam-Search]]
+
+

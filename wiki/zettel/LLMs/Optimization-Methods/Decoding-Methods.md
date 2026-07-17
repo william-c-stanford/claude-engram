@@ -19,6 +19,8 @@ tags:
   - llm-fundamentals
   - decoding
   - inference
+subtree_size: 10
+cards_due: 0
 ---
 
 # Text Generation: Decoding Methods
@@ -54,3 +56,5 @@ At each step a trained model gives a distribution $P(x_t \mid x_{<t})$; the **de
 - Parent: [[Optimization-Methods]]
 - Diversity lens: [[Sampling-Diversity]]
 - Accelerated by [[Speculative-Decoding]]
+
+

@@ -12,6 +12,8 @@ tags:
   - llm-fundamentals
   - diversity
   - training
+subtree_size: 3
+cards_due: 0
 ---
 
 # Diversity in LLM Training
@@ -35,3 +37,5 @@ Diversity — in outputs, in training data, and in optimization — is what prev
 - Parent: [[Optimization-Methods]]
 - Sampling knobs are detailed under [[Decoding-Methods]]
 - Data diversity connects to [[Pretraining-Data-Pipeline]] and [[LIMA-Principle]]
+
+

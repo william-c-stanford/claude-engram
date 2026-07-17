@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - moe
+subtree_size: 0
+cards_due: 0
 ---
 
 # MoE Architecture
@@ -31,3 +33,5 @@ where $E_i$ are expert FFNs and $g_i(x)$ are router gating weights, non-zero onl
 - Parent: [[Mixture-of-Experts]]
 - Dense counterpart: [[Feed-Forward-Network]]
 - Routing must be balanced ([[MoE-Load-Balancing]]) and trainable ([[Noisy-Top-K-Gating]])
+
+

@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - safety
+subtree_size: 0
+cards_due: 0
 ---
 
 # Helpfulness-Safety Tradeoff
@@ -33,3 +35,5 @@ In practice this is a weighted reward $R = \alpha R_{\text{helpful}} + (1-\alpha
 - Parent: [[LLM-Safety]]
 - Over-refusal as a prompt symptom: [[Prompt-Engineering-Best-Practices]]
 - Reward models: [[Reward-Head]]
+
+

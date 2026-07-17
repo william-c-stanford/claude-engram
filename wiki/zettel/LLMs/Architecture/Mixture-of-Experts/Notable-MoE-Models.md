@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - moe
   - reference
+subtree_size: 0
+cards_due: 0
 ---
 
 # Notable MoE Models
@@ -37,3 +39,5 @@ The clear trajectory is toward *more, smaller* experts with higher $K$ (DeepSeek
 
 - Parent: [[Mixture-of-Experts]]
 - Architecture: [[MoE-Architecture]]; also in [[Model-Size-Reference]]
+
+

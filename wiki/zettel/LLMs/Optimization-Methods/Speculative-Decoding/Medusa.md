@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - speculative-decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Medusa
@@ -28,3 +30,5 @@ Each Medusa head is one linear layer sharing the backbone: head 0 is the standar
 
 - Parent: [[Speculative-Decoding]]
 - Improves on Medusa's independence flaw: [[Eagle]]
+
+

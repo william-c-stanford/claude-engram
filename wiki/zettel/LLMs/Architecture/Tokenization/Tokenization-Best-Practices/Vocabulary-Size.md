@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Vocabulary Size
@@ -28,3 +30,5 @@ A larger vocabulary lets more words and code fragments stay as single tokens, sh
 
 - Parent: [[Tokenization-Best-Practices]]
 - Related coverage diagnostic: [[Tokenizer-Fertility]]
+
+

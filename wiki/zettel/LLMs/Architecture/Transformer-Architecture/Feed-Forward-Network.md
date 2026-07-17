@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - transformer
+subtree_size: 0
+cards_due: 0
 ---
 
 # Feed-Forward Network
@@ -38,3 +40,5 @@ which needs three weight matrices but performs better; its hidden dimension is t
 
 - Parent: [[Transformer-Architecture]]
 - Sparse-FFN generalization: [[Mixture-of-Experts]]
+
+

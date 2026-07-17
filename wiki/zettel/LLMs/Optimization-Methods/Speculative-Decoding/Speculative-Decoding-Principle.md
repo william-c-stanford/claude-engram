@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - speculative-decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Speculative Decoding Principle
@@ -32,3 +34,5 @@ With acceptance rate $\alpha$, expected tokens per step is $\frac{1 - \alpha^{k+
 
 - Parent: [[Speculative-Decoding]]
 - Draft-source options: [[Speculative-Decoding-Methods-Comparison]]
+
+

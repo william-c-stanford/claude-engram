@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - decoding
   - structured-output
+subtree_size: 0
+cards_due: 0
 ---
 
 # Constrained Decoding
@@ -33,3 +35,5 @@ with $Z$ renormalizing. Because the mask changes every step, validity is enforce
 
 - Parent: [[Decoding-Methods]]
 - Prompt-side analogue: [[Structured-Output-Prompts]]
+
+

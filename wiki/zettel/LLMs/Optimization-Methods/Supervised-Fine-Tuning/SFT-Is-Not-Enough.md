@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - sft
   - rlhf
+subtree_size: 0
+cards_due: 0
 ---
 
 # SFT Is Not Enough
@@ -36,3 +38,5 @@ SFT provides a competent, well-formatted starting policy; the reinforcement-lear
 
 - Parent: [[Supervised-Fine-Tuning]]
 - Safety phase: [[Safety-Training-Pipeline]]
+
+

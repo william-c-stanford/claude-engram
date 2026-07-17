@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - decoding
   - sampling
+subtree_size: 0
+cards_due: 0
 ---
 
 # Top-k Sampling
@@ -31,3 +33,5 @@ After "The cat sat on the…" it keeps the $k$ plausible continuations ("mat", "
 
 - Parent: [[Decoding-Methods]]
 - Adaptive successor: [[Top-P-Sampling]]; relative-floor variant: [[Min-P-Sampling]]
+
+

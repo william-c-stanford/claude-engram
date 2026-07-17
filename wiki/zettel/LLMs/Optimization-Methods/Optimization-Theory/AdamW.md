@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - optimization
+subtree_size: 0
+cards_due: 0
 ---
 
 # AdamW
@@ -37,3 +39,5 @@ The $\eta\lambda\theta_t$ term is not divided by $\sqrt{\hat{v}_t}$, so every pa
 - Parent: [[Optimization-Theory]]
 - Builds on: [[Adam-Optimizer]]
 - Recommended values: [[Optimizer-Settings-By-Phase]]
+
+

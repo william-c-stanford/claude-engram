@@ -11,6 +11,8 @@ tags:
   - llm-fundamentals
   - hallucination
   - reliability
+subtree_size: 2
+cards_due: 0
 ---
 
 # Hallucination Detection
@@ -33,3 +35,5 @@ LLMs produce fluent text that may be factually wrong — hallucination. This not
 - Parent: [[Optimization-Methods]]
 - RAG grounding as the reliable complement: [[Advanced-Prompting-Techniques]]
 - DoLA is a layer-contrast cousin of [[Contrastive-Decoding]]
+
+

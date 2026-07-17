@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Greedy Decoding
@@ -28,3 +30,5 @@ Choosing the locally most probable token at each step is myopic: a sequence whos
 
 - Parent: [[Decoding-Methods]]
 - Lookahead alternative: [[Beam-Search]]; $\tau\to 0$ limit of [[Temperature-Scaling]]
+
+

@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Special Token Inventory
@@ -36,3 +38,5 @@ These entries occupy real vocabulary slots but never appear in natural text; the
 
 - Parent: [[Special-Tokens]]
 - Why `<unk>` is rare: [[Subword-Tokenizer-Variants]] (byte-level BPE)
+
+

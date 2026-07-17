@@ -16,6 +16,8 @@ children:
 tags:
   - llm-fundamentals
   - prompting
+subtree_size: 8
+cards_due: 0
 ---
 
 # Prompt Engineering
@@ -44,3 +46,5 @@ Prompt engineering elicits desired behavior *without changing weights* — the f
 - Parent: [[Optimization-Methods]]
 - When prompting stops improving quality, move to [[Supervised-Fine-Tuning]] or RLHF.
 - Guaranteed structure via [[Constrained-Decoding]]
+
+

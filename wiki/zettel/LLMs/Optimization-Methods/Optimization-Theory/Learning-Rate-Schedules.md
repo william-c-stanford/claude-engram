@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - optimization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Learning Rate Schedules
@@ -35,3 +37,5 @@ The main options (all preceded by linear warmup):
 - Parent: [[Optimization-Theory]]
 - First phase: [[Learning-Rate-Warmup]]
 - Per-phase values: [[Optimizer-Settings-By-Phase]]
+
+

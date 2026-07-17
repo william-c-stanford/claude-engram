@@ -14,6 +14,8 @@ tags:
   - llm-fundamentals
   - peft
   - lora
+subtree_size: 5
+cards_due: 0
 ---
 
 # LoRA and Parameter-Efficient Fine-Tuning
@@ -39,3 +41,5 @@ Full fine-tuning of a 70B model needs 560+ GB (weights + gradients + optimizer s
 - Parent: [[Optimization-Methods]]
 - Applied during [[Supervised-Fine-Tuning]]
 - Adapts the weight matrices of [[Transformer-Architecture]]
+
+

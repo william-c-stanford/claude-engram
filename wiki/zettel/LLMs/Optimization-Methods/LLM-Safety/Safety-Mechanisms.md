@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - safety
+subtree_size: 0
+cards_due: 0
 ---
 
 # Safety Mechanisms
@@ -36,3 +38,5 @@ No single mechanism suffices; they layer so that a request slipping past one is 
 - Parent: [[LLM-Safety]]
 - Constitutional AI self-critique also appears in [[Advanced-Prompting-Techniques]]
 - Reward combination: [[Helpfulness-Safety-Tradeoff]]
+
+

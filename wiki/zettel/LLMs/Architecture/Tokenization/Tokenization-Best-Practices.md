@@ -11,6 +11,8 @@ children:
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 3
+cards_due: 0
 ---
 
 # Tokenization Best Practices
@@ -32,3 +34,5 @@ Beyond the choice of algorithm, a handful of practical settings determine whethe
 ## Cross-references
 
 - Parent: [[Tokenization]]
+
+

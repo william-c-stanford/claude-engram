@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - lora
   - reference
+subtree_size: 0
+cards_due: 0
 ---
 
 # LoRA Hyperparameters
@@ -38,3 +40,5 @@ Start LoRA at rank 16 with `lora_alpha` $= r$ or $2r$, targeting all attention p
 
 - Parent: [[LoRA-And-PEFT]]
 - Scaling knob: [[LoRA-Alpha-Scaling]]; LR context: [[Optimizer-Settings-By-Phase]]
+
+

@@ -18,6 +18,8 @@ tags:
   - llm-fundamentals
   - optimization
   - training
+subtree_size: 9
+cards_due: 0
 ---
 
 # Optimization Theory for LLM Training
@@ -47,3 +49,5 @@ Training an LLM is minimizing a loss $\mathcal{L}(\theta)$ over billions of para
 - Parent: [[Optimization-Methods]]
 - Kernel-level training efficiency: [[Flash-Attention]]
 - Applied in [[Pretraining]] and [[Supervised-Fine-Tuning]]
+
+

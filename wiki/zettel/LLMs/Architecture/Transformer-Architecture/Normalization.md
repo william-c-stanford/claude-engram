@@ -11,6 +11,8 @@ tags:
   - llm-fundamentals
   - transformer
   - normalization
+subtree_size: 2
+cards_due: 0
 ---
 
 # Normalization
@@ -32,3 +34,5 @@ Normalization is what lets deep transformers train at all: without it, activatio
 
 - Parent: [[Transformer-Architecture]]
 - Pre-Norm is assumed by the [[Decoder-Only-Block]] residual form.
+
+

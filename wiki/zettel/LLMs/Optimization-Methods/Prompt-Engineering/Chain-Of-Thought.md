@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - prompting
   - reasoning
+subtree_size: 0
+cards_due: 0
 ---
 
 # Chain-of-Thought Prompting
@@ -40,3 +42,5 @@ Why CoT works: transformers have fixed depth but variable-length generation, so 
 
 - Parent: [[Prompt-Engineering]]
 - Advanced patterns build on it: [[Advanced-Prompting-Techniques]]
+
+

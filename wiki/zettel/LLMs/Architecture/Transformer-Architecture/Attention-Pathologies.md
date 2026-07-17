@@ -12,6 +12,8 @@ tags:
   - llm-fundamentals
   - transformer
   - attention
+subtree_size: 3
+cards_due: 0
 ---
 
 # Attention Pathologies
@@ -34,3 +36,5 @@ The softmax attention that makes transformers powerful also produces systematic,
 
 - Parent: [[Transformer-Architecture]]
 - Sink handling drives [[Long-Context-Extension]] KV-cache strategies (StreamingLLM).
+
+

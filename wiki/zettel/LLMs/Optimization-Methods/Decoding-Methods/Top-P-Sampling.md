@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - decoding
   - sampling
+subtree_size: 0
+cards_due: 0
 ---
 
 # Top-p (Nucleus) Sampling
@@ -31,3 +33,5 @@ tokens are sorted by descending probability and added until the cumulative mass 
 
 - Parent: [[Decoding-Methods]]
 - Fixed-size counterpart: [[Top-K-Sampling]]; relative floor: [[Min-P-Sampling]]
+
+

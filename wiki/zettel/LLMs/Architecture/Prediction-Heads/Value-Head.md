@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - reinforcement-learning
+subtree_size: 0
+cards_due: 0
 ---
 
 # Value Head
@@ -32,3 +34,5 @@ Trained with $\mathcal{L}_V = \frac{1}{T}\sum_t (V(s_t) - R_t)^2$. The architect
 
 - Parent: [[Prediction-Heads]]
 - Scalar sibling: [[Reward-Head]]
+
+

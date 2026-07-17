@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - sft
   - data
+subtree_size: 0
+cards_due: 0
 ---
 
 # LIMA Principle
@@ -34,3 +36,5 @@ The alignment "knowledge" is largely already in the pretrained model; SFT mainly
 
 - Parent: [[Supervised-Fine-Tuning]]
 - Related lens: [[Training-Data-Diversity]]
+
+

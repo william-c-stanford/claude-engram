@@ -12,6 +12,8 @@ tags:
   - tokenization
 aliases:
   - "BPE"
+subtree_size: 2
+cards_due: 0
 ---
 
 # Byte-Pair Encoding
@@ -32,3 +34,5 @@ Byte-Pair Encoding (BPE) is the dominant subword tokenization algorithm, used by
 ## Cross-references
 
 - Parent: [[Tokenization]]
+
+

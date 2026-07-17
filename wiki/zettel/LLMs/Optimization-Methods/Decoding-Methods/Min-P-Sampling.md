@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - decoding
   - sampling
+subtree_size: 0
+cards_due: 0
 ---
 
 # Min-p Sampling
@@ -31,3 +33,5 @@ $$\text{Min-}p = \left\{ v \in V : P(v \mid x_{<t}) \ge p_{\min} \cdot \max_{v'}
 
 - Parent: [[Decoding-Methods]]
 - Compared against: [[Top-P-Sampling]] · [[Top-K-Sampling]]
+
+

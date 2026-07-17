@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - diversity
+subtree_size: 0
+cards_due: 0
 ---
 
 # Diversity-Promoting Methods
@@ -37,3 +39,5 @@ The first three act at generation time; the next two at data time; verbalized sa
 
 - Parent: [[Diversity-In-Training]]
 - Generation knobs: [[Sampling-Diversity]]; data knobs: [[Training-Data-Diversity]]
+
+

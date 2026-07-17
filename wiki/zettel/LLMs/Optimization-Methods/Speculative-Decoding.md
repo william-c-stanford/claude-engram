@@ -14,6 +14,8 @@ tags:
   - llm-fundamentals
   - inference
   - speculative-decoding
+subtree_size: 5
+cards_due: 0
 ---
 
 # Speculative Decoding Methods
@@ -39,3 +41,5 @@ Speculative decoding accelerates autoregressive generation 2–3× by having a f
 - Parent: [[Optimization-Methods]]
 - Accelerates the [[Decoding-Methods]] loop
 - Weight-level complement: [[Model-Compression]]
+
+

@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - positional-encoding
   - long-context
+subtree_size: 0
+cards_due: 0
 ---
 
 # Long-Context Extension
@@ -37,3 +39,5 @@ Beyond positional support, models also need **continued pretraining** on long do
 - Parent: [[Positional-Encodings]]
 - Scales: [[RoPE]]
 - Usage limit: [[Attention-Dilution]] (lost in the middle)
+
+

@@ -13,6 +13,8 @@ tags:
   - llm-fundamentals
   - transformer
   - positional-encoding
+subtree_size: 4
+cards_due: 0
 ---
 
 # Positional Encodings
@@ -36,3 +38,5 @@ Attention is permutation-equivariant, so without an added position signal a tran
 
 - Parent: [[Transformer-Architecture]]
 - Position interacts with the [[Attention-Dilution]] "lost in the middle" effect.
+
+

@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - sft
   - efficiency
+subtree_size: 0
+cards_due: 0
 ---
 
 # SFT Efficient Training
@@ -33,3 +35,5 @@ Selection: Unsloth for quick single-GPU LoRA/QLoRA; TRL/DeepSpeed + Liger for mu
 
 - Parent: [[Supervised-Fine-Tuning]]
 - QLoRA: [[LoRA-Variants]]; fused ops touch [[Feed-Forward-Network]] and [[RoPE]]
+
+

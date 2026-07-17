@@ -11,6 +11,8 @@ children:
 tags:
   - llm-fundamentals
   - moc
+subtree_size: 130
+cards_due: 0
 ---
 
 # LLMs
@@ -32,3 +34,5 @@ Large language models are the subject of this whole corpus: this note is the top
 ## Cross-references
 
 - Every topic in this chapter descends from here.
+
+

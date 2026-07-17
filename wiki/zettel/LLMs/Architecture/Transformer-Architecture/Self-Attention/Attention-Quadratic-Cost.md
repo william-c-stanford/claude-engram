@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - attention
   - efficiency
+subtree_size: 0
+cards_due: 0
 ---
 
 # Attention Quadratic Cost
@@ -40,3 +42,5 @@ Crucially, FlashAttention *composes* with families 2–3 — production stacks r
 - Parent: [[Self-Attention]]
 - Deep dive on family 1: [[Flash-Attention]]
 - KV-cache reduction via heads: [[Multi-Head-Attention]]
+
+

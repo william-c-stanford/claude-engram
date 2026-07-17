@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - interpretability
+subtree_size: 0
+cards_due: 0
 ---
 
 # Sparse Autoencoders
@@ -34,3 +36,5 @@ Key findings: features are **monosemantic** (one concept each), **steerable** (c
 
 - Parent: [[Attention-Interpretability]]
 - Successor approach: [[Natural-Language-Autoencoders]]
+
+

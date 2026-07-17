@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Subword Tokenizer Variants
@@ -35,3 +37,5 @@ Byte-level BPE's guarantee matters most: because every input decomposes to bytes
 
 - Parent: [[Byte-Pair-Encoding]]
 - Base procedure: [[BPE-Merge-Algorithm]]
+
+

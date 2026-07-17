@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - prompting
+subtree_size: 0
+cards_due: 0
 ---
 
 # Prompt Engineering Best Practices
@@ -38,3 +40,5 @@ When systematic iteration stops improving quality, that is the signal to move to
 
 - Parent: [[Prompt-Engineering]]
 - Recency/amnesia relate to [[Attention-Dilution]]; refusal to [[Helpfulness-Safety-Tradeoff]]
+
+

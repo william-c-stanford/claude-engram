@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - transformer
+subtree_size: 0
+cards_due: 0
 ---
 
 # Encoder-Decoder vs Decoder-Only
@@ -37,3 +39,5 @@ where queries come from the decoder but keys/values come from the encoder (no ma
 
 - Parent: [[Transformer-Architecture]]
 - Mechanism: [[Scaled-Dot-Product-Attention]] (masked self-attention it builds on)
+
+

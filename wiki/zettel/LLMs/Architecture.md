@@ -12,6 +12,8 @@ children:
 tags:
   - llm-fundamentals
   - architecture
+subtree_size: 51
+cards_due: 0
 ---
 
 # Architecture
@@ -35,3 +37,5 @@ Architecture is what an LLM *is* — the static computational structure a token 
 
 - Parent: [[LLMs]]
 - Sibling: [[Optimization-Methods]] (what you *do* to this structure)
+
+

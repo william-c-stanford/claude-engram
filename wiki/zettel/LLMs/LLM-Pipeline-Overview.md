@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - architecture
+subtree_size: 0
+cards_due: 0
 ---
 
 # LLM Pipeline Overview
@@ -37,3 +39,5 @@ Generation is autoregressive: the chosen token is appended to the input and the 
 - Stage 1: [[Tokenization]]
 - Stages 2–3: [[Transformer-Architecture]] (embeddings, attention, layers)
 - Stage 4: [[Prediction-Heads]] and [[Decoding-Methods]]
+
+

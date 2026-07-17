@@ -12,6 +12,8 @@ children:
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 12
+cards_due: 0
 ---
 
 # Tokenization
@@ -35,3 +37,5 @@ Tokenization is the first stage of the LLM pipeline: it converts raw text into t
 
 - Parent: [[Architecture]]
 - Downstream stage: the token IDs index into the embedding table of the transformer.
+
+

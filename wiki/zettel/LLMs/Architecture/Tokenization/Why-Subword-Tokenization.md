@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Why Subword Tokenization
@@ -35,3 +37,5 @@ Common words stay single tokens ("the"), while rare words decompose into known p
 ## Cross-references
 
 - Parent: [[Tokenization]]
+
+

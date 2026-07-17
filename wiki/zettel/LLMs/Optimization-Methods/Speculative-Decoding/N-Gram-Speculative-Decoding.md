@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - speculative-decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # N-gram Speculative Decoding
@@ -28,3 +30,5 @@ Steps: (1) cache n-grams from the prompt and previously generated text; (2) at e
 
 - Parent: [[Speculative-Decoding]]
 - Landscape: [[Speculative-Decoding-Methods-Comparison]]
+
+

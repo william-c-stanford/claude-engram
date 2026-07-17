@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - lora
+subtree_size: 0
+cards_due: 0
 ---
 
 # LoRA Alpha Scaling
@@ -28,3 +30,5 @@ Without scaling, doubling $r$ roughly doubles the magnitude of $\Delta W = BA$ (
 
 - Parent: [[LoRA-And-PEFT]]
 - Core update: [[LoRA-Insight]]; rsLoRA in context: [[LoRA-Variants]]
+
+

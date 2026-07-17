@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - optimization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Gradient Clipping
@@ -30,3 +32,5 @@ Only steps whose global L2 norm exceeds `max_grad_norm` are scaled down; normal 
 
 - Parent: [[Optimization-Theory]]
 - Interacts with: [[Mixed-Precision-Training]]
+
+

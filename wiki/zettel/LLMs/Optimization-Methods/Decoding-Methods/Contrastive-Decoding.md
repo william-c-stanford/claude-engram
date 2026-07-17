@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Contrastive Decoding
@@ -30,3 +32,5 @@ restricted to a plausibility set $V(x_{<t}) = \{v : P_{\text{expert}}(v) \ge \al
 
 - Parent: [[Decoding-Methods]]
 - Layer-contrast analogue for hallucination: [[Model-Level-Hallucination-Detection]]
+
+

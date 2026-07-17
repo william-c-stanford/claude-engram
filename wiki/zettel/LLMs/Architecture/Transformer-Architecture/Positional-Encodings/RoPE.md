@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - positional-encoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # RoPE (Rotary Position Embedding)
@@ -33,3 +35,5 @@ So RoPE achieves *relative* position encoding without explicit bias terms and wi
 - Parent: [[Positional-Encodings]]
 - Extending it: [[Long-Context-Extension]]
 - Contrast: [[ALiBi]]
+
+

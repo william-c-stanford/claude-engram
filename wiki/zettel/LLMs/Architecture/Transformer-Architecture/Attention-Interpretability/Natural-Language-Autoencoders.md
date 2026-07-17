@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - interpretability
+subtree_size: 0
+cards_due: 0
 ---
 
 # Natural Language Autoencoders
@@ -30,3 +32,5 @@ An NLAE encoder (a language model) reads activations and emits a natural-languag
 
 - Parent: [[Attention-Interpretability]]
 - Predecessor: [[Sparse-Autoencoders]]
+
+

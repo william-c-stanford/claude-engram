@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - compression
   - distillation
+subtree_size: 0
+cards_due: 0
 ---
 
 # Knowledge Distillation
@@ -35,3 +37,5 @@ Paradigms: **offline/white-box** (precompute teacher logits, most data-efficient
 
 - Parent: [[Model-Compression]]
 - Layer-contrast cousin at decode time: [[Contrastive-Decoding]]
+
+

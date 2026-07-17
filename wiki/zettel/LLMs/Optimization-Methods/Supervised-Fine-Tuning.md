@@ -14,6 +14,8 @@ tags:
   - llm-fundamentals
   - sft
   - training
+subtree_size: 5
+cards_due: 0
 ---
 
 # Supervised Fine-Tuning (SFT)
@@ -39,3 +41,5 @@ SFT is the bridge from a raw next-token predictor to an instruction-following as
 - Parent: [[Optimization-Methods]]
 - Previous phase: [[Pretraining]]
 - Head it trains: [[Conditional-Generation-Head]]
+
+

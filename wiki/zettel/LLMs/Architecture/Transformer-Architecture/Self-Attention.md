@@ -12,6 +12,8 @@ tags:
   - llm-fundamentals
   - transformer
   - attention
+subtree_size: 3
+cards_due: 0
 ---
 
 # Self-Attention
@@ -34,3 +36,5 @@ Self-attention is the transformer's token-mixing engine: each position forms a q
 
 - Parent: [[Transformer-Architecture]]
 - IO-aware exact implementation: [[Flash-Attention]]
+
+

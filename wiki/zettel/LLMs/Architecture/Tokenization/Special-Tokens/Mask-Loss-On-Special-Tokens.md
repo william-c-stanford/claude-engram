@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Mask Loss on Special Tokens
@@ -28,3 +30,5 @@ Structural tokens are inserted by the chat template, not generated as a modeling
 
 - Parent: [[Special-Tokens]]
 - The tokens being masked: [[Special-Token-Inventory]]
+
+

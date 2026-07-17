@@ -11,6 +11,8 @@ children:
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 3
+cards_due: 0
 ---
 
 # Special Tokens
@@ -32,3 +34,5 @@ Special tokens are reserved vocabulary entries that carry structural meaning rat
 ## Cross-references
 
 - Parent: [[Tokenization]]
+
+

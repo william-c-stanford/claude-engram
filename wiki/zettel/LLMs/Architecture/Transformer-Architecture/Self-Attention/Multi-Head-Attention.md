@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - attention
+subtree_size: 0
+cards_due: 0
 ---
 
 # Multi-Head Attention
@@ -32,3 +34,5 @@ Each head attends independently, so the model can attend to several relationship
 
 - Parent: [[Self-Attention]]
 - Which heads specialize: [[Attention-Head-Roles]]
+
+

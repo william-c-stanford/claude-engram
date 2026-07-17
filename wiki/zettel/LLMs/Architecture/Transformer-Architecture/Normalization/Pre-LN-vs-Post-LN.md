@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - normalization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Pre-LN vs Post-LN
@@ -32,3 +34,5 @@ Deep networks need this because, without normalization, activation magnitudes dr
 - Parent: [[Normalization]]
 - Assumed by: [[Decoder-Only-Block]]
 - Warmup detail: [[Learning-Rate-Warmup]]
+
+

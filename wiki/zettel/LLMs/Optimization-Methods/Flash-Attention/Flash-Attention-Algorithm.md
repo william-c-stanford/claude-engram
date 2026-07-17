@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - attention
   - efficiency
+subtree_size: 0
+cards_due: 0
 ---
 
 # Flash Attention Algorithm
@@ -46,3 +48,5 @@ Forward FLOPs are unchanged — the speedup comes entirely from slashing HBM tra
 - Parent: [[Flash-Attention]]
 - Softmax recurrence: [[Tiling-And-Online-Softmax]]
 - Hardware-specific versions: [[Flash-Attention-Hardware-Evolution]]
+
+

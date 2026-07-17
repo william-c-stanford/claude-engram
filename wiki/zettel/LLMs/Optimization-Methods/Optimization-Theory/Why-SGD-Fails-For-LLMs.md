@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - optimization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Why Vanilla SGD Fails for LLMs
@@ -35,3 +37,5 @@ The resolution is a per-parameter adaptive learning rate ([[Adam-Optimizer]]).
 
 - Parent: [[Optimization-Theory]]
 - The fix: [[Adam-Optimizer]]
+
+

@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - safety
+subtree_size: 0
+cards_due: 0
 ---
 
 # Safety Training Pipeline
@@ -35,3 +37,5 @@ Because each layer catches what earlier ones miss, safety is defense-in-depth ra
 
 - Parent: [[LLM-Safety]]
 - The tools used at each stage: [[Safety-Mechanisms]]
+
+

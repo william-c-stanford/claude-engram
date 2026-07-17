@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - pretraining
   - data
+subtree_size: 0
+cards_due: 0
 ---
 
 # Pretraining Data Pipeline
@@ -38,3 +40,5 @@ Data quality and mixture are as consequential as raw scale — dedup in particul
 - Parent: [[Pretraining]]
 - Memorization risk: [[Pretraining-Failure-Modes]]
 - Diversity lens: [[Training-Data-Diversity]]
+
+

@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Tokenizer Fertility
@@ -28,3 +30,5 @@ When a language is under-represented in the tokenizer's training corpus, its wor
 
 - Parent: [[Tokenization-Best-Practices]]
 - Mitigation: [[Vocabulary-Size]]
+
+

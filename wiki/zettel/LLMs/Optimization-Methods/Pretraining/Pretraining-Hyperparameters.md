@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - pretraining
   - reference
+subtree_size: 0
+cards_due: 0
 ---
 
 # Pretraining Hyperparameters
@@ -38,3 +40,5 @@ Two patterns: the very largest model (405B) uses both a *larger* batch (16M toke
 
 - Parent: [[Pretraining]]
 - Schedules: [[Learning-Rate-Schedules]]; full optimizer table: [[Optimizer-Settings-By-Phase]]
+
+

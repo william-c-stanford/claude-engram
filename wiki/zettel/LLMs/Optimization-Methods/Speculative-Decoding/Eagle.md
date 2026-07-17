@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - speculative-decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Eagle
@@ -28,3 +30,5 @@ The fix for Medusa's independence problem: (1) extract hidden states from the ta
 
 - Parent: [[Speculative-Decoding]]
 - The method it improves: [[Medusa]]
+
+

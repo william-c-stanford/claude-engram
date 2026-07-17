@@ -20,6 +20,8 @@ tags:
   - llm-fundamentals
   - architecture
   - transformer
+subtree_size: 27
+cards_due: 0
 ---
 
 # Transformer Architecture
@@ -51,3 +53,5 @@ The transformer is the substrate of every modern LLM: a stack of $L$ identical b
 - Parent: [[Architecture]]
 - Upstream stage: [[Tokenization]] produces the IDs this architecture embeds.
 - [[LLM-Pipeline-Overview]] — where this sits in the end-to-end pipeline.
+
+

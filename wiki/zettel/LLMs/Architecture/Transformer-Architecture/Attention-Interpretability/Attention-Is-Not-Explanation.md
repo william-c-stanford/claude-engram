@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - interpretability
+subtree_size: 0
+cards_due: 0
 ---
 
 # Attention Is Not Explanation
@@ -28,3 +30,5 @@ Jain and Wallace showed that high attention does not imply high influence: a tok
 
 - Parent: [[Attention-Interpretability]]
 - More faithful tools: [[Sparse-Autoencoders]]
+
+

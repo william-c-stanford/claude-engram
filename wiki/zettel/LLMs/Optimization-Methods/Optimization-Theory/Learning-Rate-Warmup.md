@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - optimization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Learning Rate Warmup
@@ -33,3 +35,5 @@ Typical durations: 1–5% of total steps for pretraining, 3–10% for fine-tunin
 - Parent: [[Optimization-Theory]]
 - Second-moment source: [[Adam-Optimizer]]
 - First phase of: [[Learning-Rate-Schedules]]
+
+

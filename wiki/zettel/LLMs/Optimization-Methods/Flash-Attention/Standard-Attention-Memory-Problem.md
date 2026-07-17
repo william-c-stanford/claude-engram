@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - attention
   - efficiency
+subtree_size: 0
+cards_due: 0
 ---
 
 # Standard Attention Memory Problem
@@ -37,3 +39,5 @@ At $n = 8192$, $d = 128$, BF16, the attention matrix is $\approx 134$ MB per hea
 - Parent: [[Flash-Attention]]
 - The solution: [[Tiling-And-Online-Softmax]]
 - Broader taxonomy: [[Attention-Quadratic-Cost]]
+
+

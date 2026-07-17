@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - normalization
+subtree_size: 0
+cards_due: 0
 ---
 
 # LayerNorm and RMSNorm
@@ -38,3 +40,5 @@ One fewer reduction per token, no accuracy cost — which is why Llama, Mistral,
 
 - Parent: [[Normalization]]
 - Placement decision: [[Pre-LN-vs-Post-LN]]
+
+

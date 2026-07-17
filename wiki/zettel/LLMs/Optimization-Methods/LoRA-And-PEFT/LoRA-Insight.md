@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - lora
+subtree_size: 0
+cards_due: 0
 ---
 
 # LoRA Insight
@@ -30,3 +32,5 @@ $W$ is frozen (no gradients, no optimizer states); only $A$ and $B$ train, costi
 
 - Parent: [[LoRA-And-PEFT]]
 - The scaling factor: [[LoRA-Alpha-Scaling]]
+
+

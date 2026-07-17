@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - attention
   - gpu
+subtree_size: 0
+cards_due: 0
 ---
 
 # Flash Attention Hardware Evolution
@@ -33,3 +35,5 @@ The general principle: identify *where* the hardware bottleneck lies (bandwidth 
 
 - Parent: [[Flash-Attention]]
 - Base algorithm: [[Flash-Attention-Algorithm]]
+
+

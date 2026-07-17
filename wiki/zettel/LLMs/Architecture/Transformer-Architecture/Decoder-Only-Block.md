@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - transformer
+subtree_size: 0
+cards_due: 0
 ---
 
 # Decoder-Only Block
@@ -35,3 +37,5 @@ This keeps a clean residual highway from input to output, which stabilizes train
 - Parent: [[Transformer-Architecture]]
 - Detail: [[Pre-LN-vs-Post-LN]] (why the ordering matters)
 - Output stage: [[Prediction-Heads]] (what the final projection computes)
+
+

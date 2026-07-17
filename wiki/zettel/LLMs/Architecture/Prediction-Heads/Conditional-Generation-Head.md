@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - sft
+subtree_size: 0
+cards_due: 0
 ---
 
 # Conditional Generation Head
@@ -38,3 +40,5 @@ The same head is reused as the policy head in RL that emits actions/responses. B
 - Identical architecture: [[Language-Modeling-Head]]
 - Training method that uses it: [[Supervised-Fine-Tuning]]
 - Loss masking of structural tokens: [[Mask-Loss-On-Special-Tokens]]
+
+

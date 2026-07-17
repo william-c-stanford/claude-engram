@@ -14,6 +14,8 @@ tags:
   - llm-fundamentals
   - safety
   - responsible-ai
+subtree_size: 5
+cards_due: 0
 ---
 
 # LLM Safety and Responsible AI
@@ -39,3 +41,5 @@ Safety is not an afterthought but an integral part of the training pipeline, app
 - Parent: [[Optimization-Methods]]
 - Refusal is a capability SFT alone can't teach: [[SFT-Is-Not-Enough]]
 - Refusal over-triggering as a prompt failure: [[Prompt-Engineering-Best-Practices]]
+
+

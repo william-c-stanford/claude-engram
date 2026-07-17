@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Never Split Special Tokens
@@ -28,3 +30,5 @@ A special token like `<|assistant|>` is meaningful only as a single indivisible 
 
 - Parent: [[Special-Tokens]]
 - What the tokens are: [[Special-Token-Inventory]]
+
+

@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - attention
   - efficiency
+subtree_size: 0
+cards_due: 0
 ---
 
 # Tiling and Online Softmax
@@ -35,3 +37,5 @@ The rescaling by $e^{m_{\text{old}} - m_{\text{new}}}$ retroactively corrects ea
 
 - Parent: [[Flash-Attention]]
 - Applied in: [[Flash-Attention-Algorithm]]
+
+

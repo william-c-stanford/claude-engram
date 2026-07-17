@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - positional-encoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Sinusoidal and Learned Absolute Positional Encoding
@@ -36,3 +38,5 @@ Both are absolute; modern models prefer relative encodings ([[RoPE]], [[ALiBi]])
 
 - Parent: [[Positional-Encodings]]
 - Successors: [[RoPE]] · [[ALiBi]]
+
+

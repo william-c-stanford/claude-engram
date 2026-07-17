@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - pretraining
+subtree_size: 0
+cards_due: 0
 ---
 
 # Pretraining Failure Modes
@@ -30,3 +32,5 @@ Three characteristic pretraining pitfalls are loss spikes (from bad batches or n
 
 - Parent: [[Pretraining]]
 - Dedup: [[Pretraining-Data-Pipeline]]; long context: [[Long-Context-Extension]]
+
+

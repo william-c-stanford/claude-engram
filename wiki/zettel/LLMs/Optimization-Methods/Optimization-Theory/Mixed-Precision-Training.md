@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - optimization
   - efficiency
+subtree_size: 0
+cards_due: 0
 ---
 
 # Mixed Precision Training
@@ -31,3 +33,5 @@ The formats differ mainly in dynamic range: FP32 and BF16 both have 8 exponent b
 
 - Parent: [[Optimization-Theory]]
 - Clipping must unscale first: [[Gradient-Clipping]]
+
+

@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - reinforcement-learning
+subtree_size: 0
+cards_due: 0
 ---
 
 # Reward Head
@@ -28,3 +30,5 @@ Unlike the LM/conditional heads that emit per-position logits, the reward head r
 
 - Parent: [[Prediction-Heads]]
 - Scalar sibling used inside PPO: [[Value-Head]]
+
+

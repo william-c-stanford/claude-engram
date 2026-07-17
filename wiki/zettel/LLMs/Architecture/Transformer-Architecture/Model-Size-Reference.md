@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - transformer
   - reference
+subtree_size: 0
+cards_due: 0
 ---
 
 # Model Size Reference
@@ -38,3 +40,5 @@ Two design signals recur: **"active" parameters** mark Mixture-of-Experts models
 
 - Parent: [[Transformer-Architecture]]
 - [[Mixture-of-Experts]] · [[Multi-Head-Attention]]
+
+

@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - pretraining
   - scaling
+subtree_size: 0
+cards_due: 0
 ---
 
 # Scaling Laws
@@ -29,3 +31,5 @@ Hoffmann et al. found that for a fixed compute budget $C$, both model parameters
 
 - Parent: [[Pretraining]]
 - Model sizes in practice: [[Model-Size-Reference]]
+
+

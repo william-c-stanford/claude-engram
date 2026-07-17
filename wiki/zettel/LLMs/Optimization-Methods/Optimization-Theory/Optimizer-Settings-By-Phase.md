@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - optimization
   - reference
+subtree_size: 0
+cards_due: 0
 ---
 
 # Optimizer Settings by Phase
@@ -35,3 +37,5 @@ LoRA uses a *higher* LR than full fine-tuning because only the adapter weights u
 
 - Parent: [[Optimization-Theory]]
 - [[AdamW]] · [[Learning-Rate-Schedules]] · [[Gradient-Clipping]] · [[Mixed-Precision-Training]]
+
+

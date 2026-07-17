@@ -13,6 +13,8 @@ tags:
   - llm-fundamentals
   - transformer
   - interpretability
+subtree_size: 4
+cards_due: 0
 ---
 
 # Attention Interpretability
@@ -36,3 +38,5 @@ Attention weights are the cheapest window into what a model "looks at," but they
 
 - Parent: [[Transformer-Architecture]]
 - Retrieval-head pruning links to [[Attention-Head-Roles]].
+
+

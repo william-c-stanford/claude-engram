@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - prompting
+subtree_size: 0
+cards_due: 0
 ---
 
 # Advanced Prompting Techniques
@@ -33,3 +35,5 @@ Beyond single prompts, advanced patterns extend the model with external or struc
 - Parent: [[Prompt-Engineering]]
 - ARQ addresses [[Attention-Dilution]]; builds on [[Chain-Of-Thought]]
 - Self-critique underlies Constitutional AI in [[Safety-Mechanisms]]
+
+

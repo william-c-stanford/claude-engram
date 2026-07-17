@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - prompting
+subtree_size: 0
+cards_due: 0
 ---
 
 # In-Context Learning
@@ -35,3 +37,5 @@ Scaling: ICL emerges mainly above ~1B parameters and improves log-linearly with 
 - Parent: [[Prompt-Engineering]]
 - Mechanism: [[Attention-Head-Roles]] (induction heads)
 - Zero and few examples: [[Zero-Shot-Prompting]] · [[Few-Shot-Prompting]]
+
+

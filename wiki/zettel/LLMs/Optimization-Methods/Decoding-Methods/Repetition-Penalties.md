@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Repetition Penalties
@@ -36,3 +38,5 @@ where $\alpha$ is the frequency penalty (scales with how many times $v$ appeared
 
 - Parent: [[Decoding-Methods]]
 - Diversity role: [[Sampling-Diversity]]
+
+

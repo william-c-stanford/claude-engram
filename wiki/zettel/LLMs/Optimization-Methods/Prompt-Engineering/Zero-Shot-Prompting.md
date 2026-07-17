@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - prompting
+subtree_size: 0
+cards_due: 0
 ---
 
 # Zero-Shot Prompting
@@ -28,3 +30,5 @@ With no demonstrations, the model must infer both the task and the exact output 
 
 - Parent: [[Prompt-Engineering]]
 - Add examples: [[Few-Shot-Prompting]]
+
+

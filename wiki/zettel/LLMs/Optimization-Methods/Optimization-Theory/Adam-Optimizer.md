@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - optimization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Adam Optimizer
@@ -35,3 +37,5 @@ Role of each term: $m_t$ is momentum (smooths noisy gradients; $\beta_1 = 0.9$ w
 - Parent: [[Optimization-Theory]]
 - The LLM-correct variant: [[AdamW]]
 - Bias-correction motivates [[Learning-Rate-Warmup]]
+
+

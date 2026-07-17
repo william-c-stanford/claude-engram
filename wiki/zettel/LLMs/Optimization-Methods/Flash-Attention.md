@@ -13,6 +13,8 @@ tags:
   - llm-fundamentals
   - attention
   - efficiency
+subtree_size: 4
+cards_due: 0
 ---
 
 # Flash Attention
@@ -37,3 +39,5 @@ Flash Attention computes *exactly* standard attention but restructures its memor
 - Parent: [[Optimization-Methods]]
 - The bottleneck it solves: [[Attention-Quadratic-Cost]]
 - Composes with sparse masks under [[Self-Attention]]
+
+

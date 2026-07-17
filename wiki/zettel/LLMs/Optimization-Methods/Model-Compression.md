@@ -12,6 +12,8 @@ tags:
   - llm-fundamentals
   - compression
   - inference
+subtree_size: 3
+cards_due: 0
 ---
 
 # Model Compression Methods
@@ -47,3 +49,5 @@ Model compression cuts size and inference cost while preserving quality through 
 - Parent: [[Optimization-Methods]]
 - Inference-time complement: [[Speculative-Decoding]]
 - QLoRA relies on 4-bit quantization: [[LoRA-Variants]]
+
+

@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - compression
   - quantization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Quantization
@@ -44,3 +46,5 @@ When to quantize: **always for inference serving** (W4A16); **FP8 for training**
 - Parent: [[Model-Compression]]
 - NF4 quantization underlies QLoRA: [[LoRA-Variants]]
 - FP8/BF16 in training: [[Mixed-Precision-Training]]
+
+

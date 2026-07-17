@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - diversity
   - decoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # Sampling Diversity
@@ -37,3 +39,5 @@ For RLHF the model must generate a spread of candidate responses to learn from, 
 
 - Parent: [[Diversity-In-Training]]
 - Full treatment: [[Temperature-Scaling]], [[Top-P-Sampling]], [[Min-P-Sampling]], [[Repetition-Penalties]]
+
+

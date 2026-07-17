@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - decoding
   - sampling
+subtree_size: 0
+cards_due: 0
 ---
 
 # Temperature Scaling
@@ -31,3 +33,5 @@ Because dividing logits by $T$ rescales their spread, small $T$ exaggerates diff
 
 - Parent: [[Decoding-Methods]]
 - $T\to 0$ limit: [[Greedy-Decoding]]; applied before [[Top-P-Sampling]]
+
+

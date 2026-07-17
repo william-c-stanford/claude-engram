@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - hallucination
+subtree_size: 0
+cards_due: 0
 ---
 
 # Model-Level Hallucination Detection
@@ -38,3 +40,5 @@ Without external knowledge, hallucination is flagged by uncertainty signals — 
 
 - Parent: [[Hallucination-Detection]]
 - DoLA vs. model-pair contrast: [[Contrastive-Decoding]]; grounding: [[Advanced-Prompting-Techniques]]
+
+

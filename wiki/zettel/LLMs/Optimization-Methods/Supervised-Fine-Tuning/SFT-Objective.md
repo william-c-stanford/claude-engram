@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - sft
+subtree_size: 0
+cards_due: 0
 ---
 
 # SFT Objective
@@ -30,3 +32,5 @@ Masking the prompt is the entire mechanistic difference from pretraining: the mo
 
 - Parent: [[Supervised-Fine-Tuning]]
 - Head: [[Conditional-Generation-Head]]; pretraining version: [[Pretraining-Objective]]
+
+

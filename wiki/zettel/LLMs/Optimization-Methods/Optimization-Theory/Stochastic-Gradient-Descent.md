@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - optimization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Stochastic Gradient Descent
@@ -32,3 +34,5 @@ with $B$ typically 1K–4M tokens. Why mini-batches work: each step costs $O(B)$
 
 - Parent: [[Optimization-Theory]]
 - Why it is not enough: [[Why-SGD-Fails-For-LLMs]]
+
+

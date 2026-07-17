@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - attention
+subtree_size: 0
+cards_due: 0
 ---
 
 # Scaled Dot-Product Attention
@@ -37,3 +39,5 @@ During training the whole target sequence is processed in parallel (teacher forc
 - Parent: [[Self-Attention]]
 - Cost of this operation: [[Attention-Quadratic-Cost]]
 - Cross-attention drops the mask: [[Encoder-Decoder-vs-Decoder-Only]]
+
+

@@ -13,6 +13,8 @@ tags:
   - llm-fundamentals
   - moe
   - architecture
+subtree_size: 4
+cards_due: 0
 ---
 
 # Mixture of Experts (MoE)
@@ -37,3 +39,5 @@ MoE scales model *capacity* without scaling per-token *compute*: it replaces the
 - Parent: [[Architecture]]
 - Replaces the dense [[Feed-Forward-Network]]
 - "Active param" models in [[Model-Size-Reference]]
+
+

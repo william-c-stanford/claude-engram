@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - transformer
   - embeddings
+subtree_size: 0
+cards_due: 0
 ---
 
 # Token Embeddings
@@ -38,3 +40,5 @@ The geometry is learned purely from co-occurrence — "you shall know a word by 
 - Parent: [[Transformer-Architecture]]
 - Failure mode: [[Embedding-Anisotropy]] (when this geometry degrades)
 - Reuse: [[Language-Modeling-Head]] (weight tying with the output head)
+
+

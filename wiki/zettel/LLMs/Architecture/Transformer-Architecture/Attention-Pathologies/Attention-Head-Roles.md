@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - attention
   - interpretability
+subtree_size: 0
+cards_due: 0
 ---
 
 # Attention Head Roles
@@ -37,3 +39,5 @@ The practical upshot: pruning is safe only if it avoids the load-bearing inducti
 - Parent: [[Attention-Pathologies]]
 - Head-count mechanics: [[Multi-Head-Attention]]
 - Retrieval-head pruning links to [[Attention-Is-Not-Explanation]]
+
+

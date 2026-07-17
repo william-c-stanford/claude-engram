@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - tokenization
+subtree_size: 0
+cards_due: 0
 ---
 
 # Digit-Level Tokenization
@@ -27,3 +29,5 @@ If "2024" is a single token, the model has no positional handle on its digits, s
 ## Cross-references
 
 - Parent: [[Tokenization-Best-Practices]]
+
+

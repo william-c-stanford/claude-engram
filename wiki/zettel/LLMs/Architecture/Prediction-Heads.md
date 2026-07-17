@@ -12,6 +12,8 @@ children:
 tags:
   - llm-fundamentals
   - training
+subtree_size: 4
+cards_due: 0
 ---
 
 # Prediction Heads
@@ -45,3 +47,5 @@ The transformer body produces a contextual hidden state $h_t \in \mathbb{R}^d$ p
 - Parent: [[Architecture]]
 - Consumes hidden states from [[Transformer-Architecture]]
 - Final stage of the [[LLM-Pipeline-Overview]]
+
+

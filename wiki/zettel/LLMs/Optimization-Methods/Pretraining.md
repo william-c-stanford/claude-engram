@@ -14,6 +14,8 @@ tags:
   - llm-fundamentals
   - pretraining
   - training
+subtree_size: 5
+cards_due: 0
 ---
 
 # Pretraining
@@ -39,3 +41,5 @@ Pretraining is the most expensive phase of LLM development — millions of GPU-h
 - Parent: [[Optimization-Methods]]
 - Uses the [[Language-Modeling-Head]] and [[Optimization-Theory]]
 - Next phase: [[Supervised-Fine-Tuning]]
+
+

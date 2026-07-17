@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - positional-encoding
+subtree_size: 0
+cards_due: 0
 ---
 
 # ALiBi (Attention with Linear Biases)
@@ -30,3 +32,5 @@ The slope $m$ is fixed geometrically per head, $m_h = 2^{-8h/H}$ for head $h$ of
 
 - Parent: [[Positional-Encodings]]
 - Contrast: [[RoPE]]
+
+

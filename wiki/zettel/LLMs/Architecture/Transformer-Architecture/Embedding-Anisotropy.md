@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - embeddings
+subtree_size: 0
+cards_due: 0
 ---
 
 # Embedding Anisotropy
@@ -32,3 +34,5 @@ where $\mu$ is the mean embedding and $U D U^\top$ is the eigendecomposition of 
 
 - Parent: [[Transformer-Architecture]]
 - Concerns the geometry built in [[Token-Embeddings]]
+
+

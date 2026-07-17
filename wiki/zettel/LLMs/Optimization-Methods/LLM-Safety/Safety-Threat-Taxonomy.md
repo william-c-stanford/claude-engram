@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - safety
+subtree_size: 0
+cards_due: 0
 ---
 
 # Safety Threat Taxonomy
@@ -38,3 +40,5 @@ The taxonomy matters because the mechanisms differ: data filtering addresses har
 - Parent: [[LLM-Safety]]
 - Countermeasures: [[Safety-Mechanisms]]
 - Privacy links to [[Pretraining-Failure-Modes]] (memorization)
+
+

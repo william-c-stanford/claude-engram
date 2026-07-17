@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - speculative-decoding
   - reference
+subtree_size: 0
+cards_due: 0
 ---
 
 # Speculative Decoding Methods Comparison
@@ -39,3 +41,5 @@ The general lever: a cheaper, higher-acceptance draft source yields more accepte
 
 - Parent: [[Speculative-Decoding]]
 - Detailed methods: [[Medusa]] · [[Eagle]] · [[N-Gram-Speculative-Decoding]]
+
+

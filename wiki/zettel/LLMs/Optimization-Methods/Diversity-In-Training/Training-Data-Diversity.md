@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - diversity
   - data
+subtree_size: 0
+cards_due: 0
 ---
 
 # Training Data Diversity
@@ -33,3 +35,5 @@ These mirror the pretraining data recipe but apply to every training phase, incl
 
 - Parent: [[Diversity-In-Training]]
 - Related: [[Pretraining-Data-Pipeline]] · [[LIMA-Principle]]
+
+

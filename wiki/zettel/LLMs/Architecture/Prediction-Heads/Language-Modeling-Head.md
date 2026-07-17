@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - pretraining
+subtree_size: 0
+cards_due: 0
 ---
 
 # Language Modeling Head
@@ -35,3 +37,5 @@ Every token is simultaneously input (shifted right) and target (shifted left), s
 - Parent: [[Prediction-Heads]]
 - Weight tying with [[Token-Embeddings]]
 - Same projection, different masking: [[Conditional-Generation-Head]]
+
+

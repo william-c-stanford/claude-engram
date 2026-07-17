@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - prompting
+subtree_size: 0
+cards_due: 0
 ---
 
 # Instruction-Following Prompts
@@ -37,3 +39,5 @@ Modern chat APIs separate the **system prompt** (persistent role/instructions) f
 
 - Parent: [[Prompt-Engineering]]
 - Format enforcement: [[Structured-Output-Prompts]]; checklist: [[Prompt-Engineering-Best-Practices]]
+
+

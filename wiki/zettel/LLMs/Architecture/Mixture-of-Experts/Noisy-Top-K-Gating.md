@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - moe
+subtree_size: 0
+cards_due: 0
 ---
 
 # Noisy Top-K Gating
@@ -32,3 +34,5 @@ then $g(x) = \text{softmax}(\text{TopK}(H(x), k))$. $W_{\text{noise}}$ is a *lea
 
 - Parent: [[Mixture-of-Experts]]
 - Complements: [[MoE-Load-Balancing]]
+
+

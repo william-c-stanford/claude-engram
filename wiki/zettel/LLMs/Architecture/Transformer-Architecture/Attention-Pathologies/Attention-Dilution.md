@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - attention
   - long-context
+subtree_size: 0
+cards_due: 0
 ---
 
 # Attention Dilution
@@ -35,3 +37,5 @@ Three compounding causes:
 
 - Parent: [[Attention-Pathologies]]
 - Positional cause: [[RoPE]]; extension context: [[Long-Context-Extension]]
+
+

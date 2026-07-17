@@ -9,6 +9,8 @@ tags:
   - llm-fundamentals
   - prompting
   - structured-output
+subtree_size: 0
+cards_due: 0
 ---
 
 # Structured Output Prompts
@@ -31,3 +33,5 @@ Techniques for reliable structured output: **schema-first** (show the exact JSON
 
 - Parent: [[Prompt-Engineering]]
 - Token-level guarantee: [[Constrained-Decoding]]
+
+

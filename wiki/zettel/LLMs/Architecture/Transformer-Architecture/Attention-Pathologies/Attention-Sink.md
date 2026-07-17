@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - attention
+subtree_size: 0
+cards_due: 0
 ---
 
 # Attention Sink
@@ -32,3 +34,5 @@ $$\alpha_{\text{sink}} = \frac{\exp(q \cdot k_0 / \sqrt{d})}{\sum_j \exp(q \cdot
 
 - Parent: [[Attention-Pathologies]]
 - StreamingLLM also appears under [[Long-Context-Extension]] (KV-cache strategies)
+
+

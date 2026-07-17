@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - hallucination
+subtree_size: 0
+cards_due: 0
 ---
 
 # Hallucination Types
@@ -34,3 +36,5 @@ Separating "contradicts the source" from "false about the world" from "ignores t
 
 - Parent: [[Hallucination-Detection]]
 - How to detect them: [[Model-Level-Hallucination-Detection]]
+
+

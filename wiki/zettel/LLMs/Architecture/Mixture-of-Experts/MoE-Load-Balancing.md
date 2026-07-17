@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - moe
+subtree_size: 0
+cards_due: 0
 ---
 
 # MoE Load Balancing
@@ -32,3 +34,5 @@ where $f_i$ is the fraction of tokens routed to expert $i$ and $p_i$ is the mean
 
 - Parent: [[Mixture-of-Experts]]
 - The other routing challenge: [[Noisy-Top-K-Gating]]
+
+

@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - lora
+subtree_size: 0
+cards_due: 0
 ---
 
 # LoRA Variants
@@ -38,3 +40,5 @@ A family of LoRA refinements trade off memory, quality, and rank behavior: **QLo
 
 - Parent: [[LoRA-And-PEFT]]
 - rsLoRA scaling: [[LoRA-Alpha-Scaling]]; QLoRA in Unsloth: [[SFT-Efficient-Training]]; NF4 quantization: [[Quantization]]
+
+

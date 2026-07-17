@@ -8,6 +8,8 @@ children: []
 tags:
   - llm-fundamentals
   - pretraining
+subtree_size: 0
+cards_due: 0
 ---
 
 # Pretraining Objective
@@ -31,3 +33,5 @@ The remarkable empirical fact is that this simple self-supervised loss, scaled u
 - Parent: [[Pretraining]]
 - Same loss, computed on all tokens: [[Language-Modeling-Head]]
 - Response-masked version: [[SFT-Objective]]
+
+
