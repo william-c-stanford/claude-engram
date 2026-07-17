@@ -10,7 +10,7 @@ tags:
   - moe
   - reference
 subtree_size: 0
-cards_due: 4
+cards_due: 0
 ---
 
 # Notable MoE Models

@@ -9,7 +9,7 @@ tags:
   - llm-fundamentals
   - moe
 subtree_size: 0
-cards_due: 2
+cards_due: 0
 ---
 
 # Noisy Top-K Gating

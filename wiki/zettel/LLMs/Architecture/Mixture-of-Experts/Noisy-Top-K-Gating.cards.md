@@ -65,3 +65,5 @@ y      = sum(gates[i] * expert[i](x) for i in topk)
 %% srs c-000024-05 {"due":"2026-07-18T18:37:53.447Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:37:53.447Z","rating":"hard"}],"easeDelta":-0.15} %%
 %% srs c-000024-04 {"due":"2026-07-21T18:38:12.122Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:38:12.122Z","rating":"easy"}],"easeDelta":0.15} %%
 %% srs c-000024-02 {"due":"2026-07-18T18:49:51.714Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:49:51.714Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000024-01 {"due":"2026-07-18T18:52:35.006Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T18:52:35.006Z","rating":"good"}]} %%
+%% srs c-000024-03 {"due":"2026-07-18T18:53:40.645Z","interval":1,"ease":2.15,"reviews":[{"at":"2026-07-17T18:53:28.885Z","rating":"again","verdict":"incorrect"},{"at":"2026-07-17T18:53:40.645Z","rating":"hard"}],"easeDelta":-0.35} %%

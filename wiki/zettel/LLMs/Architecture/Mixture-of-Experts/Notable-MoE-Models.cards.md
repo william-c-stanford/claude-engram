@@ -40,3 +40,7 @@ What made Switch Transformer notable in MoE history?
 - [ ] First open-weight MoE to beat a dense 70B model
 - [ ] Introduced shared + routed experts (DeepSeekMoE)
 - [ ] First MoE to use Gumbel-Softmax routing
+%% srs c-000025-02 {"due":"2026-07-18T18:56:35.629Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:56:35.629Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000025-01 {"due":"2026-07-21T18:56:47.055Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:56:47.055Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000025-03 {"due":"2026-07-18T18:57:20.927Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T18:57:20.927Z","rating":"good"}]} %%
+%% srs c-000025-04 {"due":"2026-07-21T18:57:28.479Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:57:28.479Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
