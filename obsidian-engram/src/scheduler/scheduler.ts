@@ -30,6 +30,26 @@ function clampDelta(base: number, delta: number): number {
 }
 
 /**
+ * Re-reading the source note restarts the interval ladder (plan 002 KTD3):
+ * interval to 0 (due now), ease and full history preserved, one `reset` event
+ * appended. Not a rating — no ease penalty. A never-reviewed card is left
+ * untouched (it is already at the ladder start and must stay "new" so the
+ * first-encounter reading step still recognizes it).
+ */
+export function resetLadder(state: CardState, now: Date): CardState {
+  if (!state.due && (state.reviews?.length ?? 0) === 0) return state;
+  const next: CardState & { easeDelta?: number } = {
+    due: now.toISOString(),
+    interval: 0,
+    reviews: [...(state.reviews ?? []), { at: now.toISOString(), rating: "reset" }],
+  };
+  if (state.ease !== undefined) next.ease = state.ease;
+  const delta = (state as { easeDelta?: number }).easeDelta;
+  if (typeof delta === "number" && delta !== 0) next.easeDelta = delta;
+  return next;
+}
+
+/**
  * The R6 ladder: first success ~1 day, second ~4 days, then interval × ease.
  * Hard dampens, Easy boosts, Again lapses to the ladder start with an ease
  * penalty (KTD6). Returns the fully-updated state with the review appended.

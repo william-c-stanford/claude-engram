@@ -15,6 +15,7 @@ function sidecarWith(address: string, states: CardState[]): ParsedSidecar {
     id: `${address}-${String(i + 1).padStart(2, "0")}`,
     type: "free",
     content: "**Prompt**\nq\n**Answer**\na",
+    notes: "",
     state,
   }));
   return { noteAddress: address, noteTitle: address, cards, orphanedStateIds: [], retiredLines: [], warnings: [] };

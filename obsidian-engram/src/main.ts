@@ -52,6 +52,7 @@ export default class EngramPlugin extends Plugin {
               warnWindowHours: this.settings.warnWindowHours,
               skipGreenParents: this.settings.skipGreenParents,
               reorientationSampleSize: this.settings.reorientationSampleSize,
+              noteIntroMode: this.settings.noteIntroMode,
             })
           );
         new ReviewModal(this, roots, "All due").open();

@@ -13,8 +13,28 @@ const INDEX_CACHE_PATH = ".vault-meta/flashcard-index.json";
 export class VaultScanner {
   private plugin: EngramPlugin;
   private rebuildTimer: number | null = null;
+  private holds = 0;
+  private rebuildPending = false;
   index: FlashcardIndex = new FlashcardIndex([], new Set());
   onRebuilt: (() => void)[] = [];
+
+  /**
+   * Suspend event-driven rebuilds (an open review session stages state in
+   * memory that a mid-session rebuild would clobber). The caller that
+   * releases the last hold is responsible for triggering its own rebuild —
+   * persistReviewUpdates does — but a deferred event rebuild is replayed too.
+   */
+  holdRebuilds(): void {
+    this.holds++;
+  }
+
+  releaseRebuilds(): void {
+    this.holds = Math.max(0, this.holds - 1);
+    if (this.holds === 0 && this.rebuildPending) {
+      this.rebuildPending = false;
+      this.scheduleRebuild();
+    }
+  }
 
   constructor(plugin: EngramPlugin) {
     this.plugin = plugin;
@@ -37,6 +57,10 @@ export class VaultScanner {
   }
 
   scheduleRebuild(delayMs = 800): void {
+    if (this.holds > 0) {
+      this.rebuildPending = true;
+      return;
+    }
     if (this.rebuildTimer !== null) window.clearTimeout(this.rebuildTimer);
     this.rebuildTimer = window.setTimeout(() => {
       this.rebuildTimer = null;

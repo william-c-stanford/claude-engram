@@ -14,7 +14,7 @@ Turn a subtree of atomic notes into review-ready flashcards. The plugin (`obsidi
    - Find the root note's address: `python3 scripts/zettel-index.py find "<name>"`.
    - List every note in scope: `python3 scripts/zettel-index.py subtree <address>` (the root itself included — parents get cards too, they anchor the mental-palace walk).
 2. **Read each note fully.** The Claim and Reasoning sections are the card source; Cross-references supply MCQ distractor material (near-miss concepts from sibling notes).
-3. **Check for an existing sidecar** (`<Note>.cards.md`). If present, this is a regeneration: follow the format doc's regeneration rules — stable IDs for unchanged cards, next unused `nn` for new ones, `%% srs-retired` for removed ones, and never touch `%% srs` state lines otherwise.
+3. **Check for an existing sidecar** (`<Note>.cards.md`). If present, this is a regeneration: follow the format doc's regeneration rules — stable IDs for unchanged cards, next unused `nn` for new ones, `%% srs-retired` for removed ones, and never touch `%% srs` state lines otherwise. **Preserve `**Notes**` sections verbatim on every card you keep** — they are the reviewer's own annotations (hidden until reveal in the plugin) and outrank generated content.
 4. **Write the sidecar** beside each note, guarded by the vault lock:
    ```bash
    bash scripts/wiki-lock.sh acquire "<sidecar-path>"   # write, then:

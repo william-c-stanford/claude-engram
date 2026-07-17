@@ -4,7 +4,7 @@ import { NoteEntry, isSidecarPath, pairedFolderPath } from "../index/flashcard-i
 import { Bucket, Counts } from "../scheduler/buckets";
 import { folderCounts, noteCounts, subtreeCounts } from "../scheduler/rollup";
 import { chipsFor } from "./chips";
-import { buildSessionQueue, SessionCard } from "./session-queue";
+import { buildSessionQueue, SessionItem } from "./session-queue";
 import { ReviewModal } from "./review-modal";
 
 interface FileItem {
@@ -115,9 +115,10 @@ export class ExplorerBadges {
       warnWindowHours: this.plugin.settings.warnWindowHours,
       skipGreenParents: this.plugin.settings.skipGreenParents,
       reorientationSampleSize: this.plugin.settings.reorientationSampleSize,
+      noteIntroMode: this.plugin.settings.noteIntroMode,
     };
 
-    let queue: SessionCard[];
+    let queue: SessionItem[];
     let title: string;
     if ("folderPath" in scope) {
       // Folder with no paired parent note: concatenated walks of its direct notes.

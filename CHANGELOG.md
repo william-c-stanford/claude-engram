@@ -2,6 +2,17 @@
 
 All notable changes to claude-obsidian. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [SemVer](https://semver.org/).
 
+## [1.10.1] - 2026-07-17 (Engram Flashcards 0.2.0: session study affordances)
+
+Plan: `docs/plans/2026-07-17-002-feat-session-study-affordances-plan.md`. Plugin 0.1.1 → 0.2.0.
+
+### Added
+
+- **Note-first reading step**: sessions render the evergreen note (frontmatter stripped) with a Proceed control before a note's cards on first encounter — derived from empty review history, settings-selectable (first-encounter / always / never). Session queues are now typed item streams (`note-intro` | `card`).
+- **"Review source note"** on every card: the bound note renders in a collapsible in-modal panel; the first open per note per session restarts that exact note's interval ladder (`resetLadder`: interval → 0, ease + history preserved, `reset` log event; children untouched). Reset cards classify red and lead reopened sessions.
+- **Post-reveal card editing + annotations**: edit prompt/answer (or raw content for cloze/mcq) and a `**Notes**` annotation hidden until reveal; saves rewrite exactly one card block (`rewriteCardBlock`, byte-identity guaranteed elsewhere) immediately via `vault.process`, with a dirty-editor guard so the modal never closes over unsaved edits. Notes sections are spec'd in `docs/flashcard-format.md` and preserved by `/zettel-flashcards` regeneration.
+- 33 new unit tests (81 total): notes splitting incl. fence guard, block rewriting, reset semantics, intro interleaving, editor field round-trips, frontmatter stripping.
+
 ## [1.10.0] - 2026-07-17 (Engram Flashcards: spaced repetition over the zettel tree)
 
 Stage 1 of the memorization layer (plan: `docs/plans/2026-07-17-001-feat-zettel-flashcards-plugin-plan.md`): a real Obsidian plugin (`obsidian-engram/`, id `engram-flashcards`, v0.1.0, BRAT-installable) plus a Claude-side generation skill, meeting the vault at `<Note>.cards.md` sidecar files.

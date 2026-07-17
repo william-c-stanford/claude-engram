@@ -7,6 +7,9 @@ Spaced-repetition flashcards over a folder-nested Zettelkasten vault. Companion 
 - **Due-count badges in the file explorer.** Every zettel folder and its paired parent note show colored chips: red = due/overdue, yellow = due soon, green = healthy. Folder and parent-note rows carry identical subtree rollups; leaf notes show their own cards.
 - **Click a chip to review.** Red opens the subtree's due cards, yellow opens early review, green opens practice-ahead (optional).
 - **Mental-palace sessions.** A folder session walks the tree topologically — parent-note cards first, then each child subtree recursively — instead of shuffling the whole folder. All-green parents contribute a small reorientation sample first (skippable in settings).
+- **Note-first reading.** The first time a note's cards come up (no review history yet), the session shows the evergreen note itself as a reading step before quizzing — a settings option makes this always or never.
+- **Review the source, restart the ladder.** Every card offers "Review source note", shown in a panel inside the session. Opening it counts as re-learning: that exact note's cards (never its children) go back to the start of the interval ladder, recorded as a `reset` event with ease and history preserved.
+- **Edit cards mid-session.** After revealing, edit the question/answer or attach **Notes** — annotations that stay hidden while answering and appear only after reveal. Edits and notes persist into the card sidecar and survive card regeneration.
 - **Ease-factor scheduling.** First success ≈ 1 day, second ≈ 4 days, then each success multiplies the interval by an adjustable ease factor (default 2.5): 1 → 4 → 10 → 25 → 60 → 150 days. Again lapses to the start. Every review is kept in an append-only log.
 - **Graph groundwork.** Each note's current due count is written to its `cards_due` frontmatter field (subtree rollup on parents), so graph tooling can color nodes by memory state.
 
@@ -28,6 +31,7 @@ Cards live in `<Note>.cards.md` sidecar files bound to notes by DragonScale addr
 | Hide card sidecars | on | Hide `*.cards.md` rows in the file explorer |
 | Practice ahead | on | Green chips open a practice-ahead session |
 | Skip green parents | off | Skip reorientation samples in folder sessions |
+| Note reading step | first encounter | Show the note before its cards: first encounter / always / never |
 | Reorientation sample size | 3 | Cards an all-green parent contributes before its children |
 
 ## Development

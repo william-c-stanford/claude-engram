@@ -4,9 +4,12 @@ export const CARD_TYPES: readonly CardType[] = ["cloze", "mcq", "free", "derivat
 
 export type Rating = "again" | "hard" | "good" | "easy";
 
+/** Log entries record the four ratings plus `reset` (source-note re-read; not a rating). */
+export type ReviewEventKind = Rating | "reset";
+
 export interface ReviewLogEntry {
   at: string; // ISO 8601 UTC
-  rating: Rating;
+  rating: ReviewEventKind;
 }
 
 /** Scheduling state per docs/flashcard-format.md. A never-reviewed card is {state:"new"}. */
@@ -23,8 +26,10 @@ export const NEW_STATE: CardState = { state: "new" };
 export interface Card {
   id: string; // <note_address>-<nn>
   type: CardType;
-  /** Raw markdown content of the block below the type line. */
+  /** Markdown content of the block below the type line, annotation excluded. */
   content: string;
+  /** Annotation from the card's **Notes** section — hidden while answering, shown after reveal. */
+  notes: string;
   state: CardState;
 }
 

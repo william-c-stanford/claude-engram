@@ -41,6 +41,10 @@ Why does MoE decouple capacity from per-token compute?
 
 Total parameters grow with the expert count $N$ while per-token compute grows only with the active count $K$.
 
+**Notes**
+
+Annotation: think "library size vs books you actually open".
+
 ### card c-000022-05
 type: pseudocode
 

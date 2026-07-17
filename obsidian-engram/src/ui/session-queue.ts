@@ -27,13 +27,32 @@ export interface SessionCard {
   reorientation: boolean;
 }
 
+/** A session interleaves note-reading steps with card items (plan 002 KTD1). */
+export type SessionItem = { kind: "note-intro"; entry: NoteEntry } | ({ kind: "card" } & SessionCard);
+
+export type NoteIntroMode = "first-encounter" | "always" | "never";
+
 export interface QueueOptions {
   nowMs: number;
   warnWindowHours: number;
   skipGreenParents: boolean;
   reorientationSampleSize: number;
+  /** When the evergreen note is shown as a reading step before its cards. */
+  noteIntroMode: NoteIntroMode;
   /** Shuffle for within-note card order; injectable for tests. */
   random?: () => number;
+}
+
+/** First encounter: no card of the note carries any review-log entry (KTD2). */
+export function isFirstEncounter(entry: NoteEntry): boolean {
+  const cards = entry.sidecar?.cards ?? [];
+  return cards.length > 0 && cards.every((c) => (c.state.reviews?.length ?? 0) === 0);
+}
+
+function wantsIntro(entry: NoteEntry, mode: NoteIntroMode): boolean {
+  if (mode === "never") return false;
+  if (mode === "always") return true;
+  return isFirstEncounter(entry);
 }
 
 function shuffled<T>(items: T[], random: () => number): T[] {
@@ -66,7 +85,7 @@ export function buildSessionQueue(
   rootAddress: string,
   bucket: Bucket,
   opts: QueueOptions
-): SessionCard[] {
+): SessionItem[] {
   const random = opts.random ?? Math.random;
   const queue: SessionCard[] = [];
 
@@ -92,6 +111,7 @@ export function buildSessionQueue(
     }
   }
 
+  let ordered = queue;
   if (bucket === "red") {
     const relearning = queue.filter((s) => isRelearning(s.card.state));
     if (relearning.length > 0) {
@@ -100,9 +120,23 @@ export function buildSessionQueue(
         (a, b) =>
           Date.parse(a.card.state.reviews?.at(-1)?.at ?? "9999") - Date.parse(b.card.state.reviews?.at(-1)?.at ?? "9999")
       );
-      return [...relearning, ...rest];
+      ordered = [...relearning, ...rest];
     }
   }
 
-  return queue;
+  // Interleave note-reading steps: one intro before a note's first card, per
+  // the mode (R1/R2). Relearning cards imply history, so first-encounter
+  // intros never land in the pulled-forward segment.
+  const items: SessionItem[] = [];
+  const introduced = new Set<string>();
+  for (const s of ordered) {
+    if (!introduced.has(s.entry.address)) {
+      introduced.add(s.entry.address);
+      if (wantsIntro(s.entry, opts.noteIntroMode)) {
+        items.push({ kind: "note-intro", entry: s.entry });
+      }
+    }
+    items.push({ kind: "card", ...s });
+  }
+  return items;
 }

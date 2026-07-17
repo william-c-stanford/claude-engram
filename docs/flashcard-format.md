@@ -66,6 +66,23 @@ Why do MoE models report both "total" and "active" parameter counts?
 - [ ] It is a marketing convention with no technical meaning
 ```
 
+### Notes sections (annotations) — all card types
+
+Any card block may end with a top-level `**Notes**` marker line; everything after it is the reviewer's annotation. Annotations are hidden while answering and rendered only after the reveal. A `**Notes**` line inside a fenced code block is content, not a marker.
+
+```markdown
+### card c-000023-03
+type: cloze
+
+The balancing loss penalizes the product of {{c::$f_i \cdot p_i$}}.
+
+**Notes**
+
+Mnemonic: "how often" times "how confidently".
+```
+
+**Generators must preserve `**Notes**` sections verbatim on cards they keep during regeneration** — annotations are the reviewer's own memory cues and outrank generated content.
+
 ### free / derivation / pseudocode — reveal and self-grade
 
 Two sections marked by bold labels. `derivation` prompts ask to derive or write out an equation (answer in LaTeX); `pseudocode` prompts ask for algorithm sketches (answer in a fenced code block); `free` is open prose. All three render prompt → reveal → self-grade.
@@ -94,7 +111,7 @@ Plugin-managed. One Obsidian comment line per card, grouped at the end of the fi
 %% srs c-000022-02 {"state":"new"} %%
 ```
 
-JSON fields: `due` (ISO 8601 UTC), `interval` (days, fractional allowed), `ease` (effective ease at last review, informational), `easeDelta` (the card's accumulated adjustment from Hard/Easy/Again; authoritative — effective ease is the settings base plus this delta, floored at 1.3, so changing the settings ease applies to all future reviews without rewriting state), `reviews` (append-only log of `{at, rating}`), or `{"state":"new"}` for never-reviewed cards. A state line whose card ID no longer exists in the file is preserved untouched and flagged orphaned by the parser (never crashes, never deleted by the plugin).
+JSON fields: `due` (ISO 8601 UTC), `interval` (days, fractional allowed), `ease` (effective ease at last review, informational), `easeDelta` (the card's accumulated adjustment from Hard/Easy/Again; authoritative — effective ease is the settings base plus this delta, floored at 1.3, so changing the settings ease applies to all future reviews without rewriting state), `reviews` (append-only log of `{at, rating}` where `rating` is one of the four ratings **or `reset`** — appended when the reviewer re-opens the source note, which restarts the interval ladder without an ease penalty), or `{"state":"new"}` for never-reviewed cards. A state line whose card ID no longer exists in the file is preserved untouched and flagged orphaned by the parser (never crashes, never deleted by the plugin).
 
 ## Regeneration rules (for generators)
 

@@ -51,10 +51,12 @@ export function parseSidecar(raw: string): ParsedSidecar | null {
     const typeMatch = current.typeLine?.match(/^type:\s*(\S+)\s*$/);
     const type = typeMatch?.[1];
     if (type && (CARD_TYPES as readonly string[]).includes(type)) {
+      const { content, notes } = splitNotes(current.body.join("\n").trim());
       cards.push({
         id: current.id,
         type: type as CardType,
-        content: current.body.join("\n").trim(),
+        content,
+        notes,
         state: NEW_STATE,
       });
     } else {
@@ -63,8 +65,19 @@ export function parseSidecar(raw: string): ParsedSidecar | null {
     current = null;
   };
 
+  let inFence = false;
   for (let i = fm.bodyStart; i < lines.length; i++) {
     const line = lines[i] ?? "";
+    if (/^(```|~~~)/.test(line.trim())) {
+      inFence = !inFence;
+      if (current && current.typeLine !== null) current.body.push(line);
+      continue;
+    }
+    if (inFence) {
+      // Fenced content is always card body — never a boundary.
+      if (current && current.typeLine !== null) current.body.push(line);
+      continue;
+    }
     const heading = line.match(CARD_HEADING);
     if (heading && heading[1]) {
       flush();
@@ -115,6 +128,85 @@ export function parseSidecar(raw: string): ParsedSidecar | null {
     retiredLines,
     warnings,
   };
+}
+
+/**
+ * Split a card body at its first top-level `**Notes**` marker line (fenced
+ * code blocks don't count). Content before, annotation after.
+ */
+export function splitNotes(body: string): { content: string; notes: string } {
+  const lines = body.split("\n");
+  let inFence = false;
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = (lines[i] ?? "").trim();
+    if (/^(```|~~~)/.test(trimmed)) inFence = !inFence;
+    if (!inFence && trimmed === "**Notes**") {
+      return {
+        content: lines.slice(0, i).join("\n").trim(),
+        notes: lines.slice(i + 1).join("\n").trim(),
+      };
+    }
+  }
+  return { content: body, notes: "" };
+}
+
+/** Compose a card body from content + optional annotation (inverse of splitNotes). */
+export function composeCardBody(content: string, notes: string): string {
+  const trimmedNotes = notes.trim();
+  return trimmedNotes.length > 0 ? `${content.trim()}\n\n**Notes**\n\n${trimmedNotes}` : content.trim();
+}
+
+/**
+ * Replace one card's body (everything after its `type:` line, up to the next
+ * card/state/retired line) with `newBody`, leaving the heading, type line,
+ * every other card, and all state lines byte-identical. Returns null when the
+ * card ID is not found.
+ */
+export function rewriteCardBlock(raw: string, cardId: string, newBody: string): string | null {
+  const lines = raw.split("\n");
+  const isFence = (line: string) => /^(```|~~~)/.test(line.trim());
+
+  // Boundary lines only count outside fenced code blocks — a card body may
+  // legitimately contain an example `### card ...` or `%% srs ... %%` line.
+  let inFence = false;
+  let start = -1; // index of the card's heading line
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i] ?? "";
+    if (isFence(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    const m = line.match(CARD_HEADING);
+    if (m && m[1] === cardId) {
+      start = i;
+      break;
+    }
+  }
+  if (start === -1) return null;
+
+  // The type line is the first non-blank line after the heading.
+  let typeIdx = start + 1;
+  while (typeIdx < lines.length && (lines[typeIdx] ?? "").trim() === "") typeIdx++;
+  if (typeIdx >= lines.length || !/^type:\s*\S+/.test((lines[typeIdx] ?? "").trim())) return null;
+
+  // Body ends at the next non-fenced card heading, srs/retired line, or EOF.
+  inFence = false;
+  let end = typeIdx + 1;
+  while (end < lines.length) {
+    const line = lines[end] ?? "";
+    if (isFence(line)) {
+      inFence = !inFence;
+      end++;
+      continue;
+    }
+    if (!inFence && (CARD_HEADING.test(line) || SRS_LINE.test(line) || RETIRED_LINE.test(line))) break;
+    end++;
+  }
+
+  const trimmed = newBody.trim();
+  const bodyLines = trimmed === "" ? [] : trimmed.split("\n");
+  return [...lines.slice(0, typeIdx + 1), "", ...bodyLines, "", ...lines.slice(end)].join("\n");
 }
 
 /** Serialize one card state to its srs line. */

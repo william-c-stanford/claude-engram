@@ -16,6 +16,8 @@ export interface EngramSettings {
   skipGreenParents: boolean;
   /** How many cards an all-green parent contributes as a reorientation sample. */
   reorientationSampleSize: number;
+  /** When the evergreen note shows as a reading step before its cards. */
+  noteIntroMode: "first-encounter" | "always" | "never";
 }
 
 export const DEFAULT_SETTINGS: EngramSettings = {
@@ -26,6 +28,7 @@ export const DEFAULT_SETTINGS: EngramSettings = {
   practiceAhead: true,
   skipGreenParents: false,
   reorientationSampleSize: 3,
+  noteIntroMode: "first-encounter",
 };
 
 export class EngramSettingTab extends PluginSettingTab {
@@ -110,6 +113,21 @@ export class EngramSettingTab extends PluginSettingTab {
           this.plugin.settings.skipGreenParents = v;
           await this.plugin.saveSettings();
         })
+      );
+
+    new Setting(containerEl)
+      .setName("Note reading step")
+      .setDesc("Show the evergreen note before its cards: on first encounter (no card reviewed yet), always, or never.")
+      .addDropdown((d) =>
+        d
+          .addOptions({ "first-encounter": "First encounter (default)", always: "Always", never: "Never" })
+          .setValue(this.plugin.settings.noteIntroMode)
+          .onChange(async (v) => {
+            if (v === "first-encounter" || v === "always" || v === "never") {
+              this.plugin.settings.noteIntroMode = v;
+              await this.plugin.saveSettings();
+            }
+          })
       );
 
     new Setting(containerEl)

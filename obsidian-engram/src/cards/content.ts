@@ -72,6 +72,22 @@ export function parseMcqContent(content: string): McqContent | null {
   return { prompt: promptLines.join("\n").trim(), options };
 }
 
+/**
+ * Strip a leading YAML frontmatter block from a note's raw text so the body
+ * can render inside the review modal. Tolerates `---` inside string values by
+ * only matching the closing delimiter on its own line.
+ */
+export function stripFrontmatter(raw: string): string {
+  const lines = raw.split("\n");
+  if (lines[0]?.trim() !== "---") return raw;
+  for (let i = 1; i < lines.length; i++) {
+    if ((lines[i] ?? "").trim() === "---") {
+      return lines.slice(i + 1).join("\n").trim();
+    }
+  }
+  return raw; // unterminated frontmatter — render as-is
+}
+
 export interface PromptAnswer {
   prompt: string;
   answer: string;

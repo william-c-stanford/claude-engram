@@ -5,7 +5,8 @@ import { Card, NEW_STATE, ParsedSidecar } from "../src/cards/types";
 function sidecar(address: string, cardCount: number): ParsedSidecar {
   const cards: Card[] = [];
   for (let i = 1; i <= cardCount; i++) {
-    cards.push({ id: `${address}-${String(i).padStart(2, "0")}`, type: "free", content: "**Prompt**\nq\n**Answer**\na", state: NEW_STATE });
+    cards.push({ id: `${address}-${String(i).padStart(2, "0")}`, type: "free", content: "**Prompt**\nq\n**Answer**\na",
+    notes: "", state: NEW_STATE });
   }
   return { noteAddress: address, noteTitle: address, cards, orphanedStateIds: [], retiredLines: [], warnings: [] };
 }

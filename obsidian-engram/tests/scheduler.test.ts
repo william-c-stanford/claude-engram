@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { rate, EASE_FLOOR } from "../src/scheduler/scheduler";
+import { rate, resetLadder, EASE_FLOOR } from "../src/scheduler/scheduler";
 import { bucketOf } from "../src/scheduler/buckets";
 import { CardState, NEW_STATE, Rating } from "../src/cards/types";
 import { parseSidecar, rewriteStates } from "../src/cards/parser";
@@ -89,6 +89,50 @@ describe("ease-factor ladder (R6)", () => {
     const out = rewriteStates(raw, new Map([["c-000001-01", state]]));
     const reparsed = parseSidecar(out)!;
     expect(reparsed.cards[0]!.state).toEqual(state);
+  });
+});
+
+describe("resetLadder (plan 002 U2)", () => {
+  it("resets a mature card to the ladder start, preserving ease and history", () => {
+    const mature = run(["good", "good", "good", "hard"]).at(-1)!; // interval 12.5? -> hard path; ease 2.35
+    const before = JSON.parse(JSON.stringify(mature));
+    const reset = resetLadder(mature, new Date("2026-08-01T00:00:00.000Z"));
+    expect(reset.interval).toBe(0);
+    expect(Date.parse(reset.due!)).toBeLessThanOrEqual(Date.parse("2026-08-01T00:00:00.001Z"));
+    expect(reset.ease).toBe(mature.ease); // preserved, no penalty
+    expect(reset.reviews).toHaveLength(mature.reviews!.length + 1);
+    expect(reset.reviews!.at(-1)!.rating).toBe("reset");
+    expect(mature).toEqual(before); // input untouched
+  });
+
+  it("ladder restarts at 1 then 4 then interval × preserved ease", () => {
+    const mature = run(["good", "good", "good", "hard"]).at(-1)!; // easeDelta -0.15 -> effective 2.35
+    const reset = resetLadder(mature, new Date(mature.due!));
+    let s = rate(reset, "good", config, new Date(reset.due!));
+    expect(s.interval).toBe(1);
+    s = rate(s, "good", config, new Date(s.due!));
+    expect(s.interval).toBe(4);
+    s = rate(s, "good", config, new Date(s.due!));
+    expect(s.interval).toBeCloseTo(4 * 2.35); // preserved ease, not the default
+  });
+
+  it("does not count as a failed review (no ease penalty ever)", () => {
+    const good = run(["good", "good"]).at(-1)!;
+    const reset = resetLadder(good, new Date(good.due!));
+    expect(reset.ease).toBe(good.ease);
+    expect((reset as { easeDelta?: number }).easeDelta).toBeUndefined();
+  });
+
+  it("is a no-op on a never-reviewed card (stays new for the first-encounter rule)", () => {
+    expect(resetLadder(NEW_STATE, t0)).toBe(NEW_STATE);
+    expect(resetLadder({}, t0)).toEqual({});
+  });
+
+  it("reset cards classify red and count as relearning", () => {
+    const reset = resetLadder(run(["good", "good"]).at(-1)!, t0);
+    expect(bucketOf(reset, t0.getTime(), 24)).toBe("red");
+    expect(reset.interval).toBe(0);
+    expect((reset.reviews?.length ?? 0) > 0).toBe(true);
   });
 });
 

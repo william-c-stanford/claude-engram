@@ -1,5 +1,25 @@
 import { describe, expect, it } from "vitest";
-import { parseMcqContent, renderCloze, splitPromptAnswer } from "../src/cards/content";
+import { parseMcqContent, renderCloze, splitPromptAnswer, stripFrontmatter } from "../src/cards/content";
+
+describe("stripFrontmatter (plan 002 U4)", () => {
+  it("strips a leading frontmatter block", () => {
+    expect(stripFrontmatter("---\ntitle: X\n---\n\n# Body\ntext")).toBe("# Body\ntext");
+  });
+
+  it("leaves notes without frontmatter untouched", () => {
+    expect(stripFrontmatter("# Body\ntext")).toBe("# Body\ntext");
+  });
+
+  it("only the closing delimiter on its own line ends the block", () => {
+    const raw = '---\ntitle: "a --- b"\ntags: []\n---\nBody';
+    expect(stripFrontmatter(raw)).toBe("Body");
+  });
+
+  it("renders unterminated frontmatter as-is rather than eating the note", () => {
+    const raw = "---\ntitle: X\nno closing";
+    expect(stripFrontmatter(raw)).toBe(raw);
+  });
+});
 
 describe("renderCloze (AE3 rule)", () => {
   it("masks a span outside math with a styled blank", () => {
