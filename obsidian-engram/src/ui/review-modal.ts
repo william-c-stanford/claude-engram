@@ -2,7 +2,7 @@ import { Component, Modal, Notice } from "obsidian";
 import type EngramPlugin from "../main";
 import { CardState, Rating } from "../cards/types";
 import { rate } from "../scheduler/scheduler";
-import { SessionCard } from "./session-queue";
+import { againReinsertIndex, SessionCard } from "./session-queue";
 import { autoRating, finalRating } from "./grading";
 import { clozeAnswerMatches, renderClozePrompt } from "./renderers/cloze";
 import { renderMcq } from "./renderers/mcq";
@@ -106,10 +106,13 @@ export class ReviewModal extends Modal {
       return;
     }
 
+    // Breadcrumb: session scope, then the note only when it differs (a parent
+    // note reviewing its own cards would otherwise show its title twice).
+    const parts = [this.sessionTitle];
+    if (item.entry.title !== this.sessionTitle) parts.push(item.entry.title);
+    if (item.reorientation) parts.push("reorientation");
     const crumb = contentEl.createDiv({ cls: "engram-review-breadcrumb" });
-    crumb.setText(
-      `${this.sessionTitle} — ${item.entry.title}${item.reorientation ? " (reorientation)" : ""} · ${item.card.type}`
-    );
+    crumb.setText(parts.join(" · "));
 
     const cardEl = contentEl.createDiv({ cls: "engram-review-card" });
     const sourcePath = item.entry.notePath;
@@ -184,12 +187,14 @@ export class ReviewModal extends Modal {
     controls.empty();
 
     if (this.currentAuto !== null) {
-      // Auto-checked: confirm or override (KTD6).
-      const verdict = controls.createDiv();
-      verdict.setText(this.currentAuto === "good" ? "Correct → Good. Override:" : "Incorrect → Again. Override:");
+      // Auto-checked: confirm or override (KTD6). Own line above the buttons.
+      const verdict = controls.createDiv({ cls: "engram-review-verdict" });
+      verdict.setText(this.currentAuto === "good" ? "Correct — Enter to confirm Good" : "Incorrect — Enter to confirm Again");
     }
+    const buttons = controls.createDiv({ cls: "engram-review-buttons" });
     for (const [rating, label, cls] of RATING_LABELS) {
-      const btn = controls.createEl("button", { text: label, cls });
+      const btn = buttons.createEl("button", { text: label, cls });
+      if (this.currentAuto === rating) btn.addClass("engram-rating-suggested");
       btn.addEventListener("click", () => this.rateCurrent(rating));
     }
   }
@@ -211,9 +216,11 @@ export class ReviewModal extends Modal {
     }
     this.rated++;
 
-    // In-session relearn: an Again card comes back at the end of the queue.
+    // In-session relearn: an Again card comes back 1–10 cards later, not at
+    // the end of the queue.
     if (effective === "again") {
-      this.queue.push({ ...item, reorientation: false });
+      const insertAt = againReinsertIndex(this.pos + 1, this.queue.length);
+      this.queue.splice(insertAt, 0, { ...item, reorientation: false });
     }
 
     this.pos++;

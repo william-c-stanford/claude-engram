@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { FlashcardIndex, NoteEntry } from "../src/index/flashcard-index";
 import { Card, CardState, ParsedSidecar } from "../src/cards/types";
-import { buildSessionQueue } from "../src/ui/session-queue";
+import { againReinsertIndex, buildSessionQueue, isRelearning } from "../src/ui/session-queue";
 import { chipsFor } from "../src/ui/chips";
 import { autoRating, finalRating } from "../src/ui/grading";
 
@@ -75,6 +75,48 @@ describe("buildSessionQueue (R16 mental-palace walk)", () => {
     expect(queue.every((s) => s.entry.address === "c-000001")).toBe(true);
     expect(queue).toHaveLength(4);
     expect(queue.every((s) => !s.reorientation)).toBe(true);
+  });
+});
+
+describe("relearning cards (Again flow)", () => {
+  const lapsed = (at: string): CardState => ({
+    due: at,
+    interval: 0,
+    ease: 2.3,
+    reviews: [{ at, rating: "again" }],
+  });
+
+  it("isRelearning: lapsed cards yes, new and passed cards no", () => {
+    expect(isRelearning(lapsed("2026-07-17T08:00:00.000Z"))).toBe(true);
+    expect(isRelearning({ state: "new" })).toBe(false);
+    expect(isRelearning(red())).toBe(false); // interval 1, passed before
+  });
+
+  it("a reopened red session puts relearning cards first, oldest lapse first", () => {
+    const idx = new FlashcardIndex(
+      [
+        entry("c-000020", "wiki/zettel/R.md", ["c-000021"], [red()]),
+        entry("c-000021", "wiki/zettel/R/L.md", [], [red()]),
+      ],
+      new Set(["wiki/zettel", "wiki/zettel/R"])
+    );
+    // Lapse the leaf's card (later) and one deep card (earlier).
+    idx.byAddress.get("c-000021")!.sidecar!.cards[0]!.state = lapsed("2026-07-17T08:30:00.000Z");
+    idx.byAddress.get("c-000020")!.sidecar!.cards.push({
+      id: "c-000020-02",
+      type: "free",
+      content: "**Prompt**\nq\n**Answer**\na",
+      state: lapsed("2026-07-17T08:00:00.000Z"),
+    });
+    const queue = buildSessionQueue(idx, "c-000020", "red", opts);
+    expect(queue.slice(0, 2).map((s) => s.card.id)).toEqual(["c-000020-02", "c-000021-01"]);
+    expect(queue.slice(2).every((s) => !isRelearning(s.card.state))).toBe(true);
+  });
+
+  it("againReinsertIndex lands 1–10 cards later, clamped to queue end", () => {
+    expect(againReinsertIndex(5, 100, () => 0)).toBe(6); // k=1: one card intervenes
+    expect(againReinsertIndex(5, 100, () => 0.999)).toBe(15); // k=10
+    expect(againReinsertIndex(5, 7, () => 0.999)).toBe(7); // clamped to end
   });
 });
 

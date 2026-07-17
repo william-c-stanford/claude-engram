@@ -51,15 +51,21 @@
   width: 90vw;
 }
 
+.engram-review-modal .modal-content {
+  padding: 12px 20px 20px;
+}
+
 .engram-review-breadcrumb {
   font-size: var(--font-ui-smaller);
-  color: var(--text-muted);
-  margin-bottom: 8px;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
 }
 
 .engram-review-card {
   min-height: 160px;
-  padding: 12px 4px;
+  padding: 8px 4px 16px;
+  line-height: 1.5;
 }
 
 .engram-review-blank {
@@ -70,19 +76,38 @@
 
 .engram-review-reveal {
   border-top: 1px solid var(--background-modifier-border);
-  margin-top: 12px;
-  padding-top: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
 }
 
 .engram-review-controls {
   display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
 }
 
-.engram-review-controls button {
-  min-width: 90px;
+.engram-review-verdict {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+}
+
+.engram-review-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.engram-review-buttons button {
+  min-width: 96px;
+  padding: 8px 14px;
+}
+
+.engram-rating-suggested {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 1px;
 }
 
 .engram-rating-again {
@@ -105,7 +130,15 @@
   display: block;
   width: 100%;
   text-align: left;
-  margin: 4px 0;
+  margin: 8px 0;
+  padding: 10px 14px;
+  height: auto;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.engram-mcq-option p {
+  margin: 0;
 }
 
 .engram-mcq-correct {
@@ -118,7 +151,7 @@
 
 .engram-review-progress {
   font-size: var(--font-ui-smaller);
-  color: var(--text-muted);
+  color: var(--text-faint);
   text-align: center;
-  margin-top: 10px;
+  margin-top: 18px;
 }

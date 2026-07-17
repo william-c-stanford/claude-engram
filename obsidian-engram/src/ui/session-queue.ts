@@ -1,6 +1,24 @@
-import { Card } from "../cards/types";
+import { Card, CardState } from "../cards/types";
 import { FlashcardIndex, NoteEntry } from "../index/flashcard-index";
 import { Bucket, bucketOf } from "../scheduler/buckets";
+
+/**
+ * A lapsed card: its last rating was Again and it hasn't re-passed yet
+ * (the scheduler leaves interval at 0 until the next success).
+ */
+export function isRelearning(state: CardState): boolean {
+  return state.interval === 0 && (state.reviews?.length ?? 0) > 0;
+}
+
+/**
+ * Where an Again-rated card re-enters the live queue: 1–10 cards later
+ * (clamped to the queue end). `nextPos` is the index of the next card to be
+ * shown; at least one other card intervenes when the queue allows it.
+ */
+export function againReinsertIndex(nextPos: number, queueLength: number, random: () => number = Math.random): number {
+  const k = 1 + Math.floor(random() * 10); // 1..10 intervening cards
+  return Math.min(nextPos + k, queueLength);
+}
 
 export interface SessionCard {
   card: Card;
@@ -38,6 +56,10 @@ function shuffled<T>(items: T[], random: () => number): T[] {
  * contributes a small reorientation sample — its most-nearly-due cards — so
  * the walk re-anchors context before descending, unless skipGreenParents.
  * Cards shuffle only within their note, never across notes.
+ *
+ * Exception to the walk: relearning cards (last rating Again, not yet
+ * re-passed) jump to the front of a red session, oldest lapse first — closing
+ * and reopening a session resumes with the cards that just failed.
  */
 export function buildSessionQueue(
   index: FlashcardIndex,
@@ -67,6 +89,18 @@ export function buildSessionQueue(
         .sort((a, b) => Date.parse(a.state.due ?? "9999") - Date.parse(b.state.due ?? "9999"))
         .slice(0, opts.reorientationSampleSize);
       queue.push(...sample.map((card) => ({ card, entry, reorientation: true })));
+    }
+  }
+
+  if (bucket === "red") {
+    const relearning = queue.filter((s) => isRelearning(s.card.state));
+    if (relearning.length > 0) {
+      const rest = queue.filter((s) => !isRelearning(s.card.state));
+      relearning.sort(
+        (a, b) =>
+          Date.parse(a.card.state.reviews?.at(-1)?.at ?? "9999") - Date.parse(b.card.state.reviews?.at(-1)?.at ?? "9999")
+      );
+      return [...relearning, ...rest];
     }
   }
 
