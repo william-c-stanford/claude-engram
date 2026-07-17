@@ -34,7 +34,7 @@ type: cloze
 
 In noisy gating, the masked term is the learned, always-positive per-expert noise scale that occasionally promotes underdog experts:
 
-$$H(x) = W_g x + \epsilon \cdot {{c::\text{Softplus}(W_{\text{noise}} x)}}, \quad \epsilon \sim \mathcal{N}(0,1)$$
+$$H(x) = W_g x + \epsilon \cdot {{c::\text{Softplus}(W_\text{noise} x)}}, \quad \epsilon \sim \mathcal{N}(0,1)$$
 
 ### card c-000024-04
 type: mcq
@@ -64,3 +64,4 @@ y      = sum(gates[i] * expert[i](x) for i in topk)
 ```
 %% srs c-000024-05 {"due":"2026-07-18T18:37:53.447Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:37:53.447Z","rating":"hard"}],"easeDelta":-0.15} %%
 %% srs c-000024-04 {"due":"2026-07-21T18:38:12.122Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T18:38:12.122Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000024-02 {"due":"2026-07-18T18:49:51.714Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T18:49:51.714Z","rating":"hard"}],"easeDelta":-0.15} %%
