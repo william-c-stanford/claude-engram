@@ -48,7 +48,7 @@ type: cloze
 A MoE layer keeps only the top-$K$ experts per token, so active parameters are a {{c::$K/N$}} fraction of FFN capacity.
 ```
 
-**Cloze-inside-LaTeX rule.** A `{{c::...}}` span may sit inside `$...$` or `$$...$$`. Rendering: the plugin strips the markers and replaces the span — with `\boxed{\;?\;}` when the span is inside math delimiters, with a styled `____` blank otherwise — then renders through Obsidian's MarkdownRenderer. Reveal renders the original content with the span highlighted. A span must be entirely inside or entirely outside math delimiters; generators must not straddle a `$` boundary. The span content itself must be valid LaTeX when inside math.
+**Cloze-inside-LaTeX rule.** A `{{c::...}}` span may sit inside `$...$` or `$$...$$`. Rendering: the plugin strips the markers and replaces the span — with `\boxed{\;?\;}` when the span is inside math delimiters, with a styled `____` blank otherwise — then renders through Obsidian's MarkdownRenderer. Reveal renders the original content with the span highlighted. A span must be entirely inside or entirely outside math delimiters; generators must not straddle a `$` boundary. The span content itself must be valid LaTeX when inside math. **Put the span inside the delimiters, never around them**: `${{c::K/N}}$`, not `{{c::$K/N$}}` — the latter's reveal wraps math in bold markers, which Obsidian often fails to render. And keep `$$...$$` display math on its own lines, not mid-sentence — restructure the prose around it.
 
 ### mcq — multiple choice
 

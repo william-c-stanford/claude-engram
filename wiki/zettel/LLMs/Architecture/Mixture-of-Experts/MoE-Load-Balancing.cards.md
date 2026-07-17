@@ -32,7 +32,9 @@ where $f_i$ is the fraction of tokens actually routed to expert $i$ and $p_i$ is
 ### card c-000023-03
 type: cloze
 
-The balancing loss $$\mathcal{L}_{\text{bal}} = \alpha \cdot N \sum_{i=1}^{N} {{c::f_i \cdot p_i}}$$ penalizes the product of "how often chosen" and "how confidently chosen", pushing utilization toward uniform.
+The balancing loss penalizes the product of "how often chosen" and "how confidently chosen", pushing utilization toward uniform:
+
+$$\mathcal{L}_{\text{bal}} = \alpha \cdot N \sum_{i=1}^{N} {{c::f_i \cdot p_i}}$$
 
 ### card c-000023-04
 type: mcq

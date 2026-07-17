@@ -21,12 +21,14 @@ where $E_i$ are expert FFNs and $g_i(x)$ are gating weights, non-zero only for t
 ### card c-000022-02
 type: cloze
 
-In a MoE layer, $$\text{MoE}(x) = \sum_{i=1}^{N} {{c::g_i(x)\, E_i(x)}}$$ — each expert's output weighted by its router gate, with only the top-$K$ gates non-zero.
+In a MoE layer, each expert's output is weighted by its router gate, with only the top-$K$ gates non-zero:
+
+$$\text{MoE}(x) = \sum_{i=1}^{N} {{c::g_i(x)\, E_i(x)}}$$
 
 ### card c-000022-03
 type: cloze
 
-Because only $K$ of $N$ experts run per token, active parameters are a {{c::$K/N$}} fraction of the FFN capacity; typical routing keeps $K=2$ of $N=8$–64 experts.
+Because only $K$ of $N$ experts run per token, active parameters are a ${{c::K/N}}$ fraction of the FFN capacity; typical routing keeps $K=2$ of $N=8$–64 experts.
 
 ### card c-000022-04
 type: mcq

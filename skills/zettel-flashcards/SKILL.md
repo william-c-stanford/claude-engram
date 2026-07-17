@@ -43,6 +43,7 @@ Read the note's content shape and pick accordingly — every note gets 2–6 car
 - **Desirable difficulty.** Prompts should require recall, not recognition — except MCQ, whose job is discrimination between near-misses; pull distractors from sibling notes so they're plausible.
 - **No yes/no questions.** Nothing answerable by pattern-matching the prompt's shape.
 - **Equations are recalled, not admired.** Masking `$\alpha$` teaches nothing; mask the term that carries the idea (the product $f_i \cdot p_i$, not the summation sign).
+- **LaTeX rendering rules (hard-won):** cloze spans go *inside* math delimiters (`${{c::K/N}}$`, never `{{c::$K/N$}}`), and `$$...$$` display math sits on its own lines — never embedded mid-sentence. Both patterns render broken in Obsidian.
 
 ## Validation
 

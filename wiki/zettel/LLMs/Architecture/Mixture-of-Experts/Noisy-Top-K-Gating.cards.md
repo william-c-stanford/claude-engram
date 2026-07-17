@@ -32,7 +32,9 @@ then $g(x) = \text{softmax}(\text{TopK}(H(x), k))$. $W_{\text{noise}}$ is a lear
 ### card c-000024-03
 type: cloze
 
-In noisy gating, $$H(x) = W_g x + \epsilon \cdot {{c::\text{Softplus}(W_{\text{noise}} x)}}, \quad \epsilon \sim \mathcal{N}(0,1)$$ — the learned, always-positive per-expert noise scale that occasionally promotes underdog experts.
+In noisy gating, the masked term is the learned, always-positive per-expert noise scale that occasionally promotes underdog experts:
+
+$$H(x) = W_g x + \epsilon \cdot {{c::\text{Softplus}(W_{\text{noise}} x)}}, \quad \epsilon \sim \mathcal{N}(0,1)$$
 
 ### card c-000024-04
 type: mcq
