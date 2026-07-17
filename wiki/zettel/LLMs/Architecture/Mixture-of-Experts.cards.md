@@ -19,7 +19,7 @@ It decouples model *capacity* from per-token *compute*: the block's single FFN i
 ### card c-000026-02
 type: cloze
 
-The two design problems MoE creates are both about the router: keeping experts evenly used ({{c::load balancing}}) and making a discrete top-K selection trainable ({{c::noisy gating}}).
+The two design problems MoE creates are both about the router: ({{c::load balancing}}) is the problem of keeping experts evenly used and ({{c::noisy gating}}) is the difficulty associated with making a discrete top-K selection trainable .
 
 ### card c-000026-03
 type: mcq
