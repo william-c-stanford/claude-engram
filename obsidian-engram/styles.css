@@ -44,14 +44,17 @@
   color: var(--color-green, #08b94e);
 }
 
-/* Notes with no flashcards yet — plain neutral gray, inert (R3). */
+/* Notes with no flashcards yet — bright text so it stands out against the
+ * dimmer folder/note labels; inert (R3). --text-normal is white on dark themes,
+ * near-black on light, so it stays legible either way. */
 .engram-chip-uncovered {
-  color: var(--text-muted);
+  color: var(--text-normal);
 }
 
-/* Review cadence — plain muted text, first in the strip (R1). */
+/* Review cadence — bright text, first in the strip (R1); stands out vs the
+ * nav-item label rather than receding like a muted annotation. */
 .engram-chip-cadence {
-  color: var(--text-muted);
+  color: var(--text-normal);
   font-weight: 500;
 }
 
