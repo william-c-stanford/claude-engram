@@ -1,16 +1,16 @@
 ---
 type: zettel
-address: "c-000063"
-title: "Long-Context Extension"
-created: "2026-07-08"
-parent: "c-000066"
+address: c-000063
+title: Long-Context Extension
+created: 2026-07-08
+parent: c-000066
 children: []
 tags:
   - llm-fundamentals
   - positional-encoding
   - long-context
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Long-Context Extension

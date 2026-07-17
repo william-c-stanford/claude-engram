@@ -1,16 +1,16 @@
 ---
 type: zettel
-address: "c-000050"
-title: "Attention Dilution"
-created: "2026-07-08"
-parent: "c-000053"
+address: c-000050
+title: Attention Dilution
+created: 2026-07-08
+parent: c-000053
 children: []
 tags:
   - llm-fundamentals
   - attention
   - long-context
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Attention Dilution

@@ -49,3 +49,7 @@ What does BPE start its vocabulary from before any merges?
 - [ ] The most frequent whole words in the corpus
 - [ ] A fixed 32K set of common subwords
 - [ ] Randomly initialized token embeddings
+%% srs c-000032-04 {"due":"2026-07-21T19:15:47.984Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T19:15:47.984Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000032-01 {"due":"2026-07-21T19:16:06.992Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T19:16:06.992Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000032-02 {"due":"2026-07-18T19:16:32.663Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T19:16:32.663Z","rating":"good"}]} %%
+%% srs c-000032-03 {"due":"2026-07-21T19:16:41.364Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T19:16:41.364Z","rating":"easy"}],"easeDelta":0.15} %%

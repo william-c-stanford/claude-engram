@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000043"
-title: "Why Subword Tokenization"
-created: "2026-07-08"
-parent: "c-000044"
+address: c-000043
+title: Why Subword Tokenization
+created: 2026-07-08
+parent: c-000044
 children: []
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Why Subword Tokenization

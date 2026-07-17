@@ -1,19 +1,19 @@
 ---
 type: zettel
-address: "c-000031"
-title: "Prediction Heads"
-created: "2026-07-08"
-parent: "c-000073"
+address: c-000031
+title: Prediction Heads
+created: 2026-07-08
+parent: c-000073
 children:
-  - "c-000028"
-  - "c-000027"
-  - "c-000030"
-  - "c-000029"
+  - c-000028
+  - c-000027
+  - c-000030
+  - c-000029
 tags:
   - llm-fundamentals
   - training
 subtree_size: 4
-cards_due: 0
+cards_due: 20
 ---
 
 # Prediction Heads

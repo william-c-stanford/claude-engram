@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000048"
-title: "Sparse Autoencoders"
-created: "2026-07-08"
-parent: "c-000049"
+address: c-000048
+title: Sparse Autoencoders
+created: 2026-07-08
+parent: c-000049
 children: []
 tags:
   - llm-fundamentals
   - interpretability
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Sparse Autoencoders

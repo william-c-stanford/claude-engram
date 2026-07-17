@@ -1,18 +1,18 @@
 ---
 type: zettel
-address: "c-000061"
-title: "Normalization"
-created: "2026-07-08"
-parent: "c-000072"
+address: c-000061
+title: Normalization
+created: 2026-07-08
+parent: c-000072
 children:
-  - "c-000059"
-  - "c-000060"
+  - c-000059
+  - c-000060
 tags:
   - llm-fundamentals
   - transformer
   - normalization
 subtree_size: 2
-cards_due: 0
+cards_due: 8
 ---
 
 # Normalization

@@ -1,20 +1,20 @@
 ---
 type: zettel
-address: "c-000066"
-title: "Positional Encodings"
-created: "2026-07-08"
-parent: "c-000072"
+address: c-000066
+title: Positional Encodings
+created: 2026-07-08
+parent: c-000072
 children:
-  - "c-000065"
-  - "c-000064"
-  - "c-000062"
-  - "c-000063"
+  - c-000065
+  - c-000064
+  - c-000062
+  - c-000063
 tags:
   - llm-fundamentals
   - transformer
   - positional-encoding
 subtree_size: 4
-cards_due: 0
+cards_due: 17
 ---
 
 # Positional Encodings

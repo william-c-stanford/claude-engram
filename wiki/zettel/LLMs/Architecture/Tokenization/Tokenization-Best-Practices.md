@@ -1,18 +1,18 @@
 ---
 type: zettel
-address: "c-000042"
-title: "Tokenization Best Practices"
-created: "2026-07-08"
-parent: "c-000044"
+address: c-000042
+title: Tokenization Best Practices
+created: 2026-07-08
+parent: c-000044
 children:
-  - "c-000041"
-  - "c-000039"
-  - "c-000040"
+  - c-000041
+  - c-000039
+  - c-000040
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 3
-cards_due: 0
+cards_due: 12
 ---
 
 # Tokenization Best Practices

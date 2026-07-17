@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000037"
-title: "Special Token Inventory"
-created: "2026-07-08"
-parent: "c-000038"
+address: c-000037
+title: Special Token Inventory
+created: 2026-07-08
+parent: c-000038
 children: []
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Special Token Inventory

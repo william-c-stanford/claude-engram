@@ -39,3 +39,7 @@ What guarantee makes byte-level BPE (GPT-2 onward) distinctive?
 type: cloze
 
 Byte-level BPE runs BPE over raw bytes with a {{c::256}}-symbol base vocabulary, which is why no token can ever be out-of-vocabulary.
+%% srs c-000033-01 {"due":"2026-07-21T19:17:38.756Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T19:17:38.756Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000033-02 {"due":"2026-07-18T19:17:51.410Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T19:17:51.410Z","rating":"good","verdict":"correct"}]} %%
+%% srs c-000033-04 {"due":"2026-07-18T19:18:11.336Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T19:18:11.336Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000033-03 {"due":"2026-07-21T19:18:19.852Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T19:18:19.852Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%

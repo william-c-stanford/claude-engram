@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000029"
-title: "Reward Head"
-created: "2026-07-08"
-parent: "c-000031"
+address: c-000029
+title: Reward Head
+created: 2026-07-08
+parent: c-000031
 children: []
 tags:
   - llm-fundamentals
   - reinforcement-learning
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Reward Head

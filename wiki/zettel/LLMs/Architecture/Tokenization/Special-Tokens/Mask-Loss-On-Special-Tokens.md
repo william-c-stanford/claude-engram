@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000035"
-title: "Mask Loss on Special Tokens"
-created: "2026-07-08"
-parent: "c-000038"
+address: c-000035
+title: Mask Loss on Special Tokens
+created: 2026-07-08
+parent: c-000038
 children: []
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Mask Loss on Special Tokens

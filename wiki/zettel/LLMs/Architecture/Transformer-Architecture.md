@@ -1,27 +1,27 @@
 ---
 type: zettel
-address: "c-000072"
-title: "Transformer Architecture"
-created: "2026-07-08"
-parent: "c-000073"
+address: c-000072
+title: Transformer Architecture
+created: 2026-07-08
+parent: c-000073
 children:
-  - "c-000054"
-  - "c-000056"
-  - "c-000071"
-  - "c-000055"
-  - "c-000070"
-  - "c-000066"
-  - "c-000057"
-  - "c-000061"
-  - "c-000058"
-  - "c-000053"
-  - "c-000049"
+  - c-000054
+  - c-000056
+  - c-000071
+  - c-000055
+  - c-000070
+  - c-000066
+  - c-000057
+  - c-000061
+  - c-000058
+  - c-000053
+  - c-000049
 tags:
   - llm-fundamentals
   - architecture
   - transformer
 subtree_size: 27
-cards_due: 0
+cards_due: 88
 ---
 
 # Transformer Architecture

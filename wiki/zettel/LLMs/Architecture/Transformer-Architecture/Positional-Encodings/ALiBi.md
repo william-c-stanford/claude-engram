@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000062"
-title: "ALiBi (Attention with Linear Biases)"
-created: "2026-07-08"
-parent: "c-000066"
+address: c-000062
+title: ALiBi (Attention with Linear Biases)
+created: 2026-07-08
+parent: c-000066
 children: []
 tags:
   - llm-fundamentals
   - positional-encoding
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # ALiBi (Attention with Linear Biases)

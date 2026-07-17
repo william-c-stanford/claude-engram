@@ -1,20 +1,20 @@
 ---
 type: zettel
-address: "c-000049"
-title: "Attention Interpretability"
-created: "2026-07-08"
-parent: "c-000072"
+address: c-000049
+title: Attention Interpretability
+created: 2026-07-08
+parent: c-000072
 children:
-  - "c-000046"
-  - "c-000045"
-  - "c-000048"
-  - "c-000047"
+  - c-000046
+  - c-000045
+  - c-000048
+  - c-000047
 tags:
   - llm-fundamentals
   - transformer
   - interpretability
 subtree_size: 4
-cards_due: 0
+cards_due: 16
 ---
 
 # Attention Interpretability

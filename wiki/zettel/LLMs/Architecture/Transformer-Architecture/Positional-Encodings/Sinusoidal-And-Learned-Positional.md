@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000065"
-title: "Sinusoidal and Learned Absolute Positional Encoding"
-created: "2026-07-08"
-parent: "c-000066"
+address: c-000065
+title: Sinusoidal and Learned Absolute Positional Encoding
+created: 2026-07-08
+parent: c-000066
 children: []
 tags:
   - llm-fundamentals
   - positional-encoding
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Sinusoidal and Learned Absolute Positional Encoding

@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000028"
-title: "Language Modeling Head"
-created: "2026-07-08"
-parent: "c-000031"
+address: c-000028
+title: Language Modeling Head
+created: 2026-07-08
+parent: c-000031
 children: []
 tags:
   - llm-fundamentals
   - pretraining
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Language Modeling Head

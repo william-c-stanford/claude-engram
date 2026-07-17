@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000045"
-title: "Attention Is Not Explanation"
-created: "2026-07-08"
-parent: "c-000049"
+address: c-000045
+title: Attention Is Not Explanation
+created: 2026-07-08
+parent: c-000049
 children: []
 tags:
   - llm-fundamentals
   - interpretability
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Attention Is Not Explanation

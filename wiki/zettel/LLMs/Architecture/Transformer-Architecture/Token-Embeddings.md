@@ -1,16 +1,16 @@
 ---
 type: zettel
-address: "c-000071"
-title: "Token Embeddings"
-created: "2026-07-08"
-parent: "c-000072"
+address: c-000071
+title: Token Embeddings
+created: 2026-07-08
+parent: c-000072
 children: []
 tags:
   - llm-fundamentals
   - transformer
   - embeddings
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Token Embeddings

@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000039"
-title: "Digit-Level Tokenization"
-created: "2026-07-08"
-parent: "c-000042"
+address: c-000039
+title: Digit-Level Tokenization
+created: 2026-07-08
+parent: c-000042
 children: []
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Digit-Level Tokenization

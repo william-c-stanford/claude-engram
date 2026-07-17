@@ -1,18 +1,18 @@
 ---
 type: zettel
-address: "c-000038"
-title: "Special Tokens"
-created: "2026-07-08"
-parent: "c-000044"
+address: c-000038
+title: Special Tokens
+created: 2026-07-08
+parent: c-000044
 children:
-  - "c-000037"
-  - "c-000036"
-  - "c-000035"
+  - c-000037
+  - c-000036
+  - c-000035
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 3
-cards_due: 0
+cards_due: 12
 ---
 
 # Special Tokens

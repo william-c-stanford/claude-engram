@@ -1,19 +1,19 @@
 ---
 type: zettel
-address: "c-000044"
-title: "Tokenization"
-created: "2026-07-08"
-parent: "c-000073"
+address: c-000044
+title: Tokenization
+created: 2026-07-08
+parent: c-000073
 children:
-  - "c-000043"
-  - "c-000034"
-  - "c-000038"
-  - "c-000042"
+  - c-000043
+  - c-000034
+  - c-000038
+  - c-000042
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 12
-cards_due: 0
+cards_due: 31
 ---
 
 # Tokenization

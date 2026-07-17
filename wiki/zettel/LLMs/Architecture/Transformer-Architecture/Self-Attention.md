@@ -1,19 +1,19 @@
 ---
 type: zettel
-address: "c-000070"
-title: "Self-Attention"
-created: "2026-07-08"
-parent: "c-000072"
+address: c-000070
+title: Self-Attention
+created: 2026-07-08
+parent: c-000072
 children:
-  - "c-000069"
-  - "c-000067"
-  - "c-000068"
+  - c-000069
+  - c-000067
+  - c-000068
 tags:
   - llm-fundamentals
   - transformer
   - attention
 subtree_size: 3
-cards_due: 0
+cards_due: 14
 ---
 
 # Self-Attention

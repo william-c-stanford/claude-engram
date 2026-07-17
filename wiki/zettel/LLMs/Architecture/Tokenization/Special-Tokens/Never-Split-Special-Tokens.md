@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000036"
-title: "Never Split Special Tokens"
-created: "2026-07-08"
-parent: "c-000038"
+address: c-000036
+title: Never Split Special Tokens
+created: 2026-07-08
+parent: c-000038
 children: []
 tags:
   - llm-fundamentals
   - tokenization
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Never Split Special Tokens

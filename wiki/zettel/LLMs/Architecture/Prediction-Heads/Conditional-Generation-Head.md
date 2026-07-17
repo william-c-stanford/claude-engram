@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000027"
-title: "Conditional Generation Head"
-created: "2026-07-08"
-parent: "c-000031"
+address: c-000027
+title: Conditional Generation Head
+created: 2026-07-08
+parent: c-000031
 children: []
 tags:
   - llm-fundamentals
   - sft
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # Conditional Generation Head

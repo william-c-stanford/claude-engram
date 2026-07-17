@@ -1,16 +1,16 @@
 ---
 type: zettel
-address: "c-000051"
-title: "Attention Head Roles"
-created: "2026-07-08"
-parent: "c-000053"
+address: c-000051
+title: Attention Head Roles
+created: 2026-07-08
+parent: c-000053
 children: []
 tags:
   - llm-fundamentals
   - attention
   - interpretability
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # Attention Head Roles

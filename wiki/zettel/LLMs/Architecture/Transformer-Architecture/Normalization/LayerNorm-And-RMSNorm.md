@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000059"
-title: "LayerNorm and RMSNorm"
-created: "2026-07-08"
-parent: "c-000061"
+address: c-000059
+title: LayerNorm and RMSNorm
+created: 2026-07-08
+parent: c-000061
 children: []
 tags:
   - llm-fundamentals
   - normalization
 subtree_size: 0
-cards_due: 0
+cards_due: 3
 ---
 
 # LayerNorm and RMSNorm

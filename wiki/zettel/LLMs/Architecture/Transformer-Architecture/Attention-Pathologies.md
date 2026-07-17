@@ -1,19 +1,19 @@
 ---
 type: zettel
-address: "c-000053"
-title: "Attention Pathologies"
-created: "2026-07-08"
-parent: "c-000072"
+address: c-000053
+title: Attention Pathologies
+created: 2026-07-08
+parent: c-000072
 children:
-  - "c-000052"
-  - "c-000050"
-  - "c-000051"
+  - c-000052
+  - c-000050
+  - c-000051
 tags:
   - llm-fundamentals
   - transformer
   - attention
 subtree_size: 3
-cards_due: 0
+cards_due: 12
 ---
 
 # Attention Pathologies

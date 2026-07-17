@@ -1,15 +1,15 @@
 ---
 type: zettel
-address: "c-000064"
-title: "RoPE (Rotary Position Embedding)"
-created: "2026-07-08"
-parent: "c-000066"
+address: c-000064
+title: RoPE (Rotary Position Embedding)
+created: 2026-07-08
+parent: c-000066
 children: []
 tags:
   - llm-fundamentals
   - positional-encoding
 subtree_size: 0
-cards_due: 0
+cards_due: 4
 ---
 
 # RoPE (Rotary Position Embedding)
