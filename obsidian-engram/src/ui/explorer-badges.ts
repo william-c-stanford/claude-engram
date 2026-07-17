@@ -112,6 +112,34 @@ export class ExplorerBadges {
       if (chips.length === 0) continue;
 
       const wrap = rowEl.createSpan({ cls: "engram-chips" });
+
+      // Cadence first (R1): median next-review | median interval across the
+      // scope. Left = urgency (drifts to "now" as you fall behind), right =
+      // maturity (stable spacing). Inert — a summary metric, not an entry point.
+      let hasCadence = false;
+      if (this.plugin.settings.showCadence && scopeCards.length > 0) {
+        const dueMs = medianDueOffsetMs(scopeCards, nowMs)!;
+        const intervalDays = medianIntervalDays(scopeCards)!;
+        const dueLabel = dueMs > 0 ? `~${formatDueOffset(dueMs)}` : formatDueOffset(dueMs);
+        const intLabel = formatIntervalDays(intervalDays);
+        const el = wrap.createSpan({
+          cls: "engram-chip engram-chip-cadence engram-chip-inert",
+          text: `${dueLabel} | ${intLabel}`,
+        });
+        el.setAttribute(
+          "aria-label",
+          `median next review ${dueMs > 0 ? `in ${formatDueOffset(dueMs)}` : "due now"}, median interval ${intLabel}`
+        );
+        hasCadence = true;
+      }
+
+      // Divider between the cadence and the count numbers (R4). Counts are
+      // guaranteed present here (empty chip lists already continued out), so the
+      // divider only needs the cadence side gated.
+      if (hasCadence) {
+        wrap.createSpan({ cls: "engram-chip engram-chip-sep engram-chip-inert", text: "·" });
+      }
+
       for (const chip of chips) {
         // The uncovered chip is purely informational — nothing to review (R6).
         if (chip.kind === "uncovered") {
@@ -136,24 +164,6 @@ export class ExplorerBadges {
             this.openSession(scope!, bucket);
           });
         }
-      }
-
-      // Review cadence pill: median next-review | median interval across the
-      // scope. Left = urgency (drifts to "now" as you fall behind), right =
-      // maturity (stable spacing). Inert — a summary metric, not an entry point.
-      if (this.plugin.settings.showCadence && scopeCards.length > 0) {
-        const dueMs = medianDueOffsetMs(scopeCards, nowMs)!;
-        const intervalDays = medianIntervalDays(scopeCards)!;
-        const dueLabel = dueMs > 0 ? `~${formatDueOffset(dueMs)}` : formatDueOffset(dueMs);
-        const intLabel = formatIntervalDays(intervalDays);
-        const el = wrap.createSpan({
-          cls: "engram-chip engram-chip-cadence engram-chip-inert",
-          text: `${dueLabel} | ${intLabel}`,
-        });
-        el.setAttribute(
-          "aria-label",
-          `median next review ${dueMs > 0 ? `in ${formatDueOffset(dueMs)}` : "due now"}, median interval ${intLabel}`
-        );
       }
     }
   }

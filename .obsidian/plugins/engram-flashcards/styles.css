@@ -1,67 +1,75 @@
 /* Engram Flashcards */
 
+/*
+ * One cohesive strip after the row title: cadence (muted) · colored count
+ * numerals · gray uncovered count. No tiles — everything is plain text at a
+ * single weight so the row scans as one unit.
+ */
 .engram-chips {
   display: inline-flex;
-  gap: 3px;
+  align-items: baseline;
+  gap: 5px;
   margin-left: 6px;
   vertical-align: middle;
+  font-size: 11px;
+  line-height: 1;
 }
 
+/* Base: plain text, no tile geometry. Count numerals are clickable; inert
+ * elements (uncovered, cadence, divider, practice-off green) override. */
 .engram-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 18px;
-  height: 16px;
-  padding: 0 4px;
-  border-radius: 4px;
-  font-size: 10px;
+  font-size: inherit;
   font-weight: 600;
   line-height: 1;
-  color: #fff;
-  cursor: pointer;
   user-select: none;
+  cursor: pointer;
 }
 
+/* Count numerals — colored foreground, no fill (R2). */
 .engram-chip-red {
-  background-color: var(--color-red, #e93147);
+  color: var(--color-red, #e93147);
 }
 
 .engram-chip-yellow {
-  background-color: var(--color-yellow, #e0ac00);
+  /* var(--color-yellow) is tuned as a fill behind white text; as foreground it
+   * washes out on a light sidebar, so light theme gets a darker gold (KTD3, R6). */
+  color: var(--color-yellow, #e0ac00);
+}
+
+.theme-light .engram-chip-yellow {
+  color: #8a6400;
 }
 
 .engram-chip-green {
-  background-color: var(--color-green, #08b94e);
+  color: var(--color-green, #08b94e);
 }
 
-/*
- * Notes with no flashcards yet. Always inert. The tile is always white, so the
- * font is a fixed near-black (not var(--text-normal), which is light in dark
- * themes and would vanish); the border keeps the white tile legible against a
- * light-theme explorer background.
- */
+/* Notes with no flashcards yet — plain neutral gray, inert (R3). */
 .engram-chip-uncovered {
-  background-color: #fff;
-  color: #1a1a1a;
-  border: 1px solid var(--background-modifier-border, #d0d0d0);
+  color: var(--text-muted);
 }
 
-/*
- * Review-cadence pill: median next-review across the scope. Neutral outline —
- * deliberately not a saturated bucket colour and not the white uncovered tile,
- * so it reads as an informational summary rather than a review-load count.
- */
+/* Review cadence — plain muted text, first in the strip (R1). */
 .engram-chip-cadence {
-  background-color: transparent;
   color: var(--text-muted);
-  border: 1px solid var(--background-modifier-border, #555);
   font-weight: 500;
+}
+
+/* Faint divider between cadence and counts (R4). */
+.engram-chip-sep {
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+/* Hover affordance for the clickable colored counts now the button shape is
+ * gone (KTD4); inert elements are excluded. */
+.engram-chip:not(.engram-chip-inert):hover {
+  text-decoration: underline;
+  filter: brightness(1.15);
 }
 
 .engram-chip-inert {
   cursor: default;
-  opacity: 0.85;
 }
 
 .engram-hidden-sidecar {
