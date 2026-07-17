@@ -47,3 +47,7 @@ Which loss trains the value head, and what is its output consumed for?
 - [ ] Pairwise ranking loss; it scores response quality for RLHF
 - [ ] Cross-entropy over the vocabulary; it predicts the next token
 - [ ] MSE against returns; it directly emits the sampled action tokens
+%% srs c-000030-03 {"due":"2026-07-18T20:41:51.944Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T20:41:51.944Z","rating":"good"}]} %%
+%% srs c-000030-04 {"due":"2026-07-18T20:42:13.633Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T20:42:13.633Z","rating":"good","verdict":"correct"}]} %%
+%% srs c-000030-01 {"due":"2026-07-18T20:42:20.595Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T20:42:20.595Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000030-02 {"due":"2026-07-18T20:42:35.788Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T20:42:35.788Z","rating":"hard"}],"easeDelta":-0.15} %%

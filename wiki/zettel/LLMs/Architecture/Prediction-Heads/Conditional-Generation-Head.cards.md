@@ -45,3 +45,7 @@ In practice, how is the "loss on response tokens only" rule implemented for the 
 - [ ] Prompt tokens are deleted from the sequence before the forward pass
 - [ ] A separate reward model down-weights the prompt gradients
 - [ ] The prompt is encoded by a frozen second model
+%% srs c-000027-01 {"due":"2026-07-21T20:37:47.369Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T20:37:47.369Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000027-04 {"due":"2026-07-21T20:37:56.282Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T20:37:56.282Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000027-02 {"due":"2026-07-18T20:38:24.526Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T20:38:24.526Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000027-03 {"due":"2026-07-18T20:38:41.870Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T20:38:41.870Z","rating":"hard"}],"easeDelta":-0.15} %%

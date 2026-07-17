@@ -40,3 +40,7 @@ Which prediction head is trained with a pairwise ranking loss rather than cross-
 - [x] Reward head
 - [ ] Conditional-Generation head
 - [ ] Language-Modeling head
+%% srs c-000031-02 {"due":"2026-07-21T20:20:36.551Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T20:20:36.551Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000031-01 {"due":"2026-07-21T20:20:58.357Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T20:20:58.357Z","rating":"easy"}],"easeDelta":0.15} %%
+%% srs c-000031-04 {"due":"2026-07-21T20:21:08.343Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T20:21:08.343Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000031-03 {"due":"2026-07-21T20:21:27.206Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T20:21:27.206Z","rating":"easy"}],"easeDelta":0.15} %%

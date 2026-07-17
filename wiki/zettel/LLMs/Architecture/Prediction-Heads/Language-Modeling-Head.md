@@ -9,7 +9,7 @@ tags:
   - llm-fundamentals
   - pretraining
 subtree_size: 0
-cards_due: 4
+cards_due: 0
 ---
 
 # Language Modeling Head

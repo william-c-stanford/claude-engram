@@ -42,3 +42,7 @@ Because the logit for token $v$ becomes $E_v \cdot h_t$ — the dot product of t
 type: cloze
 
 Under weight tying, the LM head's projection matrix is set equal to the transpose of the embedding table: $W_\text{head} = {{c::E^\top}}$.
+%% srs c-000028-04 {"due":"2026-07-18T20:22:41.180Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T20:22:41.180Z","rating":"good"}]} %%
+%% srs c-000028-01 {"due":"2026-07-18T20:26:45.319Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T20:26:45.319Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000028-02 {"due":"2026-07-18T20:27:11.958Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T20:27:11.958Z","rating":"good"}]} %%
+%% srs c-000028-03 {"due":"2026-07-18T20:28:23.866Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T20:28:23.866Z","rating":"hard"}],"easeDelta":-0.15} %%

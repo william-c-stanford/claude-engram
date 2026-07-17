@@ -12,7 +12,7 @@ tags:
   - llm-fundamentals
   - moc
 subtree_size: 130
-cards_due: 143
+cards_due: 123
 ---
 
 # LLMs

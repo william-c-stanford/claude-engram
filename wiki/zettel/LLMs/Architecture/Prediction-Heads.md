@@ -13,7 +13,7 @@ tags:
   - llm-fundamentals
   - training
 subtree_size: 4
-cards_due: 20
+cards_due: 0
 ---
 
 # Prediction Heads

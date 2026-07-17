@@ -40,3 +40,7 @@ Both the reward head and the value head output a scalar from the backbone. What 
 - [ ] The reward head outputs per-token values; the value head outputs one number per response
 - [ ] The reward head is trained with MSE; the value head with a ranking loss
 - [ ] The reward head shares the vocabulary projection; the value head does not
+%% srs c-000029-02 {"due":"2026-07-21T20:35:08.030Z","interval":4,"ease":2.65,"reviews":[{"at":"2026-07-17T20:35:08.030Z","rating":"easy","verdict":"correct"}],"easeDelta":0.15} %%
+%% srs c-000029-01 {"due":"2026-07-18T20:35:34.833Z","interval":1,"ease":2.35,"reviews":[{"at":"2026-07-17T20:35:34.833Z","rating":"hard"}],"easeDelta":-0.15} %%
+%% srs c-000029-03 {"due":"2026-07-18T20:35:55.899Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T20:35:55.899Z","rating":"good"}]} %%
+%% srs c-000029-04 {"due":"2026-07-18T20:36:35.375Z","interval":1,"ease":2.5,"reviews":[{"at":"2026-07-17T20:36:35.375Z","rating":"good","verdict":"correct"}]} %%
