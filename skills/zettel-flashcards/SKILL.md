@@ -10,9 +10,11 @@ Turn a subtree of atomic notes into review-ready flashcards. The plugin (`obsidi
 
 ## Procedure
 
-1. **Resolve the subtree.** Given a parent note, folder, or topic name:
+1. **Resolve the subtree — and always include the parent note.** Given a parent note, folder, or topic name:
    - Find the root note's address: `python3 scripts/zettel-index.py find "<name>"`.
-   - List every note in scope: `python3 scripts/zettel-index.py subtree <address>` (the root itself included — parents get cards too, they anchor the mental-palace walk).
+     - **A folder resolves to its paired parent note.** In this vault a section's parent note lives *beside* its folder, one level up — `wiki/zettel/LLMs/Architecture.md` sits next to the `Architecture/` folder, not inside it. So "card up the Architecture folder" means the note `Architecture.md`; `find "Architecture"` returns exactly that note's address. Never enumerate the files physically inside the folder — the paired parent note is not among them and would be missed.
+   - List the descendants: `python3 scripts/zettel-index.py subtree <address>`. **This command EXCLUDES the root itself** (it returns descendants only). Parents get cards too — they anchor the mental-palace walk — so the scope you generate for is **the root note PLUS the `subtree` output**. Explicitly prepend the root note (from the `find` result) to the list before iterating; do not rely on `subtree` to include it.
+   - **Before writing, verify coverage:** every note in scope, root parent note included, either gets a fresh sidecar this run or already has a non-empty one. A parent `.md` with no `<Note>.cards.md` is the signal that a prior run skipped it (the plugin flags this with a white uncovered-count chip) — card it.
 2. **Read each note fully.** The Claim and Reasoning sections are the card source; Cross-references supply MCQ distractor material (near-miss concepts from sibling notes).
 3. **Check for an existing sidecar** (`<Note>.cards.md`). If present, this is a regeneration: follow the format doc's regeneration rules — stable IDs for unchanged cards, next unused `nn` for new ones, `%% srs-retired` for removed ones, and never touch `%% srs` state lines otherwise. **Preserve `**Notes**` sections verbatim on every card you keep** — they are the reviewer's own annotations (hidden until reveal in the plugin) and outrank generated content.
 4. **Write the sidecar** beside each note, guarded by the vault lock:

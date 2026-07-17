@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "wiki/zettel/LLMs/Architecture/Mixture-of-Experts/MoE-Architecture.md",
+                "file": "wiki/zettel/LLMs/Architecture.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "MoE-Architecture"
+              "title": "Architecture"
             }
           }
         ]
@@ -197,6 +197,10 @@
   },
   "active": "5565f1231fe95c42",
   "lastOpenFiles": [
+    "wiki/zettel/LLMs/Architecture.cards.md",
+    "wiki/zettel/LLMs/LLM-Pipeline-Overview.md",
+    "wiki/zettel/LLMs/Architecture.md",
+    "wiki/zettel/LLMs/Architecture/Mixture-of-Experts/MoE-Architecture.md",
     "obsidian-engram/tests/chips.test.ts",
     "docs/plans/2026-07-17-006-feat-uncovered-notes-chip-plan.md",
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Positional-Encodings/Sinusoidal-And-Learned-Positional.cards.md",
@@ -220,9 +224,6 @@
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Interpretability.cards.md",
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Head-Roles.cards.md",
     "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Dilution.cards.md",
-    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies/Attention-Sink.cards.md",
-    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Attention-Pathologies.cards.md",
-    "wiki/zettel/LLMs/Architecture/Transformer-Architecture/Self-Attention/Multi-Head-Attention.cards.md",
     "obsidian-engram/tests/_ph_check.test.ts",
     "wiki/zettel/LLMs/Architecture/Tokenization/Tokenization-Best-Practices/Vocabulary-Size.cards.md.tmp.30348.f6d534d9345e",
     "obsidian-engram/tests/accuracy.test.ts",
@@ -232,7 +233,6 @@
     "skills/zettel-flashcards",
     "obsidian-engram/src/frontmatter/compute.ts",
     "obsidian-engram/tests/writeback.test.ts",
-    "obsidian-engram/src/frontmatter/writeback.ts",
     "Untitled.canvas",
     "wiki/Wiki Map.canvas"
   ]

@@ -41,7 +41,13 @@ Cards live in `<Note>.cards.md` sidecar files bound to notes by DragonScale addr
 ```bash
 npm install
 npm test        # vitest
-npm run build   # emits main.js
+npm run build   # emits main.js AND deploys to the vault's plugin dir
+npm run dev     # watch mode — redeploys on every rebuild
 ```
 
-Copy `main.js`, `manifest.json`, `styles.css` into `<vault>/.obsidian/plugins/engram-flashcards/` to test locally.
+`build` and `dev` copy `main.js`, `manifest.json`, `styles.css` into
+`<vault>/.obsidian/plugins/engram-flashcards/` automatically (the vault runs
+that copy, not the source `main.js`), then you reload the plugin in Obsidian to
+pick up the change. Override the target with `ENGRAM_INSTALL_DIR=/path/...` when
+building against another vault, or `ENGRAM_INSTALL_DIR=none` to skip the deploy
+(e.g. CI/release builds).

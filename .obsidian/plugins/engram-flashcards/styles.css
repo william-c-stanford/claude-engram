@@ -35,6 +35,18 @@
   background-color: var(--color-green, #08b94e);
 }
 
+/*
+ * Notes with no flashcards yet. Always inert. The tile is always white, so the
+ * font is a fixed near-black (not var(--text-normal), which is light in dark
+ * themes and would vanish); the border keeps the white tile legible against a
+ * light-theme explorer background.
+ */
+.engram-chip-uncovered {
+  background-color: #fff;
+  color: #1a1a1a;
+  border: 1px solid var(--background-modifier-border, #d0d0d0);
+}
+
 .engram-chip-inert {
   cursor: default;
   opacity: 0.85;
