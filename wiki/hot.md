@@ -20,6 +20,8 @@ Navigation: [[index]] | [[log]] | [[overview]]
 
 ## Last Updated
 
+2026-07-17 (later): **Engram Flashcards 0.2.0 — session study affordances.** Sessions now read before they quiz: the evergreen note renders as a reading step before its cards on first encounter (no review history; setting: first-encounter/always/never); every card offers "Review source note" in an in-modal panel, and opening it restarts that exact note's interval ladder (reset event logged, ease + history preserved, children untouched); after reveal, cards are editable in-session (prompt/answer + hidden-until-reveal `**Notes**` annotations, persisted to the sidecar, preserved by regeneration). One MoE card (`c-000022-05`) now carries a real annotation from the AE4 spot-check. Plugin 0.2.0 tagged after verifier pass.
+
 2026-07-17: **Engram Flashcards shipped (v1.10.0) — spaced repetition over the zettel tree.** New Obsidian plugin `obsidian-engram/` (id `engram-flashcards` 0.1.0; GitHub release `0.1.0` published with `main.js`/`manifest.json`/`styles.css`, BRAT-installable) + `/zettel-flashcards` generation skill + shared spec `docs/flashcard-format.md`. Cards live in `<Note>.cards.md` sidecars bound by DragonScale address; scheduling is an adjustable ease-factor ladder (1 → 4 → ×2.5 ≈ 1/4/10/25/62/156 days), sessions walk the tree topologically (parent cards first, green-parent reorientation samples, skippable), the explorer shows red/yellow/green count chips on folders + paired parent notes (identical subtree rollups; red chip → due review, yellow → early review, green → practice-ahead), and each note's `cards_due` frontmatter carries its red count (parents = subtree rollup) as graph-coloring groundwork.
 
 ## Key Recent Facts

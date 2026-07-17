@@ -43,8 +43,12 @@ type: free
 
 **Prompt**
 
-What exactly does a MoE layer replace inside a transformer block, and what stays shared across all tokens?
+Inside a transformer block, which component does MoE replace, and which components remain shared across all tokens?
 
 **Answer**
 
 It replaces the block's single dense FFN with $N$ parallel expert FFNs plus a router. Attention, normalization, and embeddings stay shared; only the FFN capacity is expert-partitioned.
+
+**Notes**
+
+My cue: "only the FFN forks" — everything else in the block stays shared.
